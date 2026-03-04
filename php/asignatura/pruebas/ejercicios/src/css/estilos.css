@@ -1,5 +1,5 @@
 * {
-    padding: 0;
+    padding: 2px;
     margin: 0;
     box-sizing: border-box;
 
@@ -8,11 +8,10 @@
 html {
     scroll-behavior: smooth;
 }
-
 section{
-    background-color: rgb(140, 140, 140);
+    background-color: rgb(190, 255, 247);
     padding: 10px;
-    height : 100dvh;
+    height: 100dvh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -20,10 +19,77 @@ section{
 }
 
 section > * {
-    width: 500px;
+    width:min(500px , 100px);
+    border: 1px solid rgb(39, 39, 39)
 }
 
-section:nth-child(even) {
-    background-color: rgb(105, 255, 218);
+section:nth-child(even){
+    background-color: rgb(131, 220, 236);
 }
 
+#cabecera {
+    color: rgb(17, 53, 32);
+    background-color: burlywood;
+    border-radius: 10px;
+    box-shadow: 2px 2px 3px;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+
+    ul {
+        list-style: none;
+        display: flex;
+        gap: 10px;
+
+    }
+}
+a {
+    color: inherit;
+}
+
+#hamburguesa {
+    display: none;
+}
+    @media screen and (max-width: 510px) {
+
+        #hamburguesa {
+
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+
+            border: none;
+            background-color: transparent;
+
+            div {
+                width: 24px;
+                height: 4px;
+                background-color: black;
+
+            }
+
+        }
+        #cabecera nav.open{
+            display: block;
+        }
+
+        #cabecera nav {
+
+            display: none;
+            position: absolute;
+            background-color: rgb(222, 184, 135, .5);
+            top: 80px;
+            right: 10px;
+            padding: 10px;
+
+
+            ul {
+                display: flex;
+                flex-direction: column;
+            }
+        }
+    }

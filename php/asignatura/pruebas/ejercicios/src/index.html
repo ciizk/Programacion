@@ -7,14 +7,15 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title> Ejercicio Landing Page</title>
     <link rel="stylesheet" href="css/estilos.css">
+
 </head>
 <body>
 
-
-
 <!-- header>a{LOGO}+nav>ul>a[href="#sección$"]{Sección $}-->
-<header>
-    <a href="index.html">LOGO</a>
+<header id="cabecera">
+    <a href="index.html">
+        <img src="https://placehold.co/100x50?text=100 x 50" alt="logo">
+    </a>
     <nav>
         <ul>
             <li><a href="#sección1">Sección 1</a></li>
@@ -24,6 +25,11 @@
             <li><a href="#sección5">Sección 5</a></li>
         </ul>
     </nav>
+    <button id="hamburguesa">
+        <div></div>
+        <div></div>
+        <div></div>
+    </button>
 </header>
 
 <!-- main>section*5>header{Sección $}+p>lorem
@@ -31,16 +37,17 @@
 
 <main>
     <section id="sección1">
-        <header>Sección 1 </header>
+        <header> La primera sección de la página </header>
+        <ul>
+            <li> HOLA MUNDO1</li>
+        </ul>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi error laudantium nemo odit quidem quis
             similique soluta temporibus. Eligendi eos esse facere facilis hic illum natus nobis optio perferendis
             soluta!</p>
+        <a href="#sección2"> Siguiente Sección</a>
     </section>
     <section id="sección2">
         <header>Sección 2 </header>
-        <p>Aliquid commodi corporis cumque delectus deserunt distinctio est eveniet exercitationem, fuga fugit incidunt
-            magni modi mollitia nulla officiis perspiciatis similique. Doloribus harum labore modi nihil officiis quis
-            ratione, vitae voluptate.</p>
         <p>Aliquid commodi corporis cumque delectus deserunt distinctio est eveniet exercitationem, fuga fugit incidunt
             magni modi mollitia nulla officiis perspiciatis similique. Doloribus harum labore modi nihil officiis quis
             ratione, vitae voluptate.</p>
@@ -63,6 +70,9 @@
             doloribus earum esse eum facilis incidunt ipsa optio porro sed vel! Atque enim praesentium quaerat
             quisquam?</p>
     </section>
+
+    <script defer src="js/menu.js"> </script>
+
 </main>
 
 </body>
