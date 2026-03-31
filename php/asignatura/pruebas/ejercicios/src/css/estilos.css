@@ -2,8 +2,20 @@
     padding: 2px;
     margin: 0;
     box-sizing: border-box;
-
 }
+
+:root{
+    interpolate-size: allow-keywords;
+}
+
+    a{
+        color: inherit;
+    }
+
+    body {
+        font-family: system-ui;
+    }
+
 
 html {
     scroll-behavior: smooth;
@@ -16,11 +28,15 @@ section{
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    text-align: center;
 }
 
+
+
 section > * {
-    width:min(500px , 100px);
-    border: 1px solid rgb(39, 39, 39)
+    width: min(500px, 100%);
+    margin-left: auto;
+    margin-right: auto;
 }
 
 section:nth-child(even){
@@ -34,6 +50,7 @@ section:nth-child(even){
     box-shadow: 2px 2px 3px;
     padding: 10px;
     display: flex;
+    align-items: center;
     justify-content: space-between;
     position: fixed;
     top: 10px;
@@ -44,11 +61,14 @@ section:nth-child(even){
         list-style: none;
         display: flex;
         gap: 10px;
+        align-items: center;
 
     }
-}
-a {
-    color: inherit;
+
+    a.actual {
+        text-decoration: none;
+        font-weight: bold;
+    }
 }
 
 #hamburguesa {
@@ -93,3 +113,39 @@ a {
             }
         }
     }
+
+details {
+    background-color: rgb(255, 255, 255);
+    overflow: hidden;
+
+    summary {
+        background-color: rgb(104, 68, 0);
+        color: white;
+        padding: 10px;
+        margin-bottom: 5px;
+        cursor: pointer;
+    }
+
+    summary:hover {
+        background-color: rgb(131, 93, 39);
+    }
+
+    &:last-child summary {
+        margin-bottom: 0;
+
+    }
+
+    p{
+        padding: 10px;
+    }
+}
+
+details::details-content {
+    block-size: 0;
+    transition: 1s;
+    transition-behavior: allow-discrete;
+}
+
+details:open::details-content{
+    block-size: auto;
+}
