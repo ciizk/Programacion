@@ -5,17 +5,14 @@ Fecha: 14/03/2026
 Descripción: función reducir()
 --------------------------------------------------------------------------------------------*/
 
-function reducir(lista, valorInicial, callback){
-    let acumulado = valorInicial; // inicia el acumulador con el valor inicial
-
-    for(let i = 0; i < lista.length; i++){
-        let elemento = lista[i]; // obtiene el elemento actual de la lista
-
-        acumulado = callback(acumulado, elemento); // actualiza el acumulador usando la callback
-        
+function calcularArea(alturas, dx){
+    function sumarArea(acumulado, altura){
+        let areaRectangulo = altura * dx;
+        return acumulado + areaRectangulo;
     }
+    let areaTotal = reducir(alturas, 0, sumarArea);
 
-    return acumulado; 
+    return areaTotal;
 }
 //------------------------------------------------------------------------------------------
 //  Prueba automática

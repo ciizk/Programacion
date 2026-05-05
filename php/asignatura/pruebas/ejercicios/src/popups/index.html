@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Popups</title>
+    <link rel="stylesheet" href="../css/estilos.css">
+    <link rel="stylesheet" href="../css/dialog.css">
+    <script src="../js/popups.js" defer></script>
+</head>
+<body>
+<header id="cabecera">
+    <a href="../../index.html">
+        <img src="https://placehold.co/100x50?text=Hello+World" alt="logo">
+    </a>
+    <nav class="open">
+        <ul>
+            <li><a href="../acordeon/">Acordeon</a></li>
+            <li><a href="" class="actual">Popups</a></li>
+            <li><a href="#section3">Seccion 3</a></li>
+            <li><a href="#section4">Seccion 4</a></li>
+            <li><a href="#section5">Seccion 5</a></li>
+        </ul>
+    </nav>
+    <button id="hamburguesa">
+        <div></div>
+        <div></div>
+        <div></div>
+    </button>
+</header>
+<main>
+    <section>
+        <button class="btn" id="opener-dialog">Popup</button>
+        <dialog id="popup">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus ea esse ipsa ipsum laboriosam nulla quibusdam repudiandae saepe? Adipisci at autem cum magni necessitatibus odit, quaerat quisquam soluta? Ducimus, laborum!</p>
+            <form> <button class="btn">Cerrar</button> </form>
+
+        </dialog>
+
+        <button class="btn" popovertarget=" Popover">Popover</button>
+        <div popover id="mi-popover">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam asperiores atque dolor eius, excepturi iusto magnam porro sapiente temporibus. Et, facere iste itaque laboriosam laborum maiores neque sit tempore velit.
+        </div>
+    </section>
+</main>
+</body>
+</html>

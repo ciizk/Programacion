@@ -1,0 +1,20 @@
+[
+  {
+    "nombre": "mates",
+    "id": 1,
+    "capacidad": 40 ,
+    "curso":"1 ESO"
+  },
+  {
+    "nombre": "física",
+    "id": 2,
+    "capacidad": 40,
+    "curso": "2 ESO"
+  },
+  {
+    "nombre": "UX",
+    "id": 3,
+    "capacidad": 40,
+    "curso":"1 UNI"
+  }
+]

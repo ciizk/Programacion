@@ -2,6 +2,7 @@
   <dictionary name="project">
     <words>
       <w>cabecera</w>
+      <w>usuario</w>
     </words>
   </dictionary>
 </component>

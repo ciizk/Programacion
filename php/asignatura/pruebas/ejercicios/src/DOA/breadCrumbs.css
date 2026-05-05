@@ -1,0 +1,18 @@
+#breadCrumbs {
+    display: flex;
+    gap: 1ch;
+
+    div {
+        display: flex;
+        gap: 1ch;
+
+        div:not(:last-child):after {
+            content: ">";
+            font-size: .8em;
+            padding-left: 1ch;
+
+        }
+
+    }
+
+}

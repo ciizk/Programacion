@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio de justify-content</title>
+    <style>
+        .contenedor-principal {
+            width: 500px;
+            border: 3px solid #000;
+        }
+
+        section {
+            width: 500px;
+            height: 50px;
+            border: 1px solid #000;
+            display: flex;
+            align-items: center;
+        }
+
+        h3 {
+            text-align: left;
+        }
+
+        .caja1, .caja2, .caja3 {
+            background: deepskyblue;
+            border: 1px solid #000;
+            height: 40px;
+            padding: 5px;
+            color: deepskyblue;
+        }
+
+
+        .section1 { justify-content: flex-start; }
+        .section2 { justify-content: flex-end; }
+        .section3 { justify-content: center; }
+        .section4 { justify-content: space-between; }
+        .section5 { justify-content: space-around; }
+    </style>
+</head>
+<body>
+
+<div class="contenedor-principal">
+    <h3>justify-content: flex-start</h3>
+    <section class="section1">
+        <article class="caja1">Caja 1</article>
+        <article class="caja2">Caja 2</article>
+        <article class="caja3">Caja 3</article>
+    </section>
+
+    <h3>justify-content: flex-end</h3>
+    <section class="section2">
+        <article class="caja1">Caja 1</article>
+        <article class="caja2">Caja 2</article>
+        <article class="caja3">Caja 3</article>
+    </section>
+
+    <h3>justify-content: center</h3>
+    <section class="section3">
+        <article class="caja1">Caja 1</article>
+        <article class="caja2">Caja 2</article>
+        <article class="caja3">Caja 3</article>
+    </section>
+
+    <h3>justify-content: space-between</h3>
+    <section class="section4">
+        <article class="caja1">Caja 1</article>
+        <article class="caja2">Caja 2</article>
+        <article class="caja3">Caja 3</article>
+    </section>
+
+    <h3>justify-content: space-around</h3>
+    <section class="section5">
+        <article class="caja1">Caja 1</article>
+        <article class="caja2">Caja 2</article>
+        <article class="caja3">Caja 3</article>
+    </section>
+</div>
+
+</body>
+</html>

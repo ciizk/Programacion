@@ -1,0 +1,16 @@
+{
+  "name": "clase_punto",
+  "version": "1.0.0",
+  "description": "desarrollo y pruebas de la clase Punto",
+  "main": "Punto.js",
+  "author": "Jordi",
+  "repository": "ninguno de momento",
+  "license": "ISC",
+  "dependencies": {
+    "mocha": "*"
+  },
+  "scripts": {
+    "test": "node ./node_modules/mocha/bin/mocha",
+    "ayuda": "echo ejecuta esto: npm test"
+  }
+}

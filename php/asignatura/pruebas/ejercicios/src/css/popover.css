@@ -1,0 +1,37 @@
+button[popovertarget]{
+    margin-top: 10px;
+    anchor-name: --boton;
+}
+
+#mi-popover{
+    inset: unset;
+    position-anchor: --boton;
+    top: anchor(bottom);
+    left: anchor(left);
+    position-try-fallbacks: --derecha;
+    max-width: 100px;
+    padding: 5px;
+    border: none;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    box-shadow: 0 4px 10px #676767;
+    opacity: 0;
+    transition: 1s;
+    transition-behavior: allow-discrete;
+}
+
+#mi-popover:popover-open{
+    opacity: 1;
+    @starting-style {
+        opacity: 0;
+    }
+}
+
+@position-try --derecha{
+    inset: unset;
+    top: anchor(top);
+    left: anchor(left);
+}
+
+popover.css
+1 KB

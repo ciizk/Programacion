@@ -1,0 +1,16 @@
+{
+  "name": "prueba_servidor",
+  "version": "1.0.0",
+  "description": "prueba de servidor express",
+  "main": "main.js",
+  "author": "Jordi",
+  "repository": "ninguno de momento",
+  "license": "ISC",
+  "dependencies": {
+    "express": "*"
+  },
+  "scripts": {
+    "ayuda": "echo ejecuta esto: npm run main",
+    "main": "node main.js"
+  }
+}
