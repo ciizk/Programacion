@@ -1,4 +1,9 @@
-// Apartado 2: consume el módulo bib.js
+/*--------------------------------------------------------------------------------------------
+Fichero: main.js
+Autor: Francisco Indriago
+Fecha: 06/05/2026
+Descripción: obtiene a bib.js
+--------------------------------------------------------------------------------------------*/
 var bib = require("./bib.js");
 
 console.log("porDos(8)  =", bib.porDos(8));   // 16

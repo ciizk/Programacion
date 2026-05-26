@@ -1,0 +1,26 @@
+// -*- javascript -*-
+
+// --------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------
+const borrarFilasDe = require( "./utilidades/borrarFilasDe.js" )
+
+// ----------------------------------------------------------------------------
+//          borrarFilasDeTodasLasTablas() -->
+// ----------------------------------------------------------------------------
+module.exports = async function borrarFilasDeTodasLasTablas( args ) {
+
+
+	// tengo "inyectada" también this.logica para poder llamar a funciones "hermanas"
+	//         yo.logica.funciones.loQueSea.f()
+
+		// console.log( " borrarFilasDeTodasLasTablas(): this.conexion = " + this.conexion )
+		await borrarFilasDe( "Matricula", borrarFilasDeTodasLasTablas.conexion )
+		await borrarFilasDe( "Asignatura", borrarFilasDeTodasLasTablas.conexion )
+		await borrarFilasDe( "Persona", borrarFilasDeTodasLasTablas.conexion )
+} // ()
+
+// --------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------

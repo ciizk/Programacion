@@ -1,0 +1,35 @@
+// -*- javascript -*-
+
+// --------------------------------------------------------------------------------
+// insertarPersona
+// --------------------------------------------------------------------------------
+
+// datos:{dni:Texto, nombre:Texto: apellidos:Texto}
+//     --> 
+//         insertarPersona() -->
+// ----------------------------------------------------------------------------
+module.exports =  async function insertarPersona( datos ) {
+
+	// tengo "inyectada" también xxx.logica para poder llamar a funciones "hermanas"
+	//         this.logica.funciones.loQueSea.f()
+
+
+		var textoSQL =
+			'insert into Persona values( $dni, $nombre, $apellidos );'
+		var valoresParaSQL = { $dni: datos.dni, $nombre: datos.nombre,
+							   $apellidos: datos.apellidos }
+		
+		return new Promise( (resolver, rechazar) => {
+			insertarPersona.conexion.run( textoSQL, valoresParaSQL, function( err ) {
+				( err ? rechazar(err) : resolver() )
+			})
+		})
+		
+} // ()
+
+
+// --------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------

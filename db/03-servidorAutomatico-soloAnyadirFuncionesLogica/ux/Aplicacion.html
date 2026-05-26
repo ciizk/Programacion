@@ -1,0 +1,119 @@
+<!-- ---------------------------------------------------- -->
+<!-- ---------------------------------------------------- -->
+<!DOCTYPE html>
+<html>
+
+<!-- ---------------------------------------------------- -->
+<head>
+<meta charset="utf-8"/>
+
+<!-- ---------------------------------------------------- -->
+<script src="logicaFake/llamar.js"></script>
+<script src="logicaFake/prueba.js"></script>
+<script src="logicaFake/insertarPersona.js"></script>
+<script src="logicaFake/buscarPersonaConDNI.js"></script>
+<script src="logicaFake/insertarAsignatura.js"></script>
+<script src="logicaFake/matricular.js"></script>
+<script src="logicaFake/buscarAsignaturasDePersonaPorApellidos.js"></script>
+
+<!-- ---------------------------------------------------- -->
+<script>
+function llamarAPruebaPulsado() {
+  prueba( function( err, res ) {
+    if ( err ) { alert( "hubo un problema llamando a prueba" ); return }
+    document.getElementById("salida").innerHTML = res
+  })
+}
+</script>
+
+<!-- ---------------------------------------------------- -->
+<script>
+function insertarPersonaPulsado() {
+  var dni       = document.getElementById("dni").value
+  var nombre    = document.getElementById("nombre").value
+  var apellidos = document.getElementById("apellidos").value
+  insertarPersona( {dni: dni, nombre: nombre, apellidos: apellidos}, function( err, res ) {
+    if ( err ) { alert("error http: " + err); return }
+    if ( res && res.error ) { alert("error: " + JSON.stringify(res.error)); return }
+    document.getElementById("salida").innerHTML = "Persona insertada"
+  })
+}
+
+function buscarPersonaPulsado() {
+  var dni = document.getElementById("dni").value
+  buscarPersonaConDNI( {dni: dni}, function( err, res ) {
+    if ( err ) { alert("error http: " + err); return }
+    if ( res && res.error ) { alert("error: " + JSON.stringify(res.error)); return }
+    document.getElementById("salida").innerHTML = "resultado= " + JSON.stringify(res)
+  })
+}
+</script>
+
+<!-- ---------------------------------------------------- -->
+<script>
+function insertarAsignaturaPulsado() {
+  var codigo = document.getElementById("codigo").value
+  var nombre = document.getElementById("nombreAsig").value
+  insertarAsignatura( {codigo: codigo, nombre: nombre}, function( err, res ) {
+    if ( err ) { alert("error http: " + err); return }
+    if ( res && res.error ) { alert("error: " + JSON.stringify(res.error)); return }
+    document.getElementById("salida").innerHTML = "Asignatura insertada"
+  })
+}
+
+function matricularPulsado() {
+  var dni    = document.getElementById("dni").value
+  var codigo = document.getElementById("codigo").value
+  matricular( {dni: dni, codigo: codigo}, function( err, res ) {
+    if ( err ) { alert("error http: " + err); return }
+    if ( res && res.error ) { alert("error: " + JSON.stringify(res.error)); return }
+    document.getElementById("salida").innerHTML = "Matrícula realizada"
+  })
+}
+
+function buscarAsignaturasPulsado() {
+  var apellidos = document.getElementById("apellidos").value
+  buscarAsignaturasDePersonaPorApellidos( {apellidos: apellidos}, function( err, res ) {
+    if ( err ) { alert("error http: " + err); return }
+    if ( res && res.error ) { alert("error: " + JSON.stringify(res.error)); return }
+    document.getElementById("salida").innerHTML = "asignaturas= " + JSON.stringify(res)
+  })
+}
+</script>
+
+</head>
+
+<!-- ---------------------------------------------------- -->
+<body>
+
+<h1>Aplicación web - Matrículas</h1>
+
+<h2>Persona</h2>
+<form>
+  dni: <input id="dni" type="text" value="1234A"><br>
+  nombre: <input id="nombre" type="text" value="Pepe"><br>
+  apellidos: <input id="apellidos" type="text" value="García Pérez"><br>
+</form>
+<button type="button" onclick="insertarPersonaPulsado()">Insertar Persona</button>
+<button type="button" onclick="buscarPersonaPulsado()">Buscar Persona por DNI</button>
+
+<h2>Asignatura</h2>
+<form>
+  código: <input id="codigo" type="text" value="13929"><br>
+  nombre: <input id="nombreAsig" type="text" value="Programacion 2"><br>
+</form>
+<button type="button" onclick="insertarAsignaturaPulsado()">Insertar Asignatura</button>
+
+<h2>Matrícula</h2>
+<p>Usa los campos dni y código de arriba.</p>
+<button type="button" onclick="matricularPulsado()">Matricular</button>
+<button type="button" onclick="buscarAsignaturasPulsado()">Asignaturas de persona (por apellidos)</button>
+
+<h2>Otros</h2>
+<button type="button" onclick="llamarAPruebaPulsado()">Llamar prueba()</button>
+
+<h2>Salida</h2>
+<p id="salida">-</p>
+
+</body>
+</html>

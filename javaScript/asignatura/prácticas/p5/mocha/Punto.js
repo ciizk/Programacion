@@ -1,4 +1,9 @@
-// Apartado 5: clase Punto completa, exportada para usar desde los tests.
+/*--------------------------------------------------------------------------------------------
+Fichero: Punto.js
+Autor: Francisco Indriago
+Fecha: 05/05/2026
+Descripción: clase punto completa, exportada para usar en los tests
+--------------------------------------------------------------------------------------------*/
 
 module.exports = class Punto {
   constructor(x, y) {

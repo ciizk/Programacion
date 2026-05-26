@@ -1,4 +1,9 @@
-// Test 1: constructor y getters de Punto.
+/*--------------------------------------------------------------------------------------------
+Fichero: mainTest1.js
+Autor: Francisco Indriago
+Fecha: 04/05/2026
+Descripción: constructor y getters de Punto
+--------------------------------------------------------------------------------------------*/
 const assert = require("assert");
 const Punto = require("../Punto.js");
 

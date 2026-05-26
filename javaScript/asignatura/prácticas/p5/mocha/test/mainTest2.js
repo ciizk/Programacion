@@ -1,4 +1,9 @@
-// Test 2: método distancia().
+/*--------------------------------------------------------------------------------------------
+Fichero: mainTest2.js
+Autor: Francisco Indriago
+Fecha: 05/05/2026
+Descripción: metodo distancia()
+--------------------------------------------------------------------------------------------*/
 const assert = require("assert");
 const Punto = require("../Punto.js");
 

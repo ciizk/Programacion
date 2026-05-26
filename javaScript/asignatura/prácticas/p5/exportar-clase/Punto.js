@@ -1,4 +1,10 @@
-// Apartado 3: exportar la clase Punto desde su propio módulo.
+/*--------------------------------------------------------------------------------------------
+Fichero: Punto.js
+Autor: Francisco Indriago
+Fecha: 04/05/2026
+Descripción: exportar punto
+--------------------------------------------------------------------------------------------*/
+
 
 module.exports = class Punto {
   constructor(x, y) {

@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ejercicio 2 align-items</title>
+    <style>
+        #container{
+            width: 600px;
+            border: 1px solid white;
+            margin: 0 auto;
+        }
+        #container > div{
+            border: 1px black solid;
+            width: 300px;
+            background-color: #1a2c5e;
+            display: flex;
+            height: 200px;
+            margin-left: 200px;
+        }
+
+        #container div div{
+            width: 100px;
+            background: #c8c8c8;
+            border: 1px solid black;
+            padding: 5px;
+            margin: 5px;
+        }
+
+
+        #flex-stretch{
+            align-items: stretch ;
+        }
+        #flex-start {
+            align-items: flex-start ;
+        }
+        #flex-end{
+            align-items: flex-end ;
+        }
+        #center {
+            align-items: center ;
+        }
+        #baseline {
+            align-items: baseline ;
+        }
+
+    </style>
+
+
+</head>
+<body>
+<div id="container">
+    <b>Align-items: flex-stretch</b>
+    <div id="flex-stretch">
+        <div>1</div>
+        <div><h2>2</h2></div>
+        <div>3</div>
+        <div>4</div>
+    </div>
+    <b>Align-items: flex-start</b>
+    <div id="flex-start">
+        <div>1</div>
+        <div><h2>2</h2></div>
+        <div>3</div>
+        <div>4</div>
+    </div>
+    <b>Align-items: flex-end</b>
+    <div id="flex-end">
+        <div>1</div>
+        <div><h2>2</h2></div>
+        <div>3</div>
+        <div>4</div>
+    </div>
+    <b>Align-items: center</b>
+    <div id="center">
+        <div>1</div>
+        <div><h2>2</h2></div>
+        <div>3</div>
+        <div>4</div>
+    </div>
+    <b>Align-items: baseline</b>
+    <div id="baseline">
+        <div>1</div>
+        <div><h2>2</h2></div>
+        <div>3</div>
+        <div>4</div>
+
+    </div>
+</div>
+
+</body>
+</html>

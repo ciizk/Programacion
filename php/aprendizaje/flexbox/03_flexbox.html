@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 3 align-self (JL)</title>
+    <style>
+        .contenedor{
+            width: 500px;
+            margin:10px auto
+        }
+        .flex-container {
+            width: 250px;
+            height: 150px;
+            background-color: blue;
+            display: flex;
+            padding: 5px;
+            margin: 10px auto;
+        }
+        .todosAbajo{
+            align-items: flex-end
+        }
+        .todosArriba{
+            align-items: flex-start;
+        }
+        .flex-item{
+            background-color: #CCC;
+            width: 50px;
+            margin: 10px auto;
+        }
+        .flex-item:nth-child(3) {
+            background-color: yellow;
+        }
+        .flex-container .flex-item {
+            width: 100%;
+            text-align: center;
+            margin: 10px;
+        }
+.start{
+    align-self: flex-start;
+}
+.end{
+    align-self: flex-end;
+}
+.center{
+    align-self: center;
+}
+.stretch{
+    align-self: stretch;
+}
+.baseline{
+    align-self: baseline;
+}
+    </style>
+</head>
+<body>
+<div class="contenedor">
+<h1>align-self: flex-start</h1>
+    <div class="flex-container todosAbajo">
+    <div class="flex-item">
+        <p>1</p>
+    </div>
+        <div class="flex-item">
+            <p>2</p>
+        </div>
+        <div class="flex-item start">
+            <p>3</p>
+        </div>
+        <div class="flex-item">
+            <p>4</p>
+        </div>
+    </div>
+
+    <h1>align-self: flex-end</h1>
+    <div class="flex-container todosArriba" >
+        <div class="flex-item">
+            <p>1</p>
+        </div>
+        <div class="flex-item">
+            <p>2</p>
+        </div>
+        <div class="flex-item end">
+            <p>3</p>
+        </div>
+        <div class="flex-item">
+            <p>4</p>
+        </div>
+    </div>
+    <h1>align-self: center</h1>
+    <div class="flex-container todosArriba">
+        <div class="flex-item">
+            <p>1</p>
+        </div>
+        <div class="flex-item">
+            <p>2</p>
+        </div>
+        <div class="flex-item center">
+            <p>3</p>
+        </div>
+        <div class="flex-item">
+            <p>4</p>
+        </div>
+    </div>
+    <h1>align-self: stretch</h1>
+    <div class="flex-container todosArriba">
+        <div class="flex-item">
+            <p>1</p>
+        </div>
+        <div class="flex-item">
+            <p>2</p>
+        </div>
+        <div class="flex-item stretch">
+            <p>3</p>
+        </div>
+        <div class="flex-item">
+            <p>4</p>
+        </div>
+    </div>
+    <h1>align-self: baseline</h1>
+    <div class="flex-container todosArriba">
+        <div class="flex-item">
+            <p>1</p>
+        </div>
+        <div class="flex-item baseline">
+            <h1>2</h1>
+        </div>
+        <div class="flex-item baseline">
+            <h3>3</h3>
+        </div>
+        <div class="flex-item">
+            <p>4</p>
+        </div>
+    </div>
+    </div>
+</body>
+</html>

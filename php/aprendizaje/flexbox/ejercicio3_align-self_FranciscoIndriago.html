@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ejercicio 3 align-self</title>
+  <style>
+    #container > div{
+      border: 1px black solid;
+      width: 350px;
+      background-color: #1a2c5e;
+      display: flex;
+      height: 200px;
+      margin-left: 100px;
+    }
+    #container div div{
+      width: 80px;
+      border: 1px solid black;
+      padding: 5px;
+      margin: 10px;
+      background: #c8c8c8;
+      display: flex;
+      justify-content: center;
+    }
+    #flex-start {
+      align-items: flex-end;
+    }
+    #container #align-self1{
+      align-self: flex-start;
+      background-color: yellow;
+    }
+    #flex-end {
+      align-items: flex-start;
+    }
+    #container #align-self2{
+      align-self: flex-end;
+      background-color: yellow;
+    }
+    #center {
+      align-items: flex-start;
+    }
+    #container #align-self3{
+      align-self: center;
+      background-color: yellow;
+    }
+    #Stretch {
+      align-items: flex-start;
+    }
+    #container #align-self4{
+      align-self: stretch;
+      background-color: yellow;
+    }
+    #baseline {
+      align-items: flex-start;
+    }
+    #container #align-self5{
+      align-self: baseline;
+      background-color: yellow;
+    }
+    #container #align-self6{
+      align-self: baseline;
+      background-color: yellow;
+    }
+  </style>
+</head>
+<body>
+<div id="container">
+  <b>align-self: flex-start</b>
+  <div id="flex-start">
+    <div><h3>1</h3></div>
+    <div><h3>2</h3></div>
+    <div id="align-self1"><h3>3</h3></div>
+    <div><h3>4</h3></div>
+  </div>
+  <b>align-self: flex-end</b>
+  <div id="flex-end">
+    <div><h3>1</h3></div>
+    <div><h3>2</h3></div>
+    <div id="align-self2"><h3>3</h3></div>
+    <div><h3>4</h3></div>
+  </div>
+  <b>align-self: center</b>
+  <div id="center">
+    <div><h3>1</h3></div>
+    <div><h3>2</h3></div>
+    <div id="align-self3"><h3>3</h3></div>
+    <div><h3>4</h3></div>
+  </div>
+  <b>align-self: stretch</b>
+  <div id="Stretch">
+    <div><h3>1</h3></div>
+    <div><h3>2</h3></div>
+    <div id="align-self4"><h3>3</h3></div>
+    <div><h3>4</h3></div>
+  </div>
+  <b>align-self: baseline</b>
+  <div id="baseline">
+    <div><h3>1</h3></div>
+    <div id="align-self6"><h1>2</h1></div>
+    <div id="align-self5"><h3>3</h3></div>
+    <div><h3>4</h3></div>
+  </div>
+</div>
+</body>
+</html>

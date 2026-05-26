@@ -1,5 +1,9 @@
-// Apartado 1: clase Punto en un solo fichero (sin export).
-// Sirve como prueba inicial de la clase antes de modularizarla.
+/*--------------------------------------------------------------------------------------------
+Fichero: main.js
+Autor: Francisco Indriago
+Fecha: 04/05/2026
+Descripción: clase punto
+--------------------------------------------------------------------------------------------*/
 
 class Punto {
   constructor(x, y) {

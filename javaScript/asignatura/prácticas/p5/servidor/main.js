@@ -1,4 +1,9 @@
-// Apartado 4: servidor Express en el puerto 8080.
+/*--------------------------------------------------------------------------------------------
+Fichero: main.js
+Autor: Francisco Indriago
+Fecha: 10/05/2026
+Descripción: server
+--------------------------------------------------------------------------------------------*/
 const express = require("express");
 const servidor = express();
 

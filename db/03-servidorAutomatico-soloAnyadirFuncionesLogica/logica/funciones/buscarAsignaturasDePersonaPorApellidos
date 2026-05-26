@@ -1,0 +1,31 @@
+// -*- javascript -*-
+
+// --------------------------------------------------------------------------------
+// buscarAsignaturasDePersonaPorApellidos
+// --------------------------------------------------------------------------------
+
+// datos:{apellidos:Texto}
+//     -->
+//         buscarAsignaturasDePersonaPorApellidos() -->
+//     <--
+//         [ {codigo:Texto, nombre:Texto} ]
+// ----------------------------------------------------------------------------
+module.exports = async function buscarAsignaturasDePersonaPorApellidos( datos ) {
+
+	var textoSQL =
+		"select Asignatura.codigo, Asignatura.nombre " +
+		"from Persona, Matricula, Asignatura " +
+		"where Persona.apellidos=$apellidos " +
+		"  and Matricula.dni=Persona.dni " +
+		"  and Matricula.codigo=Asignatura.codigo;"
+	var valoresParaSQL = { $apellidos: datos.apellidos }
+
+	return new Promise( (resolver, rechazar) => {
+		buscarAsignaturasDePersonaPorApellidos.conexion.all(
+			textoSQL, valoresParaSQL,
+			( err, res ) => {
+				( err ? rechazar(err) : resolver(res) )
+			})
+	})
+
+} // ()

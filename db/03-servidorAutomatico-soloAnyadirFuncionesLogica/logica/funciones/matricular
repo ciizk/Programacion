@@ -1,0 +1,23 @@
+// -*- javascript -*-
+
+// --------------------------------------------------------------------------------
+// matricular
+// --------------------------------------------------------------------------------
+
+// datos:{dni:Texto, codigo:Texto}
+//     -->
+//         matricular() -->
+// ----------------------------------------------------------------------------
+module.exports = async function matricular( datos ) {
+
+	var textoSQL =
+		'insert into Matricula values( $dni, $codigo );'
+	var valoresParaSQL = { $dni: datos.dni, $codigo: datos.codigo }
+
+	return new Promise( (resolver, rechazar) => {
+		matricular.conexion.run( textoSQL, valoresParaSQL, function( err ) {
+			( err ? rechazar(err) : resolver() )
+		})
+	})
+
+} // ()

@@ -1,4 +1,10 @@
-// Apartado 3: importar la clase y usarla.
+/*--------------------------------------------------------------------------------------------
+Fichero: main.js
+Autor: Francisco Indriago
+Fecha: 04/05/2026
+Descripción: importar clase y usarla
+--------------------------------------------------------------------------------------------*/
+
 const Punto = require("./Punto.js");
 
 var p1 = new Punto(3, 4);

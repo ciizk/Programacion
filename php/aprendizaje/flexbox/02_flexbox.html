@@ -2,79 +2,132 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>ejercicio 2 justify content</title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ejercicio 2 align-items (JL)</title>
+    <!-- Aquí va el CSS -->
     <style>
-        #container{
-            width: 600px;
+        #container {
+            width: 500px;
             border: 1px solid black;
             margin: 0 auto;
         }
-        #container > div{
+        .flex-container {
+            width: 250px;
+            height: 150px;
+            background-color: rgb(128, 192,234 );
+            padding: 5px;
+            margin: 10px auto;
             display: flex;
-            border: 1px black solid;
         }
-
-        #container div div{
-            width: 50px;
-            height: 50px;
-            background: red;
-            margin-right: 5px;
-            border: 1px solid black;
+        .flex-items{
+            width: 55px;
+            background-color: #ccc;
+            margin: 5px;
+            display: flex;
         }
-        #flex-start{
-            justify-content: flex-start ;
+        .flex-container .flex-items p,
+        .flex-container .flex-items h3{
+            width: 100%;
+            text-align: center;
+            align-self: center;
         }
-        #flex-end{
-            justify-content: flex-end;
+        .flex-container.stretch{
+            align-items: stretch;
         }
-        #center{
-            justify-content: center;
+        .flex-container.flex-start{
+            align-items: flex-start;
         }
-        #space-between{
-            justify-content: space-between;
+        .flex-container.flex-end{
+            align-items: flex-end;
         }
-        #space-around{
-            justify-content: space-around;
+        .flex-container.center{
+            align-items: center;
         }
-
+        .flex-container.baseline{
+            align-items: baseline;
+        }
     </style>
-
-
 </head>
+<!-- Aquí va el HTML -->
 <body>
-<div id="container">
-    <p>Justify-content: flex-start</p>
-    <div id="flex-start">  <!-- Padre de los div de abajo -->
-        <div></div>
-        <div></div>
-        <div></div>
-    </div>
-    <p>Justify-content: flex-end</p>
-    <div id="flex-end">
-        <div></div>
-        <div></div>
-        <div></div>
-    </div>
-    <p>Justify-content: center</p>
-    <div id="center">
-        <div></div>
-        <div></div>
-        <div></div>
-    </div>
-    <p>Justify-content: space-between</p>
-    <div id="space-between">
-        <div></div>
-        <div></div>
-        <div></div>
-    </div>
-    <p>Justify-content: space-around</p>
-    <div id="space-around">
-        <div></div>
-        <div></div>
-        <div></div>
-    </div>
-</div>
-
+    <div id="container">
+        <h2>align-items stretch</h2>
+        <div class="flex-container stretch">
+            <div class="flex-items">
+                <p>1</p>
+            </div>
+            <div class="flex-items">
+                <h3>2</h3>
+            </div>
+            <div class="flex-items">
+                <p>3</p>
+            </div>
+            <div class="flex-items">
+                <p>4</p>
+            </div>
+        </div>
+            <h2>align-items flex-start</h2>
+            <div class="flex-container flex-start">
+                <div class="flex-items">
+                    <p>1</p>
+                </div>
+                <div class="flex-items">
+                    <h3>2</h3>
+                </div>
+                <div class="flex-items">
+                    <p>3</p>
+                </div>
+                <div class="flex-items">
+                    <p>4</p>
+                </div>
+            </div>
+                <h2>align-items flex-end</h2>
+                <div class="flex-container flex-end">
+                    <div class="flex-items">
+                        <p>1</p>
+                    </div>
+                    <div class="flex-items">
+                        <h3>2</h3>
+                    </div>
+                    <div class="flex-items">
+                        <p>3</p>
+                    </div>
+                    <div class="flex-items">
+                        <p>4</p>
+                    </div>
+                </div>
+                    <h2>align-items center</h2>
+                    <div class="flex-container center">
+                        <div class="flex-items">
+                            <p>1</p>
+                        </div>
+                        <div class="flex-items">
+                            <h3>2</h3>
+                        </div>
+                        <div class="flex-items">
+                            <p>3</p>
+                        </div>
+                        <div class="flex-items">
+                            <p>4</p>
+                        </div>
+                    </div>
+                        <h2>align-items baseline</h2>
+                        <div class="flex-container baseline">
+                            <div class="flex-items">
+                                <p>1</p>
+                            </div>
+                            <div class="flex-items">
+                                <h3>2</h3>
+                            </div>
+                            <div class="flex-items">
+                                <p>3</p>
+                            </div>
+                            <div class="flex-items">
+                                <p>4</p>
+                            </div>
+                        </div>
+        </div>
 </body>
 </html>

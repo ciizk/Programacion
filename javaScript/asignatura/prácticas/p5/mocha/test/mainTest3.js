@@ -1,4 +1,9 @@
-// Test 3: método diferencia().
+/*--------------------------------------------------------------------------------------------
+Fichero: mainTest3.js
+Autor: Francisco Indriago
+Fecha: 05/05/2026
+Descripción: metodo diferencia()
+--------------------------------------------------------------------------------------------*/
 const assert = require("assert");
 const Punto = require("../Punto.js");
 

@@ -1,0 +1,23 @@
+// -*- javascript -*-
+
+// --------------------------------------------------------------------------------
+// insertarAsignatura
+// --------------------------------------------------------------------------------
+
+// datos:{codigo:Texto, nombre:Texto}
+//     -->
+//         insertarAsignatura() -->
+// ----------------------------------------------------------------------------
+module.exports = async function insertarAsignatura( datos ) {
+
+	var textoSQL =
+		'insert into Asignatura values( $codigo, $nombre );'
+	var valoresParaSQL = { $codigo: datos.codigo, $nombre: datos.nombre }
+
+	return new Promise( (resolver, rechazar) => {
+		insertarAsignatura.conexion.run( textoSQL, valoresParaSQL, function( err ) {
+			( err ? rechazar(err) : resolver() )
+		})
+	})
+
+} // ()
