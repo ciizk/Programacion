@@ -1,114 +1,85 @@
-# Práctica 6 — Bases de datos relacionales, lógica del negocio y servidor REST
+Practica 6 - PRG2
+=================
 
-Esta carpeta contiene la práctica 6 completa, organizada por las dos grandes
-fases del enunciado.
+Apuntes y codigo de la practica de bases de datos, logica y servidor REST.
 
-```
-db/p6/
-├── 01-sql/          ← Sección 1: SQL puro con sqlite3
-└── 02-aplicacion/   ← Secciones 2-3-Final: lógica + servidor REST + UX
-```
+He partido en dos carpetas para tenerlo mas claro:
 
----
+  01-sql/         lo de la seccion 1 (SQL puro con sqlite3)
+  02-aplicacion/  el resto (logica en node + servidor REST + pagina web)
 
-## 01-sql/ — Bases de datos relacionales y SQL
 
-Contiene los scripts SQL de la primera parte de la práctica, junto con el
-binario `sqlite3` y una base de datos `datos.bd` ya construida.
+01-sql/
+-------
 
-| Fichero                  | Para qué sirve                                              |
-| ------------------------ | ----------------------------------------------------------- |
-| `crearPersona.sql`       | `CREATE TABLE Persona`                                      |
-| `crearAsignatura.sql`    | `CREATE TABLE Asignatura`                                   |
-| `crearMatricula.sql`     | `CREATE TABLE Matricula` (con claves ajenas)                |
-| `insertarPersonas.sql`   | Inserta las cuatro personas del ejemplo                     |
-| `insertarAsignaturas.sql`| Inserta 3 asignaturas                                       |
-| `insertarMatricula.sql`  | Matrículas de ejemplo (incl. "matricularse en Programacion 2") |
-| `consultas.sql`          | Consultas básicas (1 tabla y 2 tablas)                      |
-| `consultaTresTablas.sql` | Ejercicio: nombre de los matriculados en Programación 2     |
-| `otrasOperaciones.sql`   | `DELETE`, `UPDATE`, `DROP`                                  |
+Aqui estan los scripts que vamos ejecutando con:
 
-### Reproducir el proceso
+    ./sqlite3 datos.bd < fichero.sql
 
-```bash
-cd 01-sql
-rm -f datos.bd
-./sqlite3 datos.bd < crearPersona.sql
-./sqlite3 datos.bd < crearAsignatura.sql
-./sqlite3 datos.bd < crearMatricula.sql
-./sqlite3 datos.bd < insertarPersonas.sql
-./sqlite3 datos.bd < insertarAsignaturas.sql
-./sqlite3 datos.bd < insertarMatricula.sql
+Orden en el que los ejecute:
 
-# Ejemplo de consultas
-./sqlite3 datos.bd < consultas.sql
-./sqlite3 datos.bd < consultaTresTablas.sql
-```
+    1. crearPersona.sql
+    2. crearAsignatura.sql
+    3. crearMatricula.sql
+    4. insertarPersonas.sql
+    5. insertarAsignaturas.sql
+    6. insertarMatricula.sql
 
----
+Y luego para probar consultas:
 
-## 02-aplicacion/ — Aplicación completa
+    consultas.sql          -> select * from Persona, etc.
+    consultaTresTablas.sql -> el ejercicio de los matriculados en Prog 2
+    otrasOperaciones.sql   -> delete, update, drop (lo del ultimo ejercicio)
 
-```
+
 02-aplicacion/
-├── docs/arquitectura.md     ← Diseño (BD, lógica, REST, UX)
-├── bd/                       ← Misma base de datos para la app
-├── logica/                   ← Sección 2: lógica del negocio
-│   ├── logica.js / cargador.js
-│   ├── funciones/            ← una función por fichero
-│   └── test/                 ← mainTest1.js .. mainTest4.js (mocha)
-├── servidorREST/             ← Sección 3: API REST sobre la lógica
-│   ├── mainServidorREST.js
-│   └── test/                 ← mainTest1.js + mainTest2.js
-└── ux/                       ← Ejercicio final: cliente web (SPA)
-    ├── Aplicacion.html
-    └── logicaFake/           ← proxy REST con la misma firma que la lógica
-```
+--------------
 
-### Reproducir el proceso
+Estructura que pide el guion:
 
-```bash
-# 1. instalar dependencias
-cd 02-aplicacion/logica && npm install
-cd ../servidorREST && npm install
+    bd/           la base de datos
+    logica/       Logica.js (aqui esta como cargador + funciones sueltas)
+    servidorREST/ el servidor express
+    ux/           la pagina web del usuario
+    docs/         notas de diseño
 
-# 2. probar la lógica de forma aislada (sin servidor)
-cd ../logica && npm test
-#   → 22 passing
+Para arrancarlo todo (la primera vez):
 
-# 3. arrancar el servidor
-cd ../servidorREST && npm run servidor
+    cd logica && npm install
+    cd ../servidorREST && npm install
 
-# 4. en OTRA terminal, lanzar los tests del servidor REST
-cd 02-aplicacion/servidorREST && npm test
-#   → 10 passing
+Para probar la logica sola:
 
-# 5. abrir la interfaz web
-#    http://localhost:8080/Aplicacion.html
-```
+    cd logica
+    npm test
 
-### Mapa de qué ejercicio resuelve qué fichero
+Para arrancar el servidor:
 
-| Ejercicio del PDF                                              | Resuelto en                                          |
-| -------------------------------------------------------------- | ---------------------------------------------------- |
-| Sección 1, SQL básico                                          | `01-sql/`                                            |
-| Sección 2, lógica + `mainTest1`                                | `02-aplicacion/logica/funciones/{prueba, insertarPersona, buscarPersonaConDNI, borrarFilasDeTodasLasTablas, cerrarConexion}` + `logica/test/mainTest1.js` |
-| Sección 2, alta de asignaturas (`mainTest2`)                   | `funciones/insertarAsignatura` + `logica/test/mainTest2.js` |
-| Sección 2, matrícula (`mainTest3`)                             | `funciones/matricular` + `logica/test/mainTest3.js`  |
-| Sección 2, asignaturas matriculadas por apellidos (`mainTest4`)| `funciones/buscarAsignaturasDePersonaPorApellidos` + `logica/test/mainTest4.js` |
-| Sección 3, servidor REST + reglas + tests                      | `servidorREST/mainServidorREST.js` (regla universal `POST /f/<funcion>`) + `servidorREST/test/mainTest1.js` y `mainTest2.js` |
-| Ejercicio Final, SPA con proxy de la lógica                    | `ux/Aplicacion.html` + `ux/logicaFake/`              |
+    cd servidorREST
+    npm run servidor
 
-### Sobre la regla REST "universal"
+Y desde otra ventana:
 
-En lugar de escribir una ruta REST por cada método de la lógica
-(`GET /persona/:dni`, `POST /alta`, ...), se ha adoptado el convenio:
+    npm test                       (para los tests automaticos)
+    http://localhost:8080/Aplicacion.html   (para usar la app)
 
-```
-POST /f/<nombreFuncion>
-body: <argumentos JSON>
-```
 
-Esto rompe ligeramente la "filosofía REST" pero permite que **cada nueva
-función de la lógica quede expuesta automáticamente** sin tocar el servidor.
-La aplicación web (`ux/logicaFake/`) usa esa misma convención.
+Notas
+-----
+
+- Mis nuevas funciones de la logica (las de los ejercicios 1, 2 y 3 de la
+  seccion 2.2) son:
+    insertarAsignatura
+    matricular
+    buscarAsignaturasDePersonaPorApellidos
+
+  Sus tests estan en logica/test/mainTest2.js, mainTest3.js y mainTest4.js.
+
+- En el servidor REST, en vez de tener una regla por funcion, hay una sola
+  regla universal POST /f/<nombreFuncion> y eso reenvia a la funcion de la
+  logica con el body como argumento. Asi cada funcion nueva queda expuesta
+  automaticamente, no hace falta tocar ReglasREST.
+
+- En la web (ux/) cada boton llama a un "fake" en logicaFake/ que en
+  realidad hace POST /f/... al servidor. Asi el codigo de la pagina parece
+  que esta llamando directamente a la logica.

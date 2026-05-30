@@ -1,6 +1,6 @@
--- consultaTresTablas.sql
--- Ejercicio Sección 1: consulta que involucra 3 tablas.
--- Obtener el nombre de todas las personas matriculadas de "Programacion 2".
+-- ejercicio: nombre de los matriculados en Programacion 2
+-- (involucra las 3 tablas)
+
 select Persona.nombre
   from Persona, Matricula, Asignatura
  where Asignatura.nombre = 'Programacion 2'

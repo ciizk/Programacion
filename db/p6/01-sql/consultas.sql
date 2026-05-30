@@ -1,16 +1,16 @@
 -- consultas.sql
--- Consultas de ejemplo de la Sección 1 del enunciado
+-- algunas pruebas con select
 
--- 1) Obtener toda la información de la tabla Persona
+-- toda la tabla Persona
 select * from Persona;
 
--- 2) Obtener solo los apellidos de todas las personas
+-- solo los apellidos
 select apellidos from Persona;
 
--- 3) Obtener los datos de la persona apellidada "Garcia"
+-- la persona apellidada Garcia
 select * from Persona where apellidos = 'Garcia';
 
--- 4) Apellidos de las personas matriculadas en la asignatura cuyo código es 13928
+-- apellidos de los matriculados en 13928 (2 tablas)
 select Persona.apellidos
   from Persona, Matricula
  where Matricula.codigo = '13928'

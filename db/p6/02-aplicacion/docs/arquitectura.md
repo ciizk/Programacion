@@ -1,63 +1,59 @@
-# Arquitectura de la aplicación
+Notas de diseño
+===============
 
-```
-+-----------------+      HTTP (REST)     +------------------+
-|   Navegador     |  <----------------> |  servidorREST    |
-|  Aplicacion.html|     POST /f/<f>     |  (Express)       |
-|  + logicaFake/  |                     |                  |
-+-----------------+                     |  cargarReglas... |
-                                        |                  |
-                                        |       |          |
-                                        |       v          |
-                                        |   logica.js      |
-                                        |   (cargador)     |
-                                        |       |          |
-                                        |       v          |
-                                        | funciones/*      |
-                                        |       |          |
-                                        |       v          |
-                                        |  sqlite3 (BD)    |
-                                        |  bd/datos.bd     |
-                                        +------------------+
-```
+Esquema de tablas
+-----------------
 
-## 1. Esquema de la base de datos
+Persona(dni, nombre, apellidos)
+   pk: dni
 
-| Tabla       | Columnas                        | Clave primaria | Claves ajenas                                   |
-| ----------- | ------------------------------- | -------------- | ----------------------------------------------- |
-| `Persona`   | dni, nombre, apellidos          | dni            | -                                               |
-| `Asignatura`| codigo, nombre                  | codigo         | -                                               |
-| `Matricula` | dni, codigo                     | (dni, codigo)  | dni → Persona(dni), codigo → Asignatura(codigo) |
+Asignatura(codigo, nombre)
+   pk: codigo
 
-## 2. Lógica del negocio (logica/funciones/)
+Matricula(dni, codigo)
+   pk: (dni, codigo)
+   fk: dni    -> Persona(dni)
+   fk: codigo -> Asignatura(codigo)
 
-Cada fichero del directorio `funciones/` exporta una función asíncrona. El
-módulo `cargador.js` las descubre dinámicamente e inyecta la conexión a la BD.
 
-| Función                                    | Entrada                          | Salida                           |
-| ------------------------------------------ | -------------------------------- | -------------------------------- |
-| `prueba`                                   | -                                | texto                            |
-| `borrarFilasDeTodasLasTablas`              | -                                | -                                |
-| `insertarPersona`                          | {dni, nombre, apellidos}         | -                                |
-| `buscarPersonaConDNI`                      | {dni}                            | [{dni, nombre, apellidos}]       |
-| `insertarAsignatura`                       | {codigo, nombre}                 | -                                |
-| `matricular`                               | {dni, codigo}                    | -                                |
-| `buscarAsignaturasDePersonaPorApellidos`   | {apellidos}                      | [{codigo, nombre}]               |
-| `cerrarConexion`                           | -                                | -                                |
+Funciones de la logica
+----------------------
 
-## 3. Reglas REST (servidorREST/mainServidorREST.js)
+Cada una vive en su propio fichero dentro de logica/funciones/.
+El cargador.js las descubre solas y les inyecta la conexion a la bd.
 
-| Verbo + recurso        | Acción                                                              |
-| ---------------------- | ------------------------------------------------------------------- |
-| GET  /prueba           | Comprobación rápida: devuelve "¡Funciona!"                          |
-| POST /f/<nombreFuncion>| Invoca la función `<nombreFuncion>` de la lógica con el JSON body   |
+    prueba                                    ()                       -> texto
+    borrarFilasDeTodasLasTablas               ()                       ->
+    insertarPersona                           {dni, nombre, apellidos} ->
+    buscarPersonaConDNI                       {dni}                    -> [persona]
+    insertarAsignatura                        {codigo, nombre}         ->
+    matricular                                {dni, codigo}            ->
+    buscarAsignaturasDePersonaPorApellidos    {apellidos}              -> [asignatura]
+    cerrarConexion                            ()                       ->
 
-Esta regla universal evita tener que escribir una ruta REST por cada método.
 
-## 4. Programa web de usuario (ux/)
+Reglas REST
+-----------
 
-- `Aplicacion.html`: formularios + botones para invocar cada función.
-- `logicaFake/llamar.js`: proxy genérico que hace `POST /f/<nombre>` por
-  `XMLHttpRequest`.
-- `logicaFake/<nombreFuncion>.js`: stubs con la misma firma que los métodos
-  de la lógica original, redirigiendo a `llamar()`.
+GET  /prueba                  -> devuelve "¡Funciona!"
+POST /f/<nombreFuncion>       -> llama a esa funcion de la logica.
+                                 Argumentos en el body (JSON).
+                                 Devuelve lo que devuelva la funcion.
+
+Lo de tener una sola regla es para no tener que tocar el servidor cada vez
+que añado una funcion nueva. Rompe un poco la idea REST pero a cambio
+todo lo que hay en logica/funciones/ queda expuesto solo.
+
+
+UX
+--
+
+Aplicacion.html: formularios con dni, nombre, apellidos, codigo, etc. y
+botones para llamar a cada funcion.
+
+ux/logicaFake/llamar.js: el proxy que hace XMLHttpRequest contra
+POST /f/<nombre>.
+
+ux/logicaFake/<funcion>.js: una "fachada" por cada funcion, asi desde
+los handlers del HTML llamo a insertarPersona(...) como si la tuviera
+en local.
