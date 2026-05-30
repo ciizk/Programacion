@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu responsive</title>
+    <style>
+        body {
+            background-color: lightpink;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            background-color: black;
+            display: flex;
+            flex-direction: row;
+        }
+
+        ul li a {
+            padding: 20px 24px;
+            color: white;
+        }
+
+        @media (max-width: 600px) {
+            ul {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <ul>
+        <li><a>Enlace 1</a></li>
+        <li><a>Enlace 2</a></li>
+        <li><a>Enlace 3</a></li>
+        <li><a>Enlace 4</a></li>
+        <li><a>Enlace 5</a></li>
+    </ul>
+</nav>
+
+</body>
+</html>

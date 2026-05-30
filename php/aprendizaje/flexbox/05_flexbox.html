@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ejercicio menu responsive (JL)</title>
+    <style>
+        body {
+            background-color: darkred;
+        }
+        nav{
+            background-color: black;
+            width: 90%;
+            margin: 0 auto;
+        }
+        nav ul{
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: space-around;
+        }
+        nav ul a{
+            color: white;
+            text-decoration: none;
+            padding: 1rem;
+            display: block;
+        }
+
+        nav ul a:hover{
+            background-color: cornflowerblue;
+        }
+        @media(max-width:590px){
+            nav ul{
+                flex-direction: column;
+            }
+            nav ul li a:hover{
+                font-size: 2rem;
+                color: darkred;
+            }
+            nav ul a{
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+<nav>
+    <ul>
+        <li><a href="#">Enlace 1</a></li>
+        <li><a href="#">Enlace 2</a></li>
+        <li><a href="#">Enlace 3</a></li>
+        <li><a href="#">Enlace 4</a></li>
+        <li><a href="#">Enlace 5</a></li>
+    </ul>
+</nav>
+</body>
+</html>
