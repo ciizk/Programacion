@@ -1,3 +1,11 @@
+/*--------------------------------------------------------------------------------------------
+Fichero: "mainTest4.js"
+Autor: Francisco Indriago
+Fecha: 30/05/2026
+Descripción: programa que comprueba con mocha que la función
+buscarAsignaturasDePersonaPorApellidos devuelve los códigos de las asignaturas en que está
+matriculada una persona dada por sus apellidos.
+--------------------------------------------------------------------------------------------*/
 
 // --------------------------------------------------------------------------------
 // mainTest4.js : buscar asignaturas matriculadas de una persona por apellidos

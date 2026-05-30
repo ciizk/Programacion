@@ -1,5 +1,10 @@
--- ejercicio: nombre de los matriculados en Programacion 2
--- (involucra las 3 tablas)
+/*--------------------------------------------------------------------------------------------
+Fichero: "consultaTresTablas.sql"
+Autor: Francisco Indriago
+Fecha: 30/05/2026
+Descripción: consulta SQL que devuelve el nombre de las personas matriculadas en la
+asignatura "Programacion 2" usando las 3 tablas (Persona, Matricula y Asignatura).
+--------------------------------------------------------------------------------------------*/
 
 select Persona.nombre
   from Persona, Matricula, Asignatura

@@ -1,3 +1,11 @@
+/*--------------------------------------------------------------------------------------------
+Fichero: "mainTest3.js"
+Autor: Francisco Indriago
+Fecha: 30/05/2026
+Descripción: programa que comprueba con mocha que la función matricular de la lógica
+matricula a una persona en una asignatura y respeta las claves (no permite duplicados ni
+dni inexistentes).
+--------------------------------------------------------------------------------------------*/
 
 // --------------------------------------------------------------------------------
 // mainTest3.js : matrícula

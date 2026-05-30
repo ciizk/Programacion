@@ -1,3 +1,10 @@
+/*--------------------------------------------------------------------------------------------
+Fichero: "mainTest2.js"
+Autor: Francisco Indriago
+Fecha: 30/05/2026
+Descripción: programa que comprueba con mocha que la función insertarAsignatura de la lógica
+da de alta una asignatura y que no se puede insertar dos veces el mismo código.
+--------------------------------------------------------------------------------------------*/
 
 // --------------------------------------------------------------------------------
 // mainTest2.js : alta de asignaturas

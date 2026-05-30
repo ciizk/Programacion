@@ -1,5 +1,10 @@
--- consultas.sql
--- algunas pruebas con select
+/*--------------------------------------------------------------------------------------------
+Fichero: "consultas.sql"
+Autor: Francisco Indriago
+Fecha: 30/05/2026
+Descripción: script con varias consultas SQL de prueba sobre la tabla Persona y la consulta
+de los matriculados en una asignatura concreta (usa 2 tablas).
+--------------------------------------------------------------------------------------------*/
 
 -- toda la tabla Persona
 select * from Persona;

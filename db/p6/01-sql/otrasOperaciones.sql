@@ -1,4 +1,10 @@
--- ejercicios sueltos: borrar una fila, actualizar, borrar tabla...
+/*--------------------------------------------------------------------------------------------
+Fichero: "otrasOperaciones.sql"
+Autor: Francisco Indriago
+Fecha: 30/05/2026
+Descripción: ejemplos de otras operaciones SQL: borrar una fila, actualizar una fila sin
+borrarla, vaciar una tabla y borrar una tabla entera.
+--------------------------------------------------------------------------------------------*/
 
 -- borrar una persona
 delete from Persona where dni = '20123458C';

@@ -1,3 +1,11 @@
+/*--------------------------------------------------------------------------------------------
+Fichero: "matricular"
+Autor: Francisco Indriago
+Fecha: 30/05/2026
+Descripción: programa que define la función de la lógica que matricula a una persona en una
+asignatura (insertando una fila en la tabla Matricula).
+--------------------------------------------------------------------------------------------*/
+
 // -*- javascript -*-
 
 // --------------------------------------------------------------------------------

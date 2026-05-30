@@ -1,3 +1,11 @@
+/*--------------------------------------------------------------------------------------------
+Fichero: "insertarAsignatura"
+Autor: Francisco Indriago
+Fecha: 30/05/2026
+Descripción: programa que define la función de la lógica que da de alta una nueva asignatura
+en la base de datos.
+--------------------------------------------------------------------------------------------*/
+
 // -*- javascript -*-
 
 // --------------------------------------------------------------------------------

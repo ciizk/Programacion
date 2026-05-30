@@ -1,3 +1,11 @@
+/*--------------------------------------------------------------------------------------------
+Fichero: "mainTest2.js"
+Autor: Francisco Indriago
+Fecha: 30/05/2026
+Descripción: programa que comprueba con mocha que las reglas REST de las nuevas funciones de
+la lógica (insertarAsignatura, matricular y buscarAsignaturasDePersonaPorApellidos)
+responden correctamente a través del servidor.
+--------------------------------------------------------------------------------------------*/
 
 // --------------------------------------------------------------------------------
 // mainTest2.js  (recuerda arrancar el servidor)
