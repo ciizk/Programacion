@@ -1,0 +1,459 @@
+/* =====================================================================
+   Coronado Padel Center — Hoja de estilos
+   Codificada a partir de los mockups finales (mobile-first + escritorio)
+   y del libro de estilo del prototipo.
+
+   · Tipografía: Montserrat
+   · Paleta exacta del style guide (azules + aqua + lima/verde)
+   · CTA1 lima · CTA2 azul · CTA3 blanco (borde)
+   · Secciones a pantalla completa con foto + tarjeta "glass"
+   · Header flotante: escritorio = iconos + buscador; móvil = hamburguesa
+   · Interacciones sin JS (menú, FAQ, modal QR) salvo el buscador.
+   ===================================================================== */
+
+/* ------------------------------------------------------------------ */
+/*  1. Tokens                                                         */
+/* ------------------------------------------------------------------ */
+:root {
+    /* Principal */
+    --azul:       #589BD4;
+    --azul-osc:   #1A2E3E;
+    --aqua:       #76EFD0;
+    --verde:      #85A54E;
+    --lima:       #DFF155;
+    /* Secundarios */
+    --navy:       #18313F;
+    --azul-2:     #285E95;
+    --azul-3:     #469DE4;
+    --gris-azul:  #7B92A5;
+    --azul-pal-2: #BCCCE2;
+    --teal:       #2B5F71;
+    --teal-2:     #4BA3A5;
+    --teal-3:     #6CBDAB;
+    --aqua-2:     #6AE5D3;
+    /* Terciarios */
+    --navy-900:   #122D40;
+    --navy-700:   #1C4765;
+    --azul-4:     #479EDF;
+    --azul-pal:   #D8E7F4;
+    --blanco:     #ffffff;
+
+    /* Roles */
+    --bg:          #ffffff;
+    --texto:       #1A2E3E;
+    --texto-suave: #51677a;
+    --lima-700:    #c4d635;
+    --azul-700:    #3a86c4;
+
+    /* CTA */
+    --cta1-bg: var(--lima);   --cta1-tx: var(--navy-900);
+    --cta2-bg: var(--azul-3); --cta2-tx: #ffffff;
+    --cta3-bg: #ffffff;       --cta3-tx: var(--navy-900);
+
+    --fuente: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+
+    /* Escala fluida */
+    --t-xs: clamp(.72rem, .7rem + .12vw, .8rem);
+    --t-sm: clamp(.86rem, .83rem + .2vw, .98rem);
+    --t-md: clamp(1rem, .95rem + .3vw, 1.15rem);
+    --t-lg: clamp(1.2rem, 1.05rem + .8vw, 1.55rem);
+    --t-xl: clamp(1.7rem, 1.3rem + 2vw, 2.6rem);
+    --t-2xl: clamp(2.3rem, 1.6rem + 3.6vw, 4.2rem);
+
+    --radio:      16px;
+    --radio-sm:   10px;
+    --radio-pill: 999px;
+    --sombra:     0 14px 38px rgba(18, 45, 64, .14);
+    --sombra-sm:  0 6px 18px rgba(18, 45, 64, .10);
+    --contenedor: 1180px;
+    --header-h:   84px;
+    --seccion-y:  clamp(3.5rem, 2.5rem + 5vw, 7rem);
+}
+
+/* ------------------------------------------------------------------ */
+/*  2. Reset / base                                                   */
+/* ------------------------------------------------------------------ */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: calc(var(--header-h) + 12px);
+    -webkit-text-size-adjust: 100%;
+}
+body {
+    margin: 0;
+    font-family: var(--fuente);
+    font-size: var(--t-md);
+    line-height: 1.6;
+    color: var(--texto);
+    background: var(--bg);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+}
+img, svg { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+ul { margin: 0; padding: 0; list-style: none; }
+
+h1, h2, h3, h4 { margin: 0 0 .5em; line-height: 1.08; font-weight: 800; letter-spacing: -.01em; }
+h1 { font-weight: 900; font-size: var(--t-2xl); }
+h2 { font-weight: 800; font-size: var(--t-xl); }
+h3 { font-size: var(--t-lg); }
+p  { margin: 0 0 1rem; }
+
+:focus-visible { outline: 3px solid var(--azul-3); outline-offset: 3px; border-radius: 6px; }
+
+.container { width: min(100% - 2.2rem, var(--contenedor)); margin-inline: auto; }
+.sr-only {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+/* Iconos SVG (sprite) */
+.icon { width: 1.4em; height: 1.4em; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.icon--fill { fill: currentColor; stroke: none; }
+
+/* Placeholder visible para imágenes pendientes (src="#") */
+.placeholder {
+    background: repeating-linear-gradient(45deg, #e7edf3 0 14px, #dbe3ec 14px 28px);
+    color: #6a7b8b; font-size: var(--t-xs); font-weight: 700;
+    letter-spacing: .04em; text-transform: uppercase;
+    display: grid; place-items: center; overflow: hidden;
+}
+.placeholder > img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* ------------------------------------------------------------------ */
+/*  3. Botones (CTA1 lima · CTA2 azul · CTA3 blanco)                  */
+/* ------------------------------------------------------------------ */
+.btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+    font-family: var(--fuente); font-weight: 700; font-size: var(--t-sm); line-height: 1;
+    padding: .95em 1.8em; border-radius: var(--radio-pill);
+    border: 2px solid transparent; cursor: pointer; white-space: nowrap;
+    transition: transform .15s ease, box-shadow .15s ease, background-color .15s ease, color .15s ease;
+}
+.btn:hover { transform: translateY(-2px); }
+.btn--lima  { background: var(--cta1-bg); color: var(--cta1-tx); box-shadow: 0 8px 22px rgba(223,241,85,.4); }
+.btn--lima:hover  { background: var(--lima-700); }
+.btn--blue  { background: var(--cta2-bg); color: var(--cta2-tx); box-shadow: 0 8px 22px rgba(70,157,228,.35); }
+.btn--blue:hover  { background: var(--azul-700); }
+.btn--white { background: var(--cta3-bg); color: var(--cta3-tx); box-shadow: var(--sombra-sm); }
+.btn--white:hover { background: #eef3f8; }
+.btn--lg { font-size: var(--t-md); padding: 1.05em 2.2em; }
+.btn--block { width: 100%; }
+
+/* ------------------------------------------------------------------ */
+/*  4. Header flotante                                                */
+/* ------------------------------------------------------------------ */
+.site-header {
+    position: sticky; top: 0; z-index: 100;
+    padding: 12px 0;
+    background: linear-gradient(180deg, rgba(255,255,255,.85), rgba(255,255,255,0));
+}
+.header-inner {
+    display: flex; align-items: center; gap: 1rem;
+    background: #fff; border: 1px solid #e7edf3; border-radius: var(--radio-pill);
+    box-shadow: var(--sombra-sm);
+    padding: .55rem .7rem .55rem 1rem; min-height: 60px;
+}
+.brand { display: inline-flex; align-items: center; gap: .5rem; flex: none; }
+.brand__logo { height: 44px; width: auto; border-radius: 8px; }
+
+/* Navegación de iconos (escritorio) — alineada a la derecha */
+.nav { display: flex; align-items: center; gap: .35rem; flex: none; margin-left: auto; }
+.nav__icon {
+    width: 44px; height: 44px; border-radius: 50%;
+    display: grid; place-items: center; color: var(--navy-900);
+    transition: background .15s ease, color .15s ease;
+}
+.nav__icon .icon { width: 1.3em; height: 1.3em; }
+.nav__icon:hover { background: var(--azul-pal); color: var(--azul-2); }
+.nav .btn { margin-left: .35rem; }
+
+/* Hamburguesa (móvil) */
+.nav-toggle { position: absolute; opacity: 0; pointer-events: none; }
+.nav-burger { display: none; width: 46px; height: 46px; border-radius: 12px; background: #f3f6f9; cursor: pointer; flex-direction: column; gap: 5px; align-items: center; justify-content: center; flex: none; margin-left: auto; transition: background .2s ease; }
+.nav-burger:hover { background: var(--azul-pal); }
+.nav-burger span { width: 22px; height: 2px; background: var(--navy-900); border-radius: 2px; transition: transform .3s cubic-bezier(.22,1,.36,1), opacity .2s ease; }
+
+/* ------------------------------------------------------------------ */
+/*  5. Hero (foto a pantalla completa + texto centrado)              */
+/* ------------------------------------------------------------------ */
+.hero {
+    position: relative; min-height: calc(100svh - var(--header-h));
+    display: grid; place-items: center; text-align: center; color: #fff;
+    overflow: hidden; isolation: isolate;
+}
+.media-bg { position: absolute; inset: 0; z-index: -2; }
+.media-bg img { width: 100%; height: 100%; object-fit: cover; }
+.hero::after { /* velo para legibilidad */
+    content: ""; position: absolute; inset: 0; z-index: -1;
+    background: linear-gradient(180deg, rgba(18,45,64,.25), rgba(18,45,64,.55));
+}
+.hero__inner { padding: 2rem 1rem; max-width: 40rem; }
+.hero h1 { color: #fff; text-transform: uppercase; text-shadow: 0 2px 18px rgba(0,0,0,.35); }
+.hero__sub { font-size: var(--t-md); color: #e7f0f8; margin-bottom: 1.6rem; font-weight: 500; }
+.hero .btn { margin-top: .4rem; }
+.scroll-cue { position: absolute; bottom: 1.4rem; left: 50%; transform: translateX(-50%); color: #fff; opacity: .9; animation: bob 1.8s ease-in-out infinite; }
+.scroll-cue .icon { width: 2rem; height: 2rem; }
+@keyframes bob { 0%,100% { transform: translate(-50%,0); } 50% { transform: translate(-50%,8px); } }
+
+/* ------------------------------------------------------------------ */
+/*  6. Sección foto + tarjeta "glass" (Academia teaser, Ubicación)   */
+/* ------------------------------------------------------------------ */
+.photo-section {
+    position: relative; min-height: 78svh; display: grid; align-items: center;
+    overflow: hidden; isolation: isolate; padding-block: var(--seccion-y);
+}
+.photo-section::after { content: ""; position: absolute; inset: 0; z-index: -1; background: rgba(18,45,64,.12); }
+.glass {
+    background: rgba(216, 231, 244, .72); backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,.6);
+    border-radius: var(--radio); box-shadow: var(--sombra);
+    padding: clamp(1.6rem, 1.1rem + 2.5vw, 2.6rem); max-width: 36rem;
+}
+.glass h2 { color: var(--navy-900); }
+.glass p { color: #33485a; }
+.glass .btn { margin-top: .6rem; }
+
+/* ------------------------------------------------------------------ */
+/*  7. Horarios y tarifas                                             */
+/* ------------------------------------------------------------------ */
+.banda-aqua { background: var(--aqua); text-align: center; padding: clamp(2rem,1.4rem+3vw,3.5rem) 0; }
+.banda-aqua h2 { color: var(--navy-900); margin: 0; }
+
+/* Slider de frases (auto-rotativo, solo CSS) */
+.frases { position: relative; margin: 0 auto; min-height: 2.4em; display: grid; }
+.frases .frase {
+    grid-area: 1 / 1; align-self: center; justify-self: center;
+    margin: 0; color: var(--navy-900); opacity: 0;
+    animation: fraseCycle 14s infinite both;
+}
+.frases .frase:nth-child(2){ animation-delay: 3.5s; }
+.frases .frase:nth-child(3){ animation-delay: 7s; }
+.frases .frase:nth-child(4){ animation-delay: 10.5s; }
+/* Desliza de derecha a izquierda (efecto slider) */
+@keyframes fraseCycle {
+    0%      { opacity: 0; transform: translateX(45px); }
+    4%, 21% { opacity: 1; transform: translateX(0); }
+    25%,100%{ opacity: 0; transform: translateX(-45px); }
+}
+/* Versión sin desplazamiento (solo opacidad) para reduce-motion */
+@keyframes fraseFade {
+    0%      { opacity: 0; }
+    4%, 21% { opacity: 1; }
+    25%,100%{ opacity: 0; }
+}
+.horarios-body { background: var(--navy); color: #eaf2f8; padding-block: var(--seccion-y); }
+/* Carrusel Horario/Tarifas (escritorio: 2 tarjetas · móvil: deslizable) */
+.hcar { position: relative; }
+.hcar__track { display: grid; gap: clamp(1.4rem, 1rem + 3vw, 3rem); grid-template-columns: 1fr; justify-items: center; }
+.hcar__arrow { display: none; }
+.info-card {
+    background: var(--azul-pal); color: var(--navy-900); border: 2px solid var(--aqua);
+    border-radius: var(--radio); overflow: hidden; width: min(100%, 420px); box-shadow: var(--sombra);
+}
+.info-card__media { aspect-ratio: 16 / 9; }
+.info-card__body { padding: 1.3rem 1.5rem 1.6rem; }
+.info-card__body h3 { margin-bottom: .6rem; }
+.precio-grupo { margin-bottom: 1rem; }
+.precio-grupo strong { display: block; }
+.precio-fila { display: flex; justify-content: space-between; gap: 1rem; }
+.banda-app { background: #fff; text-align: center; padding: clamp(2.2rem,1.6rem+3vw,3.6rem) 0; }
+.banda-app h2 { color: var(--navy-900); margin-bottom: 1.4rem; }
+
+/* ------------------------------------------------------------------ */
+/*  8. FAQ                                                            */
+/* ------------------------------------------------------------------ */
+.faq-section { padding-block: var(--seccion-y); }
+.faq-grid { display: grid; gap: clamp(1.4rem, 1rem + 3vw, 3rem); grid-template-columns: 1fr; }
+.faq-intro h2 { color: var(--navy-900); }
+.faq-intro p { color: var(--texto-suave); }
+.faq-list { display: grid; gap: .8rem; align-content: start; }
+.faq-item { border-bottom: 2px solid #e7edf3; }
+.faq-item summary {
+    list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between;
+    gap: 1rem; padding: 1rem .2rem; font-weight: 700; color: var(--navy-900); font-size: var(--t-md);
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary .icon { color: var(--azul-3); transition: transform .2s ease; flex: none; }
+.faq-item[open] summary .icon { transform: rotate(180deg); }
+.faq-item__a { padding: 0 .2rem 1.1rem; color: var(--texto-suave); font-size: var(--t-sm); }
+
+/* ------------------------------------------------------------------ */
+/*  9. Contacto + CTA final                                           */
+/* ------------------------------------------------------------------ */
+.contacto-section { text-align: center; padding-block: var(--seccion-y); }
+.contacto-card {
+    background: var(--azul-pal); border-radius: var(--radio); box-shadow: var(--sombra);
+    padding: clamp(1.6rem,1.2rem+2vw,2.4rem); max-width: 32rem; margin: 0 auto 2rem;
+}
+.contacto-card h2 { color: var(--navy-900); text-align: center; }
+.contacto-card ul { display: grid; gap: .7rem; justify-items: center; }
+.contacto-card li { display: inline-flex; align-items: center; gap: .6rem; color: #33485a; font-weight: 600; font-size: var(--t-sm); }
+.contacto-card li .icon { color: var(--azul-2); width: 1.2em; height: 1.2em; }
+.cta-final-titulo { color: var(--navy-900); font-size: var(--t-2xl); margin: 1rem 0 1.4rem; }
+
+/* ------------------------------------------------------------------ */
+/*  10. Footer                                                        */
+/* ------------------------------------------------------------------ */
+.site-footer { background: var(--navy); color: #aebfce; text-align: center; padding: clamp(2.5rem,2rem+3vw,4rem) 0 6.5rem; }
+.site-footer__logo { height: 92px; margin: 0 auto 1.2rem; width: auto; }
+.site-footer h4 { color: #fff; font-size: var(--t-sm); letter-spacing: .04em; margin-bottom: .5rem; }
+.footer-nav li { margin: .25rem 0; }
+.footer-nav a:hover { color: var(--lima); }
+.footer-siguenos { color: var(--lima); margin: 1.6rem 0 .7rem; font-weight: 800; }
+.redes { display: flex; gap: .8rem; justify-content: center; }
+.redes a { width: 44px; height: 44px; border-radius: 50%; background: rgba(255,255,255,.08); display: grid; place-items: center; color: #fff; transition: background .15s ease, color .15s ease; }
+.redes a:hover { background: var(--lima); color: var(--navy-900); }
+.footer-copy { margin-top: 1.4rem; font-size: var(--t-xs); color: #7f93a6; }
+.footer-credit { margin-top: 1.6rem; border-top: 1px solid rgba(255,255,255,.12); padding-top: 1.2rem; color: #fff; font-weight: 800; }
+
+/* ------------------------------------------------------------------ */
+/*  11. Página "Academias" (grid de niveles)                         */
+/* ------------------------------------------------------------------ */
+.academias {
+    background: linear-gradient(180deg, var(--teal) 0%, #3f6475 40%, #4a6b7a 100%);
+    color: #fff; min-height: 100svh; padding-bottom: var(--seccion-y);
+}
+.academias__head { text-align: center; max-width: 44rem; margin: 0 auto; padding: clamp(2rem,1rem+4vw,3.5rem) 1rem 2.5rem; }
+.academias__head h1 { color: #fff; }
+.academias__head p { color: #dbe7ee; }
+.niveles-grid { display: grid; gap: clamp(1.2rem,.8rem+2vw,2rem); grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
+.nivel-card { background: var(--navy-900); border-radius: var(--radio); overflow: hidden; box-shadow: var(--sombra); display: flex; flex-direction: column; transition: transform .2s ease; }
+.nivel-card:hover { transform: translateY(-6px); }
+.nivel-card__media { position: relative; aspect-ratio: 4 / 3; }
+.nivel-card__badge { position: absolute; left: 0; bottom: 0; background: var(--lima); color: var(--navy-900); font-weight: 800; font-size: var(--t-xs); padding: .35em .9em; border-radius: 0 10px 0 0; }
+.nivel-card__body { padding: 1.2rem 1.3rem 1.4rem; color: #fff; display: flex; flex-direction: column; gap: .4rem; flex: 1; }
+.nivel-card__body .kicker { color: #c7d6e4; font-weight: 600; font-size: var(--t-sm); }
+.nivel-card__body h2 { color: #fff; font-size: var(--t-lg); margin: 0; }
+.nivel-card__body p { color: #aebfce; font-size: var(--t-sm); margin: .2rem 0 1rem; }
+.nivel-card__body .btn { margin-top: auto; align-self: flex-start; }
+
+/* ------------------------------------------------------------------ */
+/*  12. Ficha de nivel (detalle de clase)                            */
+/* ------------------------------------------------------------------ */
+.ficha { padding-block: clamp(2rem, 1.4rem + 3vw, 4rem); }
+.ficha__back { display: inline-flex; align-items: center; gap: .3rem; color: var(--azul-3); font-weight: 700; margin-bottom: 1.4rem; }
+.ficha__grid { display: grid; gap: clamp(1.6rem, 1rem + 3vw, 3.5rem); grid-template-columns: 1fr; align-items: start; }
+.ficha__media { position: relative; border-radius: var(--radio); overflow: hidden; aspect-ratio: 4 / 3; box-shadow: var(--sombra); }
+.ficha__badge { position: absolute; left: 1rem; top: 1rem; background: var(--lima); color: var(--navy-900); font-weight: 800; padding: .35em .9em; border-radius: var(--radio-pill); }
+.ficha h1 { color: var(--navy-900); }
+.ficha__desc { color: var(--texto-suave); font-size: var(--t-md); max-width: 34rem; }
+.ficha__precio { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; margin: 1.6rem 0; }
+.ficha__precio .antes { color: #d23b3b; text-decoration: line-through; font-weight: 700; font-size: var(--t-md); }
+.ficha__precio .ahora { color: var(--navy-900); font-weight: 900; font-size: var(--t-xl); }
+.ficha__bloques { display: grid; gap: 1.6rem; grid-template-columns: 1fr; margin-top: 2rem; }
+.ficha h3 { color: var(--navy-900); font-size: var(--t-md); }
+.instructores { display: flex; gap: .4rem; }
+.instructores .avatar { width: 54px; height: 54px; border-radius: 50%; border: 3px solid #fff; box-shadow: var(--sombra-sm); overflow: hidden; }
+.opinion-badge { width: 78px; height: 78px; border-radius: 50%; background: var(--azul-3); color: #fff; display: grid; place-items: center; font-weight: 800; font-size: var(--t-md); }
+.ficha__reco { color: var(--texto-suave); font-style: italic; font-size: var(--t-sm); max-width: 24rem; }
+
+/* ------------------------------------------------------------------ */
+/*  13. Modal QR (CSS :target) + barra CTA fija móvil                */
+/* ------------------------------------------------------------------ */
+.modal { position: fixed; inset: 0; z-index: 200; display: none; align-items: center; justify-content: center; background: rgba(10,25,36,.72); padding: 1.2rem; }
+.modal:target { display: flex; }
+.modal__box { background: #fff; border-radius: var(--radio); max-width: 380px; width: 100%; padding: 2rem; text-align: center; position: relative; }
+.modal__box h3 { color: var(--navy-900); }
+.modal__box p { color: var(--texto-suave); font-size: var(--t-sm); }
+.modal__qr { width: 210px; height: 210px; margin: 1rem auto; border-radius: var(--radio-sm); }
+.modal__close { position: absolute; top: .7rem; right: .9rem; width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; background: #eef2f6; color: var(--navy-900); font-size: 1.4rem; line-height: 1; }
+.modal__tiendas { display: flex; gap: .6rem; justify-content: center; margin-top: 1rem; flex-wrap: wrap; }
+.modal__tiendas .btn { flex: 1 1 130px; }
+
+.cta-fija { position: fixed; left: 0; right: 0; bottom: 0; z-index: 90; background: rgba(255,255,255,.96); backdrop-filter: blur(8px); border-top: 1px solid #e7edf3; padding: .7rem 1rem calc(.7rem + env(safe-area-inset-bottom)); display: none; }
+.cta-fija .btn { width: 100%; }
+
+/* ------------------------------------------------------------------ */
+/*  14. Responsive                                                    */
+/* ------------------------------------------------------------------ */
+.glass--center { margin-inline: auto; }
+
+@media (min-width: 880px) {
+    .glass--right { margin-left: auto; }              /* tarjeta a la derecha */
+    .hcar__track { grid-template-columns: repeat(2, minmax(0, 420px)); justify-content: center; }
+    .faq-grid { grid-template-columns: 1fr 1.2fr; align-items: start; }
+    .ficha__grid { grid-template-columns: 1fr 1fr; }
+    .ficha__bloques { grid-template-columns: auto 1fr; column-gap: 3rem; align-items: start; }
+}
+
+/* Móvil: hamburguesa + menú desplegable + barra CTA fija */
+@media (max-width: 879.98px) {
+    .nav-burger { display: flex; }
+
+    /* Panel del menú: aparece con deslizamiento + desvanecido fluido */
+    .nav {
+        position: fixed; inset: calc(var(--header-h)) 0 auto 0;
+        flex-direction: column; align-items: stretch; gap: .2rem;
+        background: #fff; border-bottom: 1px solid #e7edf3; box-shadow: var(--sombra);
+        padding: 1rem 1.2rem 1.6rem;
+        max-height: calc(100svh - var(--header-h)); overflow-y: auto;
+        opacity: 0; pointer-events: none; transform: translateY(-130%);
+        transition: transform .4s cubic-bezier(.22,1,.36,1), opacity .3s ease;
+    }
+    .nav-toggle:checked ~ .nav { transform: translateY(0); opacity: 1; pointer-events: auto; }
+
+    /* Botones del menú: entran escalonados y reaccionan con fluidez */
+    .nav__icon {
+        display: flex; align-items: center; justify-content: flex-start;
+        width: auto; height: auto; border-radius: 12px;
+        gap: .8rem; padding: .9rem .6rem; border-bottom: 1px solid #eef2f6;
+        opacity: 0; transform: translateY(12px);
+        transition: background .2s ease, color .2s ease, transform .2s ease, padding-left .2s ease;
+    }
+    .nav__icon .icon { width: 1.3em; height: 1.3em; color: var(--azul-2); flex: none; }
+    .nav__icon::after { content: attr(data-label); font-weight: 600; color: var(--navy-900); }
+    .nav__icon:hover, .nav__icon:focus-visible { background: var(--azul-pal); padding-left: 1rem; }
+    .nav__icon:active { transform: scale(.98); }
+    .nav .btn { margin: .9rem 0 0; width: 100%; opacity: 0; transform: translateY(12px); }
+
+    .nav-toggle:checked ~ .nav .nav__icon,
+    .nav-toggle:checked ~ .nav .btn { animation: navItemIn .45s cubic-bezier(.22,1,.36,1) forwards; }
+    .nav-toggle:checked ~ .nav .nav__icon:nth-child(1) { animation-delay: .10s; }
+    .nav-toggle:checked ~ .nav .nav__icon:nth-child(2) { animation-delay: .16s; }
+    .nav-toggle:checked ~ .nav .nav__icon:nth-child(3) { animation-delay: .22s; }
+    .nav-toggle:checked ~ .nav .nav__icon:nth-child(4) { animation-delay: .28s; }
+    .nav-toggle:checked ~ .nav .btn { animation-delay: .34s; }
+
+    /* Hamburguesa -> X */
+    .nav-toggle:checked ~ .nav-burger span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-toggle:checked ~ .nav-burger span:nth-child(2) { opacity: 0; }
+    .nav-toggle:checked ~ .nav-burger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* Carrusel Horario/Tarifas: una tarjeta visible, deslizable + flechas */
+    .hcar { padding-inline: 6px; }
+    .hcar__track {
+        display: flex; gap: 1rem;
+        overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
+        scrollbar-width: none; padding-bottom: .3rem;
+    }
+    .hcar__track::-webkit-scrollbar { display: none; }
+    .hcar__track > .info-card { flex: 0 0 100%; width: 100%; max-width: 100%; scroll-snap-align: start; }
+    .hcar__arrow {
+        display: grid; place-items: center; position: absolute; top: 38%; transform: translateY(-50%);
+        width: 46px; height: 46px; border-radius: 50%; border: none; cursor: pointer; z-index: 5;
+        background: var(--lima); color: var(--navy-900); box-shadow: var(--sombra);
+        font-size: 1.7rem; line-height: 1; padding-bottom: .15em;
+        transition: transform .15s ease, background .15s ease;
+    }
+    .hcar__arrow:hover { background: var(--lima-700); }
+    .hcar__arrow:active { transform: translateY(-50%) scale(.9); }
+    .hcar__arrow--prev { left: -2px; }
+    .hcar__arrow--next { right: -2px; }
+
+    .cta-fija { display: block; }
+    .site-footer { padding-bottom: 5.5rem; }
+}
+
+@keyframes navItemIn { to { opacity: 1; transform: translateY(0); } }
+
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { transition-duration: .01ms !important; }
+    .scroll-cue { animation: none; }
+    /* El menú aparece sin animación de entrada */
+    .nav__icon, .nav .btn { opacity: 1 !important; transform: none !important; animation: none !important; }
+    /* El slider de frases SÍ sigue rotando, pero solo con opacidad (sin desplazamiento) */
+    .frases .frase { animation-name: fraseFade; }
+}

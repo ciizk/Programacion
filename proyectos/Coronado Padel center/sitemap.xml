@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- TODO: ajustar el dominio cuando esté definido -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url><loc>https://www.coronadopadelcenter.com/</loc><changefreq>monthly</changefreq><priority>1.0</priority></url>
+    <url><loc>https://www.coronadopadelcenter.com/academias.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+    <url><loc>https://www.coronadopadelcenter.com/nivel-principiante.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+    <url><loc>https://www.coronadopadelcenter.com/nivel-intermedio.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+    <url><loc>https://www.coronadopadelcenter.com/nivel-avanzado.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+    <url><loc>https://www.coronadopadelcenter.com/nivel-profesional.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+</urlset>
