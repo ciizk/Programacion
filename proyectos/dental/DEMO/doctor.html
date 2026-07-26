@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi agenda · Doctor · Clínica Dental Raquel Virgüez</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/tokens.css">
+    <link rel="stylesheet" href="assets/css/design-system.css">
+    <link rel="stylesheet" href="assets/css/ux.css">
+    <link rel="stylesheet" href="assets/css/panel.css">
+    <link rel="stylesheet" href="assets/css/finance.css">
+    <link rel="stylesheet" href="assets/css/calendar.css">
+    <link rel="stylesheet" href="assets/css/odontograma.css">
+    <link rel="stylesheet" href="assets/css/reports.css">
+    <link rel="stylesheet" href="assets/css/assistant.css">
+    <link rel="stylesheet" href="assets/css/clinic.css">
+</head>
+<body>
+<div class="panel-backdrop" id="backdrop"></div>
+<div class="panel-body">
+
+    <aside class="sidebar" id="sidebar">
+        <a class="brand" href="index.html"><i class="fa-solid fa-tooth"></i> Clínica Dental</a>
+        <span class="role-chip"><i class="fa-solid fa-user-doctor"></i> Doctor/a</span>
+        <div class="role-switch">
+            <span class="lbl">Cambiar rol (demo)</span>
+            <a href="paciente.html">Paciente</a> · <a href="doctor.html" class="active">Doctor</a> · <a href="secretaria.html">Secretaría</a> · <a href="raquel.html">Dirección</a>
+        </div>
+        <nav>
+            <span class="nav-group">Mi trabajo</span>
+            <a href="#agenda" data-title="Mi agenda" data-icon="fa-list-check" data-short="Agenda"
+               data-desc="Tus citas pendientes: confírmalas, complétalas con notas y cobro, o registra una ausencia."><i class="fa-solid fa-list-check"></i> Mi agenda</a>
+            <a href="#calendario" data-title="Calendario semanal" data-icon="fa-calendar-week" data-short="Semana"
+               data-desc="Tu semana completa. Clic en una cita para ver el detalle; desliza para cambiar de semana."><i class="fa-solid fa-calendar-week"></i> Calendario</a>
+            <span class="nav-group">Clínica</span>
+            <a href="#pacientes" data-title="Mis pacientes" data-icon="fa-users" data-short="Pacientes"
+               data-desc="Abre un paciente para ver su ficha, editar el odontograma y generar recetas o informes."><i class="fa-solid fa-users"></i> Pacientes</a>
+            <a href="#historial" data-title="Historial" data-icon="fa-clock-rotate-left" data-short="Historial"
+               data-desc="Citas ya atendidas con sus notas clínicas."><i class="fa-solid fa-clock-rotate-left"></i> Historial</a>
+        </nav>
+        <div class="sidebar-foot">
+            <a href="index.html"><i class="fa-solid fa-arrow-right-from-bracket"></i> Cerrar sesión</a>
+        </div>
+    </aside>
+
+    <div class="panel-main">
+        <header class="topbar">
+            <div class="flex items-center" style="gap:.7rem">
+                <button class="hamburger" id="hamburger" aria-label="Menú"><i class="fa-solid fa-bars"></i></button>
+                <h1>Mi agenda</h1>
+            </div>
+            <div class="user"><div class="av">LB</div><div>Laura Beltrán Ferrer</div></div>
+        </header>
+        <main class="panel-content">
+
+            <nav class="breadcrumbs" aria-label="Migas de pan">
+                <a href="index.html">Inicio</a><span class="sep">/</span><span class="current">Mi agenda</span>
+            </nav>
+
+            <div data-view="agenda"><div class="stats-row">
+                <div class="stat-tile"><div class="k"><i class="fa-solid fa-calendar-day"></i> Citas hoy</div><div class="v" id="st-hoy">0</div></div>
+                <div class="stat-tile"><div class="k"><i class="fa-solid fa-hourglass-half"></i> Pendientes</div><div class="v" id="st-pend">0</div></div>
+                <div class="stat-tile"><div class="k"><i class="fa-solid fa-circle-check"></i> Completadas</div><div class="v" id="st-comp">0</div></div>
+            </div>
+
+            <section class="panel-section">
+                <h2><i class="fa-solid fa-list-check"></i> Próximas y pendientes</h2>
+                <div class="flex wrap" style="gap:.5rem;margin-bottom:.8rem;align-items:center">
+                    <input id="f-buscar" class="input" style="max-width:220px" placeholder="Buscar paciente…" aria-label="Buscar paciente">
+                    <select id="f-estado" class="input" style="max-width:190px" aria-label="Filtrar por estado">
+                        <option value="">Todos los estados</option>
+                        <option value="programada">Programada</option>
+                        <option value="confirmada">Confirmada</option>
+                    </select>
+                    <span class="text-muted" id="f-count" style="font-size:.85rem"></span>
+                </div>
+                <div id="pend-wrap"></div>
+            </section>
+            </div><!-- /vista agenda -->
+
+            <section class="panel-section" data-view="calendario" id="calendario">
+                <h2><i class="fa-solid fa-calendar-week"></i> Calendario semanal</h2>
+                <div id="cal-doctor"></div>
+            </section>
+
+            <section class="panel-section" data-view="historial" id="historial">
+                <h2><i class="fa-solid fa-clock-rotate-left"></i> Historial</h2>
+                <div id="hist-wrap"></div>
+            </section>
+
+            <section class="panel-section" data-view="pacientes" id="pacientes">
+                <h2><i class="fa-solid fa-users"></i> Pacientes</h2>
+                <p class="text-muted" style="margin-top:-.4rem">Haz clic en un paciente para ver su <b>ficha médica y odontograma</b> y solicitar cambios.</p>
+                <div class="people-grid" id="pac-wrap"></div>
+            </section>
+
+        </main>
+    </div>
+</div>
+
+<!-- Modal completar + cobrar -->
+<div class="modal-back" id="modal">
+    <div class="modal">
+        <h3><i class="fa-solid fa-notes-medical" style="color:var(--c-primary)"></i> Completar cita</h3>
+        <p class="text-muted" id="modalPaciente" style="margin-top:-.4rem"></p>
+        <div class="field">
+            <label for="notas">Notas clínicas <span style="color:var(--c-danger)">*</span></label>
+            <textarea id="notas" class="input" placeholder="Diagnóstico, procedimiento realizado, indicaciones…"></textarea>
+        </div>
+        <div class="grid" style="grid-template-columns:1fr 1fr">
+            <div class="field"><label for="coste">Coste ($) <span style="color:var(--c-danger)">*</span></label><input type="number" id="coste" class="input" min="0" step="0.01" placeholder="Ej.: 50.00"></div>
+            <div class="field">
+                <label>Método de pago <span style="color:var(--c-danger)">*</span></label>
+                <div class="pay-choice" id="pay-choice">
+                    <button type="button" class="pay-opt on" data-metodo="tarjeta"><i class="fa-solid fa-credit-card"></i> Tarjeta</button>
+                    <button type="button" class="pay-opt" data-metodo="efectivo"><i class="fa-solid fa-money-bill-wave"></i> Efectivo</button>
+                </div>
+            </div>
+        </div>
+        <div class="flex justify-between" style="margin-top:.5rem">
+            <button class="btn btn-ghost" id="btnCancel">Cancelar</button>
+            <button class="btn btn-primary" id="btnGuardar"><i class="fa-solid fa-check"></i> Cobrar y completar</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal ficha médica + odontograma + solicitar cambio -->
+<div class="modal-back" id="ficha-modal">
+    <div class="modal" style="max-width:600px;max-height:88vh;overflow:auto">
+        <h3><i class="fa-solid fa-notes-medical" style="color:var(--c-primary)"></i> Ficha médica</h3>
+        <p class="text-muted" id="fm-nombre" style="margin-top:-.4rem"></p>
+        <div class="grid" id="fm-grid" style="grid-template-columns:repeat(auto-fit,minmax(150px,1fr))"></div>
+
+        <div style="margin-top:1rem">
+            <b style="font-size:.9rem"><i class="fa-solid fa-teeth" style="color:var(--c-primary)"></i> Odontograma</b>
+            <div id="fm-odo" style="margin-top:.5rem"></div>
+        </div>
+
+        <div id="fm-req" style="display:none;margin-top:1rem;border-top:1px solid var(--c-border);padding-top:1rem">
+            <b><i class="fa-solid fa-pen-to-square" style="color:var(--c-primary)"></i> Solicitar cambio</b>
+            <p class="text-muted" style="font-size:.84rem;margin:.3rem 0 .6rem">El cambio quedará <b>pendiente de autorización</b> por secretaría.</p>
+            <div class="grid" style="grid-template-columns:1fr 1fr">
+                <div class="field"><label for="req-campo">Campo</label><select id="req-campo" class="input"></select></div>
+                <div class="field"><label for="req-valor">Nuevo valor</label><input id="req-valor" class="input" placeholder="Valor propuesto"></div>
+            </div>
+            <div class="field"><label for="req-motivo">Motivo</label><input id="req-motivo" class="input" placeholder="Por qué debe cambiarse"></div>
+        </div>
+
+        <div class="flex justify-between" style="margin-top:.6rem">
+            <button class="btn btn-ghost" id="fm-close">Cerrar</button>
+            <div class="flex wrap" style="gap:.5rem">
+                <button class="btn btn-ghost" id="fm-req-toggle"><i class="fa-solid fa-pen-to-square"></i> Solicitar cambio</button>
+                <button class="btn btn-primary" id="fm-docs"><i class="fa-solid fa-file-prescription"></i> Receta / Informe</button>
+                <button class="btn btn-primary" id="fm-req-send" style="display:none"><i class="fa-solid fa-paper-plane"></i> Enviar solicitud</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="assets/js/demo-data.js"></script>
+<script src="assets/js/ui.js"></script>
+<script src="assets/js/ux.js"></script>
+<script src="assets/js/calendar.js"></script>
+<script src="assets/js/odontograma.js"></script>
+<script src="assets/js/reports.js"></script>
+<script src="assets/js/wa.js"></script>
+<script src="assets/js/assistant.js"></script>
+<script src="assets/js/clinic.js"></script>
+<script>
+(function () {
+    var HOY = window.DEMO.today, YO = 'Dra. Laura Beltrán';
+    var pending = window.DEMO.doctor.pending.map(function (c) { return Object.assign({}, c); });
+    var history = window.DEMO.doctor.history.map(function (c) { return Object.assign({}, c); });
+    var completarId = null, metodoSel = 'tarjeta';
+    var CAMPOS = [['grupo', 'Grupo sanguíneo'], ['alergias', 'Alergias'], ['cronicas', 'Enfermedades crónicas'], ['medicacion', 'Medicación actual'], ['emergencia', 'Contacto de emergencia'], ['seguro', 'Seguro']];
+
+    // Campana: al pulsar te lleva al calendario; check = marcar leída
+    UX.bell(window.DEMO.doctor.pending.map(function (c) {
+        return { icon: 'fa-calendar-day', title: 'Cita ' + fmtFecha(c.fecha) + ' · ' + c.ini, sub: c.paciente + ' · ' + c.trat, href: '#calendario' };
+    }).concat([{ icon: 'fa-file-prescription', title: 'Recetas e informes disponibles', sub: 'Genera documentos desde la ficha del paciente', href: '#pacientes' }]));
+
+    UX.setSession({ role: 'doctor', nombre: 'Laura', apellido: 'Beltrán Ferrer', tel: '+58 424 555 1020', email: 'l.beltran@clinica-dental.es' });
+
+    // Perfil (clic en el nombre, arriba a la derecha)
+    UX.profile({
+        name: 'Dra. Laura Beltrán Ferrer', role: 'Doctora · Odontología general',
+        email: 'l.beltran@clinica-dental.es', phone: '+58 424 555 1020',
+        extra: [{ k: 'Nº colegiado', v: 'COEV-4521' }, { k: 'Especialidad', v: 'Odontología general' }, { k: 'Centro', v: window.DEMO.clinic.name }]
+    });
+
+    // Calendario (con skeleton de carga)
+    var calEvents = window.DEMO.doctor.pending.map(function (c) { return { fecha: c.fecha, ini: c.ini, fin: c.fin, title: c.paciente, sub: c.trat, doctor: 'Dra. Laura Beltrán', estado: c.estado }; })
+        .concat(window.DEMO.doctor.history.map(function (c) { return { fecha: c.fecha, ini: c.ini, fin: null, title: c.paciente, sub: c.trat, doctor: 'Dra. Laura Beltrán', estado: c.estado }; }));
+    window.ClinicCalendar({ el: document.getElementById('cal-doctor'), events: calEvents, skeleton: true, soloDoctor: YO });
+
+    /* ---------- Agenda + filtros ---------- */
+    function stats() {
+        var hoy = pending.filter(function (c) { return c.fecha === HOY; }).length + history.filter(function (c) { return c.fecha === HOY; }).length;
+        document.getElementById('st-hoy').textContent = hoy;
+        document.getElementById('st-pend').textContent = pending.length;
+        document.getElementById('st-comp').textContent = history.filter(function (c) { return c.estado === 'completada'; }).length;
+    }
+    function filtered() {
+        var q = (document.getElementById('f-buscar').value || '').toLowerCase();
+        var est = document.getElementById('f-estado').value;
+        return pending.filter(function (c) { return (!q || c.paciente.toLowerCase().indexOf(q) >= 0) && (!est || c.estado === est); });
+    }
+    function render() {
+        var rows = filtered();
+        document.getElementById('f-count').textContent = rows.length + ' de ' + pending.length;
+        var pw = document.getElementById('pend-wrap');
+        pw.innerHTML = rows.length
+            ? '<div class="table-wrap"><table class="appts"><thead><tr><th>Fecha y hora</th><th>Paciente</th><th>Tratamiento</th><th>Estado</th><th>Acciones</th></tr></thead><tbody>' +
+                rows.map(function (c) {
+                    var conf = c.estado === 'programada' ? '<button class="btn btn-ghost btn-sm" data-act="confirmar" data-id="' + c.id + '"><i class="fa-solid fa-check"></i> Confirmar</button>' : '';
+                    return '<tr><td class="when"><b>' + fmtFecha(c.fecha) + '</b><span>' + c.ini + ' – ' + c.fin + '</span></td>' +
+                        '<td>' + c.paciente + '<br><span class="text-muted" style="font-size:.82rem">' + c.tel + '</span></td>' +
+                        '<td>' + c.trat + '</td><td>' + badge(c.estado) + '</td>' +
+                        '<td><div class="flex wrap" style="gap:.4rem">' + conf +
+                        '<button class="btn btn-primary btn-sm" data-act="completar" data-id="' + c.id + '"><i class="fa-solid fa-cash-register"></i> Completar</button>' +
+                        '<button class="btn btn-ghost btn-sm" data-act="noasistio" data-id="' + c.id + '">No asistió</button>' +
+                        '<button class="btn btn-ghost btn-sm" data-act="docs" data-id="' + c.id + '" title="Receta o informe"><i class="fa-solid fa-file-prescription"></i></button>' +
+                        '<button class="btn btn-ghost btn-sm" data-act="wa" data-id="' + c.id + '" title="Recordatorio por WhatsApp" style="color:#25d366"><i class="fa-brands fa-whatsapp"></i></button></div></td></tr>';
+                }).join('') + '</tbody></table></div>'
+            : '<div class="empty"><i class="fa-regular fa-calendar-check"></i> Sin citas que coincidan.</div>';
+
+        document.getElementById('hist-wrap').innerHTML = history.length
+            ? '<div class="table-wrap"><table class="appts"><thead><tr><th>Fecha</th><th>Paciente</th><th>Tratamiento</th><th>Estado</th><th>Notas</th></tr></thead><tbody>' +
+                history.map(function (c) {
+                    return '<tr><td class="when"><b>' + fmtFecha(c.fecha) + '</b><span>' + c.ini + '</span></td><td>' + c.paciente + '</td><td>' + c.trat + '</td><td>' + badge(c.estado) + '</td>' +
+                        '<td class="text-muted" style="max-width:260px">' + (c.notas || '—') + '</td></tr>';
+                }).join('') + '</tbody></table></div>'
+            : '<div class="empty">Sin historial todavía.</div>';
+        stats(); wire();
+    }
+    document.getElementById('f-buscar').addEventListener('input', render);
+    document.getElementById('f-estado').addEventListener('change', render);
+
+    function wire() {
+        document.querySelectorAll('#pend-wrap [data-act]').forEach(function (b) {
+            b.onclick = function () {
+                var id = +b.dataset.id, act = b.dataset.act, idx = pending.map(function (c) { return c.id; }).indexOf(id);
+                if (idx < 0) return;
+                if (act === 'confirmar') { pending[idx].estado = 'confirmada'; Toast.show('Cita confirmada.', 'ok'); render(); }
+                else if (act === 'noasistio') {
+                    var c = pending.splice(idx, 1)[0], prev = c.estado; c.estado = 'no_asistio'; c.notas = '—'; history.unshift(c); render();
+                    Toast.show('Marcada como «no asistió».', undefined, { label: 'Deshacer', fn: function () {
+                        var hi = history.indexOf(c); if (hi >= 0) history.splice(hi, 1); c.estado = prev; delete c.notas; pending.splice(idx, 0, c); render();
+                    } });
+                }
+                else if (act === 'completar') { completarId = id; openComplete(pending[idx]); }
+                else if (act === 'docs') { abrirDocs(pending[idx]); }
+                else if (act === 'wa') {
+                    var w = pending[idx];
+                    WA.recordatorio(Object.assign({ fechaTxt: fmtFecha(w.fecha), doctor: YO }, w), function () { render(); });
+                }
+            };
+        });
+    }
+
+    /* ---------- Documentos clínicos (receta / informe / justificante) ---------- */
+    function fichaDe(nombre) {
+        return window.DEMO.patientsList.filter(function (x) { return x.nombre === nombre; })[0] ||
+            { nombre: nombre, ficha: { alergias: 'No conocidas' }, odonto: {} };
+    }
+    function abrirDocs(cita, p) {
+        p = p || fichaDe(cita ? cita.paciente : '');
+        Reports.open({
+            paciente: p.nombre, ficha: p.ficha, odonto: p.odonto,
+            doctor: YO + ' Ferrer', colegiado: 'COEV-4521',
+            tratamiento: cita ? cita.trat : '', fechaCita: cita ? fmtFecha(cita.fecha) : '', horaCita: cita ? cita.ini : ''
+        });
+    }
+
+    function precioDe(n) { var t = window.DEMO.treatments.filter(function (x) { return n.indexOf(x.name) === 0 || x.name.indexOf(n) === 0; })[0]; return t ? t.precio : ''; }
+    function setMetodo(m) { metodoSel = m; document.querySelectorAll('#pay-choice .pay-opt').forEach(function (o) { o.classList.toggle('on', o.dataset.metodo === m); }); }
+    function openComplete(c) {
+        document.getElementById('modalPaciente').textContent = 'Paciente: ' + c.paciente + ' · ' + c.trat;
+        document.getElementById('notas').value = ''; document.getElementById('coste').value = precioDe(c.trat) || ''; setMetodo('tarjeta');
+        Modal.open('modal');
+    }
+    document.querySelectorAll('#pay-choice .pay-opt').forEach(function (o) { o.onclick = function () { setMetodo(o.dataset.metodo); }; });
+    document.getElementById('btnCancel').onclick = function () { Modal.close('modal'); };
+    document.getElementById('btnGuardar').onclick = function () {
+        var notas = document.getElementById('notas').value.trim(), importe = parseFloat(document.getElementById('coste').value);
+        if (!notas) { Toast.show('Las notas clínicas son obligatorias.', 'err'); return; }
+        if (!(importe > 0)) { Toast.show('El coste es obligatorio para cobrar la cita.', 'err'); return; }
+        var idx = pending.map(function (c) { return c.id; }).indexOf(completarId); if (idx < 0) return;
+        var c = pending.splice(idx, 1)[0]; c.estado = 'completada'; c.notas = notas; c.importe = importe; c.metodo = metodoSel; history.unshift(c);
+        Modal.close('modal'); render();
+        Toast.show('Cita completada · cobro ' + fmtMoney(importe) + ' (' + metodoSel + ').', 'ok',
+            { label: 'Generar receta', fn: function () { abrirDocs(c); } });
+        // Fidelización: proponer la siguiente cita según el tratamiento realizado
+        setTimeout(function () {
+            Clinic.proponerSeguimiento(c, function (nueva) { pending.push(nueva); render(); });
+        }, 900);
+    };
+
+    /* ---------- Pacientes + ficha + odontograma + solicitar cambio ---------- */
+    var pacienteActual = null;
+    document.getElementById('pac-wrap').innerHTML = window.DEMO.patientsList.map(function (p, i) {
+        var ini = p.nombre.split(' ').map(function (w) { return w[0]; }).slice(0, 2).join('').toUpperCase();
+        return '<button class="person" data-pac="' + i + '" style="cursor:pointer;text-align:left;font:inherit;width:100%">' +
+            '<div class="pav">' + ini + '</div><div class="pinfo"><b>' + p.nombre + '</b>' +
+            '<span>' + p.tel + ' · ' + p.visitas + ' visitas · últ. ' + fmtFecha(p.ultima) + '</span></div>' +
+            '<i class="fa-solid fa-chevron-right" style="margin-left:auto;color:var(--c-muted)"></i></button>';
+    }).join('');
+    document.querySelectorAll('#pac-wrap [data-pac]').forEach(function (b) { b.onclick = function () { Clinic.ficha360(window.DEMO.patientsList[+b.dataset.pac], { editarOdonto: true, tab: 'datos' }); }; });
+
+    function openFicha(p) {
+        pacienteActual = p;
+        document.getElementById('fm-nombre').textContent = p.nombre;
+        document.getElementById('fm-grid').innerHTML = CAMPOS.map(function (c) {
+            return '<div><div class="text-muted" style="font-size:.8rem;font-weight:600">' + c[1] + '</div><div>' + (p.ficha[c[0]] || '—') + '</div></div>';
+        }).join('');
+        p.odonto = p.odonto || {};
+        Odontograma({ el: document.getElementById('fm-odo'), state: p.odonto, editable: true });
+        document.getElementById('req-campo').innerHTML = CAMPOS.map(function (c) { return '<option value="' + c[0] + '">' + c[1] + '</option>'; }).join('');
+        document.getElementById('req-valor').value = ''; document.getElementById('req-motivo').value = '';
+        document.getElementById('fm-req').style.display = 'none';
+        document.getElementById('fm-req-toggle').style.display = 'inline-flex';
+        document.getElementById('fm-req-send').style.display = 'none';
+        Modal.open('ficha-modal');
+    }
+    document.getElementById('fm-close').onclick = function () { Modal.close('ficha-modal'); };
+    document.getElementById('fm-docs').onclick = function () { Modal.close('ficha-modal'); abrirDocs(null, pacienteActual); };
+    document.getElementById('fm-req-toggle').onclick = function () {
+        document.getElementById('fm-req').style.display = 'block'; this.style.display = 'none'; document.getElementById('fm-req-send').style.display = 'inline-flex';
+    };
+    document.getElementById('fm-req-send').onclick = function () {
+        var campoKey = document.getElementById('req-campo').value;
+        var campoLbl = CAMPOS.filter(function (c) { return c[0] === campoKey; })[0][1];
+        var nuevo = document.getElementById('req-valor').value.trim(), motivo = document.getElementById('req-motivo').value.trim();
+        if (!nuevo) { Toast.show('Indica el nuevo valor propuesto.', 'err'); return; }
+        var req = { paciente: pacienteActual.nombre, campo: campoLbl, actual: pacienteActual.ficha[campoKey] || '—', nuevo: nuevo, doctor: YO, motivo: motivo || '—' };
+        try { var arr = JSON.parse(localStorage.getItem('dc_change_requests') || '[]'); req.id = Date.now(); arr.push(req); localStorage.setItem('dc_change_requests', JSON.stringify(arr)); } catch (e) {}
+        Modal.close('ficha-modal'); Toast.show('Solicitud de cambio enviada a secretaría.', 'ok');
+    };
+
+    // Abrir ficha desde la paleta de comandos (?paciente=Nombre)
+    var qp = new URLSearchParams(location.search).get('paciente');
+    if (qp) { var pp = window.DEMO.patientsList.filter(function (x) { return x.nombre === qp; })[0]; if (pp) setTimeout(function () { openFicha(pp); }, 250); }
+
+    Assistant.init({ role: 'doctor', name: 'Laura' });
+
+    render();
+})();
+</script>
+</body>
+</html>

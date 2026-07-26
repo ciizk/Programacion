@@ -1,0 +1,104 @@
+/* =====================================================================
+   Clínica Dental · Flujo de reserva (invitado / paciente) con stepper
+   Requiere tokens.css + design-system.css
+   ===================================================================== */
+
+.booking { max-width: 920px; margin: 0 auto; padding: clamp(1.4rem, 4vw, 2.5rem) clamp(1rem, 4vw, 2rem) 3rem; }
+.booking-head { text-align: center; margin-bottom: 1.8rem; }
+.booking-head h1 { margin-bottom: .3rem; }
+.booking-head p { color: var(--c-muted); margin: 0; }
+
+/* Aviso de sesión iniciada (datos ya conocidos) */
+.logged-banner { display: inline-flex; align-items: center; gap: .5rem; flex-wrap: wrap; justify-content: center;
+    background: var(--c-success-bg); color: var(--c-success); border: 1px solid var(--c-success);
+    border-radius: var(--r-full); padding: .45rem 1rem; font-size: .88rem; margin-top: .8rem; }
+.logged-banner b { color: inherit; }
+.logged-banner button { border: 0; background: none; color: var(--c-primary-600); font: inherit; font-size: .82rem;
+    font-weight: var(--fw-semibold); cursor: pointer; text-decoration: underline; }
+
+/* ------- Stepper (¿en qué paso voy?) ------- */
+.stepper { display: flex; align-items: flex-start; justify-content: center; gap: 0; margin: 1.8rem auto 2rem; max-width: 640px; }
+.step { display: flex; flex-direction: column; align-items: center; gap: .4rem; flex: 1; position: relative; text-align: center; }
+.step .num { width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; font-weight: var(--fw-bold);
+    background: var(--c-surface); border: 2px solid var(--c-border-strong); color: var(--c-muted); transition: var(--t-base); z-index: 1; }
+.step .lbl { font-size: .8rem; color: var(--c-muted); font-weight: var(--fw-semibold); max-width: 12ch; }
+.step::before { content: ""; position: absolute; top: 19px; left: -50%; width: 100%; height: 2px; background: var(--c-border-strong); z-index: 0; }
+.step:first-child::before { display: none; }
+.step.active .num { border-color: var(--c-primary); color: var(--c-primary-700); background: var(--c-primary-050); box-shadow: var(--ring); }
+.step.active .lbl { color: var(--c-primary-700); }
+.step.done .num { background: var(--c-primary); border-color: var(--c-primary); color: #fff; }
+.step.done .lbl { color: var(--c-text); }
+.step.done::before, .step.active::before { background: var(--c-primary); }
+
+/* ------- Layout paso + resumen ------- */
+.booking-grid { display: grid; grid-template-columns: 1fr 300px; gap: 1.5rem; align-items: start; }
+/* Evita el "grid blowout": permite que la columna encoja y que el day-bar haga scroll */
+.booking-grid > * { min-width: 0; }
+.step-panel { display: none; }
+.step-panel.active { display: block; animation: toast-in .25s var(--ease); }
+.step-panel h2 { font-size: 1.25rem; }
+.step-hint { color: var(--c-muted); margin-top: -.3rem; margin-bottom: 1.2rem; font-size: .92rem; }
+
+/* Tarjetas seleccionables (tratamiento / doctor) */
+.pick-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: .8rem; }
+.pick { text-align: left; background: var(--c-surface); border: 1.5px solid var(--c-border); border-radius: var(--r-md);
+    padding: 1rem; cursor: pointer; font: inherit; transition: var(--t-base); display: flex; gap: .8rem; align-items: flex-start; }
+.pick:hover { border-color: var(--c-primary-100); box-shadow: var(--sh-sm); transform: translateY(-2px); }
+.pick.sel { border-color: var(--c-primary); background: var(--c-primary-050); box-shadow: var(--ring); }
+.pick .ic { width: 40px; height: 40px; flex-shrink: 0; border-radius: var(--r-sm); display: grid; place-items: center; background: var(--c-primary-050); color: var(--c-primary); font-size: 1.1rem; }
+.pick.sel .ic { background: var(--c-primary); color: #fff; }
+.pick .t { font-weight: var(--fw-semibold); color: var(--c-text); display: block; }
+.pick .s { font-size: .8rem; color: var(--c-muted); }
+.pick .check { margin-left: auto; color: var(--c-primary); opacity: 0; transition: var(--t-fast); }
+.pick.sel .check { opacity: 1; }
+
+/* Slots */
+.slots { display: flex; flex-wrap: wrap; gap: .5rem; }
+.slot { border: 1px solid var(--c-border-strong); background: var(--c-surface); color: var(--c-primary-700); font-weight: var(--fw-semibold);
+    padding: .5rem .9rem; border-radius: var(--r-sm); cursor: pointer; font: inherit; font-weight: var(--fw-semibold); transition: var(--t-fast); }
+.slot:hover { border-color: var(--c-primary); background: var(--c-primary-050); }
+.slot.sel { background: var(--c-primary); color: #fff; border-color: var(--c-primary); }
+.slot:disabled { opacity: .4; cursor: not-allowed; text-decoration: line-through; }
+
+.daybar { display: flex; gap: .5rem; overflow-x: auto; padding-bottom: .4rem; margin-bottom: 1rem; }
+.day { flex-shrink: 0; min-width: 66px; text-align: center; border: 1px solid var(--c-border-strong); background: var(--c-surface);
+    border-radius: var(--r-md); padding: .5rem; cursor: pointer; transition: var(--t-fast); }
+.day:hover { border-color: var(--c-primary); }
+.day.sel { background: var(--c-primary); border-color: var(--c-primary); color: #fff; }
+.day .dow { font-size: .7rem; text-transform: uppercase; letter-spacing: .04em; opacity: .8; }
+.day .dnum { font-size: 1.2rem; font-weight: var(--fw-bold); }
+.day .mon { font-size: .68rem; opacity: .8; }
+
+/* Resumen lateral */
+.summary { position: sticky; top: 1rem; }
+.summary h3 { font-size: 1rem; display: flex; align-items: center; gap: .5rem; }
+.summary h3 i { color: var(--c-primary); }
+.sum-row { display: flex; justify-content: space-between; gap: 1rem; padding: .6rem 0; border-bottom: 1px dashed var(--c-border); font-size: .9rem; }
+.sum-row:last-of-type { border-bottom: 0; }
+.sum-row .lab { color: var(--c-muted); }
+.sum-row .val { font-weight: var(--fw-semibold); text-align: right; }
+.sum-row .val.pending { color: var(--c-muted); font-weight: var(--fw-normal); font-style: italic; }
+
+/* Navegación de pasos */
+.step-nav { display: flex; justify-content: space-between; gap: 1rem; margin-top: 1.6rem; }
+
+/* Éxito */
+.success { text-align: center; padding: 2rem 1rem; }
+.success .ok-ico { width: 84px; height: 84px; border-radius: 50%; margin: 0 auto 1.2rem; display: grid; place-items: center;
+    background: var(--c-success-bg); color: var(--c-success); font-size: 2.4rem; animation: pop .35s var(--ease); }
+@keyframes pop { 0%{ transform: scale(.6); opacity: 0 } 100%{ transform: scale(1); opacity: 1 } }
+.success .ref { display: inline-block; margin-top: .4rem; font-family: ui-monospace, monospace; background: var(--c-surface-2);
+    border: 1px dashed var(--c-border-strong); border-radius: var(--r-sm); padding: .3rem .7rem; font-weight: var(--fw-bold); color: var(--c-primary-700); }
+
+/* Guest vs cuenta */
+.guest-toggle { display: flex; gap: .5rem; background: var(--c-surface-2); border-radius: var(--r-full); padding: .3rem; margin-bottom: 1.2rem; }
+.guest-toggle button { flex: 1; border: 0; background: none; font: inherit; font-weight: var(--fw-semibold); color: var(--c-muted);
+    padding: .5rem; border-radius: var(--r-full); cursor: pointer; transition: var(--t-fast); }
+.guest-toggle button.on { background: var(--c-surface); color: var(--c-primary-700); box-shadow: var(--sh-sm); }
+
+@media (max-width: 760px) {
+    .booking-grid { grid-template-columns: 1fr; }
+    .summary { position: static; }
+    .step .lbl { display: none; }
+    .step .lbl.show-m { display: block; }
+}

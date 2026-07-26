@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clínica Dental Raquel Virgüez · Tu sonrisa, en buenas manos</title>
+    <meta name="description" content="Clínica dental en Acarigua. Revisiones, higiene, ortodoncia, estética dental y más. Pide tu cita online sin registrarte.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/tokens.css">
+    <link rel="stylesheet" href="assets/css/design-system.css">
+    <link rel="stylesheet" href="assets/css/ux.css">
+    <link rel="stylesheet" href="assets/css/landing.css">
+    <link rel="stylesheet" href="assets/css/assistant.css">
+</head>
+<body>
+
+<div class="scroll-progress" aria-hidden="true"></div>
+
+<div class="demo-ribbon">
+    <span class="dot" aria-hidden="true"></span>
+    <span>Modo <b>DEMO</b> · navegación libre sin registro</span>
+    <a href="login.html">Ver paneles →</a>
+</div>
+
+<header class="site-header">
+    <div class="container">
+        <a class="brand" href="index.html" aria-label="Inicio">
+            <i class="fa-solid fa-tooth"></i> Clínica Dental Raquel Virgüez
+        </a>
+        <nav class="nav" id="nav">
+            <a class="navlink" href="#servicios">Servicios</a>
+            <a class="navlink" href="#casos">Casos</a>
+            <a class="navlink" href="#equipo">Equipo</a>
+            <a class="navlink" href="#ia">Agente IA</a>
+            <a class="navlink" href="#contacto">Contacto</a>
+            <div class="nav-actions">
+                <a class="btn btn-ghost" href="login.html"><i class="fa-solid fa-right-to-bracket"></i> Acceder</a>
+                <a class="btn btn-primary" href="pedir-cita.html"><i class="fa-solid fa-calendar-check"></i> Pedir cita</a>
+            </div>
+        </nav>
+        <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú"><i class="fa-solid fa-bars"></i></button>
+    </div>
+</header>
+
+<main>
+    <!-- HERO -->
+    <section class="hero" id="inicio">
+        <div class="container hero-grid">
+            <div>
+                <span class="eyebrow"><i class="fa-solid fa-heart-pulse"></i> Cuidamos tu salud bucodental</span>
+                <h1>Tu sonrisa, en las mejores manos</h1>
+                <p class="lead">Clínica dental en Acarigua con un equipo cercano y tecnología moderna.
+                   Pide tu cita online en segundos, <b>sin necesidad de registrarte</b>.</p>
+                <div class="hero-cta">
+                    <a class="btn btn-primary btn-lg" href="pedir-cita.html"><i class="fa-solid fa-calendar-check"></i> Pedir cita online</a>
+                    <a class="btn btn-ghost btn-lg" href="#servicios">Ver servicios</a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat"><b>4</b><span>Especialistas</span></div>
+                    <div class="stat"><b>+15</b><span>Años de experiencia</span></div>
+                    <div class="stat"><b>4.9★</b><span>Valoración pacientes</span></div>
+                </div>
+            </div>
+            <div class="hero-card">
+                <h3><i class="fa-solid fa-calendar-check" style="color:var(--c-primary)"></i> Cita online 24/7</h3>
+                <p class="text-muted mb-0">Reserva sin llamar. Elige tratamiento, doctor y hora.</p>
+                <ul class="mini-list">
+                    <li><i class="fa-solid fa-circle-check"></i> Reserva como invitado, sin crear cuenta</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Ver horarios disponibles al instante</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Recordatorios por email y WhatsApp</li>
+                </ul>
+                <a class="btn btn-primary btn-block" style="margin-top:1rem" href="pedir-cita.html">Empezar ahora</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICIOS -->
+    <section class="section reveal" id="servicios">
+        <div class="container">
+            <div class="section-head">
+                <span class="eyebrow">Servicios</span>
+                <h2>Tratamientos para toda la familia</h2>
+                <p>Desde revisiones y limpiezas hasta ortodoncia y estética dental.</p>
+            </div>
+            <div class="grid services-grid" id="services-grid"></div>
+            <p class="text-center text-muted" style="margin-top:1.5rem">
+                <i class="fa-solid fa-circle-info"></i> Catálogo completo y precios — <span class="cs-badge">Próximamente</span>
+            </p>
+        </div>
+    </section>
+
+    <!-- CASOS: ANTES Y DESPUÉS -->
+    <section class="section reveal" id="casos" style="background:var(--c-surface-2)">
+        <div class="container">
+            <div class="section-head">
+                <span class="eyebrow">Pacientes · Antes y después</span>
+                <h2>Resultados que se ven</h2>
+                <p>Arrastra el control para comparar. <span class="cs-badge">Próximamente</span> con casos reales y fotos.</p>
+            </div>
+            <div class="grid cases-grid" id="cases-grid"></div>
+        </div>
+    </section>
+
+    <!-- EQUIPO -->
+    <section class="section reveal" id="equipo">
+        <div class="container">
+            <div class="section-head">
+                <span class="eyebrow">Equipo</span>
+                <h2>Conoce a nuestros doctores</h2>
+                <p>Profesionales colegiados y en formación continua.</p>
+            </div>
+            <div class="grid team-grid" id="team-grid"></div>
+        </div>
+    </section>
+
+    <!-- AGENTE IA (PRÓXIMAMENTE) -->
+    <section class="section reveal" id="ia">
+        <div class="container">
+            <div class="ai-section">
+                <div class="ai-grid">
+                    <div>
+                        <span class="cs-badge" style="background:#22c55e"><i class="fa-solid fa-circle-play"></i> Ya puedes probarlo</span>
+                        <h2 style="margin-top:1rem">Un agente de IA que trabaja por la clínica</h2>
+                        <p class="lead">Automatiza y optimiza todos los procesos para que el equipo dedique su tiempo a lo que importa: los pacientes.</p>
+                        <ul class="ai-feats">
+                            <li><i class="fa-solid fa-comments"></i> <span>Agenda citas por chat o WhatsApp, 24/7, en lenguaje natural.</span></li>
+                            <li><i class="fa-solid fa-bell"></i> <span>Recordatorios inteligentes y reprogramación automática.</span></li>
+                            <li><i class="fa-solid fa-wand-magic-sparkles"></i> <span>Optimiza la agenda y reduce huecos y ausencias (no-shows).</span></li>
+                            <li><i class="fa-solid fa-file-lines"></i> <span>Resume el historial y redacta notas clínicas tras cada visita.</span></li>
+                            <li><i class="fa-solid fa-chart-line"></i> <span>Predice la demanda y sugiere acciones de seguimiento.</span></li>
+                        </ul>
+                        <button class="btn btn-light btn-lg" id="try-ai" style="margin-top:1.4rem"><i class="fa-solid fa-comments"></i> Hablar con el asistente</button>
+                    </div>
+                    <div class="ai-chat" aria-hidden="true">
+                        <div class="row"><div class="av bot"><i class="fa-solid fa-robot"></i></div><div class="bub">Hola 👋 Soy el asistente de la clínica. ¿Quieres pedir una cita?</div></div>
+                        <div class="row me"><div class="av usr"><i class="fa-solid fa-user"></i></div><div class="bub">Sí, para una limpieza esta semana por la tarde.</div></div>
+                        <div class="row"><div class="av bot"><i class="fa-solid fa-robot"></i></div><div class="bub">Tengo el jueves a las 16:20 con la Dra. Beltrán. ¿Te la reservo?</div></div>
+                        <div class="row me"><div class="av usr"><i class="fa-solid fa-user"></i></div><div class="bub">Perfecto 🙌</div></div>
+                        <div class="row"><div class="av bot"><i class="fa-solid fa-robot"></i></div><div class="bub"><span class="ai-typing"><span></span><span></span><span></span></span> &nbsp;Reservando y enviando recordatorio…</div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- POR QUÉ -->
+    <section class="section reveal" id="porque" style="background:var(--c-surface-2)">
+        <div class="container">
+            <div class="section-head">
+                <span class="eyebrow">Por qué nosotros</span>
+                <h2>Una clínica pensada para ti</h2>
+            </div>
+            <div class="grid why-grid">
+                <div class="why-item"><i class="fa-solid fa-calendar-check"></i><div><h3>Cita online</h3><p class="text-muted">Reserva y gestiona tus citas sin llamadas.</p></div></div>
+                <div class="why-item"><i class="fa-solid fa-notes-medical"></i><div><h3>Historial digital</h3><p class="text-muted">Tu información clínica, segura y accesible.</p></div></div>
+                <div class="why-item"><i class="fa-brands fa-whatsapp"></i><div><h3>Recordatorios</h3><p class="text-muted">Avisos por email y WhatsApp para no olvidar tu cita.</p></div></div>
+                <div class="why-item"><i class="fa-solid fa-user-shield"></i><div><h3>Trato cercano</h3><p class="text-muted">Un equipo que te acompaña en cada visita.</p></div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACTO -->
+    <section class="section reveal" id="contacto">
+        <div class="container">
+            <div class="section-head">
+                <span class="eyebrow">Contacto</span>
+                <h2>Estamos aquí para ayudarte</h2>
+            </div>
+            <div class="grid contact-grid">
+                <div class="card">
+                    <h3>Datos de la clínica</h3>
+                    <ul class="contact-list">
+                        <li><i class="fa-solid fa-location-dot"></i> <span id="c-address">C.C. Plaza Real, Acarigua, Venezuela</span></li>
+                        <li><i class="fa-solid fa-phone"></i> <span id="c-phone">+58 255 621 0000</span></li>
+                        <li><i class="fa-solid fa-envelope"></i> <span id="c-email">info@clinicaraquelvirguez.com</span></li>
+                        <li><i class="fa-regular fa-clock"></i> <span id="c-hours">Lunes a viernes, 8:00 a 17:00</span></li>
+                    </ul>
+                    <a class="btn btn-primary" href="pedir-cita.html" style="margin-top:.6rem"><i class="fa-solid fa-calendar-check"></i> Pedir cita</a>
+                </div>
+                <div class="card map-card">
+                    <div class="map-visual">
+                        <div class="pin">
+                            <i class="fa-solid fa-location-dot"></i>
+                            <b>C.C. Plaza Real</b>
+                            <span>Acarigua · Venezuela</span>
+                        </div>
+                    </div>
+                    <div style="padding:1rem">
+                        <a class="btn btn-ghost btn-block" id="maps-link" target="_blank" rel="noopener"><i class="fa-solid fa-map-location-dot"></i> Ver en Google Maps</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cta-band" style="margin-top:2.5rem">
+                <h2>¿List@ para tu próxima visita?</h2>
+                <p>Pide tu cita online y elige el hueco que mejor te venga. Sin registro.</p>
+                <a class="btn btn-light btn-lg" href="pedir-cita.html" style="margin-top:.8rem"><i class="fa-solid fa-calendar-check"></i> Reservar ahora</a>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="site-footer">
+    <div class="container">
+        <div>
+            <div class="brand"><i class="fa-solid fa-tooth"></i> Clínica Dental Raquel Virgüez</div>
+            <p class="muted" style="margin-top:.5rem;max-width:34ch">Cuidamos tu salud bucodental con un trato cercano y tecnología moderna.</p>
+        </div>
+        <div>
+            <p style="font-weight:700;color:#fff">Enlaces</p>
+            <p><a href="#servicios">Servicios</a></p>
+            <p><a href="#equipo">Equipo</a></p>
+            <p><a href="pedir-cita.html">Pedir cita</a></p>
+            <p><a href="login.html">Acceder</a></p>
+        </div>
+        <div>
+            <p style="font-weight:700;color:#fff">Contacto</p>
+            <p class="muted">C.C. Plaza Real, Acarigua, Venezuela</p>
+            <p class="muted">+58 255 621 0000</p>
+            <p class="muted">info@clinicaraquelvirguez.com</p>
+        </div>
+    </div>
+    <div class="container muted" style="margin-top:1.5rem;border-top:1px solid rgba(255,255,255,.1);padding-top:1rem">
+        © 2026 Clínica Dental Raquel Virgüez · Demo MVP
+    </div>
+</footer>
+
+<button class="to-top" aria-label="Volver arriba"><i class="fa-solid fa-arrow-up"></i></button>
+
+<script src="assets/js/demo-data.js"></script>
+<script src="assets/js/ui.js"></script>
+<script src="assets/js/ux.js"></script>
+<script src="assets/js/wa.js"></script>
+<script src="assets/js/assistant.js"></script>
+<script>
+/* Render de servicios, casos y equipo desde los datos demo (una sola fuente). */
+(function () {
+    var D = window.DEMO;
+    document.getElementById('services-grid').innerHTML = D.treatments.map(function (t) {
+        return '<article class="card card-hover service-card">' +
+            '<div class="ico"><i class="fa-solid ' + t.icon + '"></i></div>' +
+            '<h3>' + t.name + '</h3><p class="text-muted mb-0">' + t.desc + '</p>' +
+            '<div class="meta"><span><i class="fa-regular fa-clock"></i> ' + t.min + ' min</span>' +
+            '<span><i class="fa-solid fa-tag"></i> ' + t.category + '</span></div></article>';
+    }).join('');
+
+    document.getElementById('cases-grid').innerHTML = D.cases.map(function (c, i) {
+        var before = ['🦷', '😬', '🦷'][i % 3], after = ['✨', '😁', '💎'][i % 3];
+        return '<div class="ba">' +
+            '<div class="ba-viewer">' +
+              '<div class="ba-img ba-before"><span class="ba-smile">' + before + '</span></div>' +
+              '<div class="ba-img ba-after"><span class="ba-smile">' + after + '</span></div>' +
+              '<span class="ba-tag l">Antes</span><span class="ba-tag r">Después</span>' +
+              '<div class="ba-handle"></div><div class="ba-knob"><i class="fa-solid fa-arrows-left-right"></i></div>' +
+            '</div>' +
+            '<div class="ba-cap"><h3>' + c.title + '</h3><p>' + c.desc + '</p></div></div>';
+    }).join('');
+
+    document.getElementById('team-grid').innerHTML = D.doctors.map(function (d) {
+        var ini = d.name.replace('Dra. ', '').replace('Dr. ', '').split(' ').map(function (w) { return w[0]; }).slice(0, 2).join('');
+        return '<article class="card card-hover doctor-card">' +
+            '<div class="avatar">' + ini.toUpperCase() + '</div>' +
+            '<h3 class="mb-0">' + d.name + '</h3><div class="spec">' + d.specialty + '</div>' +
+            '<div class="col">Nº col. ' + d.colegiado + '</div></article>';
+    }).join('');
+
+    // Contacto dinámico + enlace a Google Maps
+    document.getElementById('c-address').textContent = D.clinic.address;
+    document.getElementById('c-phone').textContent = D.clinic.phone;
+    document.getElementById('c-email').textContent = D.clinic.email;
+    document.getElementById('c-hours').textContent = D.clinic.hours;
+    document.getElementById('maps-link').href = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(D.clinic.mapsQuery);
+
+    // Asistente IA público: pedir cita por chat, 24/7
+    Assistant.init({ role: 'publico' });
+    document.getElementById('try-ai').onclick = function () { Assistant.open(); };
+})();
+</script>
+</body>
+</html>

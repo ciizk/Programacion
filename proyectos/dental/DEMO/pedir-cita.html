@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedir cita · Clínica Dental Raquel Virgüez</title>
+    <meta name="description" content="Reserva tu cita dental online, como invitado y sin registrarte.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/tokens.css">
+    <link rel="stylesheet" href="assets/css/design-system.css">
+    <link rel="stylesheet" href="assets/css/ux.css">
+    <link rel="stylesheet" href="assets/css/landing.css">
+    <link rel="stylesheet" href="assets/css/booking.css">
+</head>
+<body>
+
+<div class="scroll-progress" aria-hidden="true"></div>
+
+<header class="site-header">
+    <div class="container">
+        <a class="brand" href="index.html"><i class="fa-solid fa-tooth"></i> Clínica Dental Raquel Virgüez</a>
+        <div class="nav-actions">
+            <a class="btn btn-ghost" href="index.html"><i class="fa-solid fa-arrow-left"></i> Volver a la web</a>
+        </div>
+    </div>
+</header>
+
+<div class="booking">
+    <nav class="breadcrumbs" aria-label="Migas de pan">
+        <a href="index.html">Inicio</a><span class="sep">/</span>
+        <span class="current">Pedir cita</span>
+    </nav>
+
+    <div class="booking-head">
+        <h1>Pide tu cita</h1>
+        <p>Reserva en 3 pasos, como invitado y <b>sin crear cuenta</b>.</p>
+    </div>
+
+    <!-- Stepper: indica en qué paso está el usuario -->
+    <ol class="stepper" aria-label="Progreso de la reserva">
+        <li class="step" data-step="1"><div class="num">1</div><div class="lbl show-m">Tratamiento</div></li>
+        <li class="step" data-step="2"><div class="num">2</div><div class="lbl">Fecha y hora</div></li>
+        <li class="step" data-step="3"><div class="num">3</div><div class="lbl">Tus datos</div></li>
+        <li class="step" data-step="4"><div class="num"><i class="fa-solid fa-check"></i></div><div class="lbl">Confirmación</div></li>
+    </ol>
+
+    <div class="booking-grid">
+        <div>
+            <!-- PASO 1 -->
+            <section class="step-panel" data-step="1">
+                <h2>¿Qué necesitas?</h2>
+                <p class="step-hint">Elige el tratamiento. Si no estás seguro, empieza por una revisión.</p>
+                <div class="pick-grid" id="trat-grid"></div>
+
+                <h2 style="margin-top:1.8rem">¿Con quién?</h2>
+                <p class="step-hint">Elige doctor/a o deja que asignemos el primero disponible.</p>
+                <div class="pick-grid" id="doc-grid"></div>
+            </section>
+
+            <!-- PASO 2 -->
+            <section class="step-panel" data-step="2">
+                <h2>Elige día y hora</h2>
+                <p class="step-hint">Te mostramos los huecos libres al instante.</p>
+                <div class="daybar" id="day-bar"></div>
+                <label class="text-muted" style="font-weight:600;font-size:.9rem">Huecos disponibles</label>
+                <div class="slots" id="slot-grid" style="margin-top:.5rem"></div>
+            </section>
+
+            <!-- PASO 3 -->
+            <section class="step-panel" data-step="3">
+                <h2>Tus datos de contacto</h2>
+                <p class="step-hint">Elige cómo continuar. Como <b>invitado</b> solo pedimos lo imprescindible.</p>
+
+                <div class="guest-toggle" id="guest-toggle">
+                    <button type="button" class="on" data-mode="guest"><i class="fa-solid fa-bolt"></i> Como invitado</button>
+                    <button type="button" data-mode="account"><i class="fa-solid fa-user-plus"></i> Crear cuenta</button>
+                </div>
+
+                <div class="grid" style="grid-template-columns:1fr 1fr">
+                    <div class="field"><label for="g-nombre">Nombre *</label><input id="g-nombre" type="text" class="input" placeholder="Ej.: Pedro"></div>
+                    <div class="field"><label for="g-apellido">Apellidos *</label><input id="g-apellido" type="text" class="input" placeholder="Ej.: Ramos"></div>
+                </div>
+                <div class="field"><label for="g-tel">Teléfono *</label><input id="g-tel" type="text" data-mask="tel" class="input" placeholder="+58 000 000 0000"></div>
+
+                <div id="account-fields" style="display:none">
+                    <div class="field"><label for="g-email">Email *</label><input id="g-email" type="email" class="input" placeholder="tu@email.com"></div>
+                    <div class="field"><label for="g-pass">Contraseña *</label><input id="g-pass" type="password" class="input" placeholder="Crea una contraseña"></div>
+                    <div class="alert alert-info"><i class="fa-solid fa-circle-info"></i> Con cuenta podrás ver tu historial y gestionar tus citas. En la demo no se crea nada real.</div>
+                </div>
+
+                <p class="text-muted" style="font-size:.82rem"><i class="fa-solid fa-lock"></i> Tus datos solo se usan para gestionar la cita.</p>
+            </section>
+
+            <!-- PASO 4 -->
+            <section class="step-panel" data-step="4">
+                <div class="success">
+                    <div class="ok-ico"><i class="fa-solid fa-check"></i></div>
+                    <h2>¡Cita solicitada, <span id="ok-nombre"></span>!</h2>
+                    <p class="text-muted">Te confirmaremos por WhatsApp o email en breve.<br>Guarda tu número de referencia:</p>
+                    <div class="ref" id="ok-ref"></div>
+                    <div class="card" style="max-width:400px;margin:1.4rem auto 0"><div id="ok-detalle"></div></div>
+                    <div style="display:flex;gap:.6rem;justify-content:center;margin-top:1.6rem;flex-wrap:wrap">
+                        <a class="btn btn-ghost" href="index.html"><i class="fa-solid fa-house"></i> Volver al inicio</a>
+                        <a class="btn btn-primary" href="paciente.html"><i class="fa-solid fa-gauge"></i> Ver mi panel</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Navegación -->
+            <div class="step-nav" id="step-nav">
+                <button class="btn btn-ghost" id="btn-back"><i class="fa-solid fa-arrow-left"></i> Atrás</button>
+                <button class="btn btn-primary" id="btn-next">Continuar <i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+        </div>
+
+        <!-- Resumen (¿qué llevo elegido?) -->
+        <aside class="card summary">
+            <h3><i class="fa-solid fa-clipboard-check"></i> Tu cita</h3>
+            <div class="sum-row"><span class="lab">Tratamiento</span><span class="val pending" id="sum-trat">Por elegir</span></div>
+            <div class="sum-row"><span class="lab">Doctor/a</span><span class="val pending" id="sum-doc">Por elegir</span></div>
+            <div class="sum-row"><span class="lab">Día</span><span class="val pending" id="sum-fecha">Por elegir</span></div>
+            <div class="sum-row"><span class="lab">Hora</span><span class="val pending" id="sum-hora">Por elegir</span></div>
+            <div class="sum-row"><span class="lab">Duración</span><span class="val pending" id="sum-dur">Por elegir</span></div>
+            <p class="text-muted" style="font-size:.8rem;margin:1rem 0 0"><i class="fa-solid fa-shield-heart"></i> Cita sin compromiso. Podrás cambiarla o cancelarla.</p>
+        </aside>
+    </div>
+</div>
+
+<script src="assets/js/demo-data.js"></script>
+<script src="assets/js/ui.js"></script>
+<script src="assets/js/ux.js"></script>
+<script src="assets/js/booking.js"></script>
+</body>
+</html>

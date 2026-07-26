@@ -1,0 +1,91 @@
+/* =====================================================================
+   Clínica Dental · Paneles de gestión (post-login)
+   Requiere design-system.css
+   ===================================================================== */
+
+.panel-body { display: flex; min-height: 100vh; background: var(--c-bg); }
+
+/* ------- Sidebar ------- */
+.sidebar {
+    width: 250px; flex-shrink: 0; background: #0f2438; color: #cdd9e5;
+    display: flex; flex-direction: column; position: sticky; top: 0; height: 100vh;
+}
+.sidebar .brand { color: #fff; padding: 1.3rem 1.3rem; font-size: 1.1rem; }
+.sidebar .brand i { color: var(--c-accent); }
+.sidebar .role-chip {
+    margin: 0 1.3rem 1rem; font-size: .72rem; letter-spacing: .05em; text-transform: uppercase;
+    background: rgba(255,255,255,.08); color: #9fd7e6; padding: .3rem .6rem; border-radius: var(--r-full);
+    display: inline-block; align-self: flex-start;
+}
+.sidebar nav { display: flex; flex-direction: column; gap: .15rem; padding: 0 .8rem; }
+.sidebar nav a {
+    display: flex; align-items: center; gap: .8rem; padding: .7rem .8rem; border-radius: var(--r-sm);
+    color: #cdd9e5; font-weight: 500; transition: .15s;
+}
+.sidebar nav a i { width: 18px; text-align: center; color: #7fa7bd; }
+.sidebar nav a:hover { background: rgba(255,255,255,.06); color: #fff; }
+.sidebar nav a.active { background: var(--c-primary); color: #fff; }
+.sidebar nav a.active i { color: #fff; }
+.sidebar .sidebar-foot { margin-top: auto; padding: 1rem; border-top: 1px solid rgba(255,255,255,.08); }
+.sidebar .sidebar-foot a { color: #cdd9e5; }
+
+/* ------- Main ------- */
+.panel-main { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.topbar {
+    background: var(--c-surface); border-bottom: 1px solid var(--c-border);
+    padding: 1rem clamp(1rem, 3vw, 2rem); display: flex; align-items: center; justify-content: space-between;
+    position: sticky; top: 0; z-index: 20;
+}
+.topbar h1 { font-size: 1.3rem; margin: 0; }
+.topbar .user { display: flex; align-items: center; gap: .7rem; font-size: .9rem; }
+.topbar .user .av {
+    width: 36px; height: 36px; border-radius: var(--r-full); background: linear-gradient(135deg,var(--c-primary),var(--c-accent));
+    color: #fff; display: grid; place-items: center; font-weight: 700; font-size: .85rem;
+}
+.panel-content { padding: clamp(1.2rem, 3vw, 2rem); max-width: 1100px; width: 100%; }
+.hamburger { display: none; background: none; border: 0; font-size: 1.3rem; color: var(--c-primary-700); cursor: pointer; }
+
+/* ------- Stat tiles ------- */
+.stats-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px,1fr)); gap: 1rem; margin-bottom: 1.5rem; }
+.stat-tile { background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--r-md); padding: 1.1rem; box-shadow: var(--sh-sm); }
+.stat-tile .k { display: flex; align-items: center; gap: .5rem; color: var(--c-muted); font-size: .82rem; font-weight: 600; }
+.stat-tile .k i { color: var(--c-primary); }
+.stat-tile .v { font-size: 1.9rem; font-weight: 800; color: var(--c-text); margin-top: .3rem; }
+
+/* ------- Secciones ------- */
+.panel-section { margin-bottom: 1.8rem; }
+.panel-section > h2 { font-size: 1.15rem; margin-bottom: .9rem; display:flex; align-items:center; gap:.5rem; }
+.panel-section > h2 i { color: var(--c-primary); }
+
+/* ------- Tabla de citas ------- */
+.appts { width: 100%; border-collapse: collapse; background: var(--c-surface); border-radius: var(--r-md); overflow: hidden; box-shadow: var(--sh-sm); }
+.appts th, .appts td { text-align: left; padding: .8rem 1rem; border-bottom: 1px solid var(--c-border); font-size: .92rem; }
+.appts th { background: var(--c-surface-2); color: var(--c-muted); font-size: .78rem; text-transform: uppercase; letter-spacing: .03em; }
+.appts tr:last-child td { border-bottom: 0; }
+.appts .when b { display: block; }
+.appts .when span { color: var(--c-muted); font-size: .82rem; }
+.empty { text-align: center; color: var(--c-muted); padding: 2rem; background: var(--c-surface); border-radius: var(--r-md); border: 1px dashed var(--c-border); }
+
+/* ------- Slots de disponibilidad ------- */
+.slots { display: flex; flex-wrap: wrap; gap: .5rem; }
+.slot {
+    border: 1px solid var(--c-border); background: #fff; color: var(--c-primary-700); font-weight: 600;
+    padding: .5rem .9rem; border-radius: var(--r-sm); cursor: pointer; font: inherit; font-weight: 600; transition: .15s;
+}
+.slot:hover { border-color: var(--c-primary); background: var(--c-primary-050); }
+.slot.sel { background: var(--c-primary); color: #fff; border-color: var(--c-primary); }
+
+/* ------- Modal ------- */
+.modal-back { position: fixed; inset: 0; background: rgba(15,36,56,.5); display: none; place-items: center; z-index: 100; padding: 1rem; }
+.modal-back.open { display: grid; }
+.modal { background: #fff; border-radius: var(--r-lg); box-shadow: var(--sh-lg); width: 100%; max-width: 520px; padding: 1.6rem; }
+.modal h3 { margin-top: 0; }
+
+/* ------- Responsive ------- */
+@media (max-width: 820px) {
+    .sidebar { position: fixed; left: 0; top: 0; z-index: 60; transform: translateX(-100%); transition: transform .25s; }
+    .sidebar.open { transform: translateX(0); box-shadow: var(--sh-lg); }
+    .hamburger { display: block; }
+    .panel-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,.35); display: none; z-index: 55; }
+    .panel-backdrop.open { display: block; }
+}

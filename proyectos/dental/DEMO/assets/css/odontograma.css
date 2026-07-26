@@ -1,0 +1,127 @@
+/* =====================================================================
+   Clínica Dental · Odontograma (FDI) — vistas: esquema · realista · 3D · scan
+   Requiere tokens.css + design-system.css
+   ===================================================================== */
+.odo { background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--r-md); box-shadow: var(--sh-sm); padding: 1rem; }
+
+/* ---------- Conmutador de vistas ---------- */
+.odo-tabs { display: flex; gap: .3rem; background: var(--c-surface-2); border: 1px solid var(--c-border);
+    border-radius: var(--r-full); padding: .25rem; margin-bottom: .9rem; flex-wrap: wrap; }
+.odo-tabs button { flex: 1; min-width: 84px; border: 0; background: none; font: inherit; font-size: .8rem; font-weight: var(--fw-semibold);
+    color: var(--c-muted); padding: .45rem .6rem; border-radius: var(--r-full); cursor: pointer; transition: var(--t-fast);
+    display: inline-flex; align-items: center; justify-content: center; gap: .35rem; }
+.odo-tabs button.on { background: var(--c-surface); color: var(--c-primary-700); box-shadow: var(--sh-sm); }
+.odo-view { display: none; }
+.odo-view.on { display: block; animation: toast-in .2s var(--ease); }
+
+/* ---------- Vista · Caras del diente (odontograma clínico) ---------- */
+.odo-help { font-size: .8rem; color: var(--c-muted); background: var(--c-surface-2); border: 1px solid var(--c-border);
+    border-radius: var(--r-sm); padding: .5rem .7rem; margin: 0 0 .8rem; }
+.odo-help i { color: var(--c-primary); }
+.fdi-wrap { overflow-x: auto; padding-bottom: .3rem; }
+.fdi-arch { display: flex; justify-content: center; gap: 4px; min-width: 620px; }
+.fdi-arch.lower { margin-top: .6rem; }
+.fdi-mid { width: 10px; flex: 0 0 auto; }
+.fdi { flex: 0 0 auto; width: 34px; text-align: center; position: relative; }
+.fdi-tooth { width: 34px; height: 34px; display: block; }
+.fdi-n { font-size: .58rem; color: var(--c-muted); display: block; line-height: 1.4; }
+.fdi .cara { fill: var(--c-surface-2); stroke: var(--c-border-strong); stroke-width: .8; cursor: pointer; transition: fill var(--t-fast); }
+.fdi .cara:hover { fill: var(--c-primary-100); }
+.fdi .cara:focus-visible { outline: 2px solid var(--c-primary); }
+.fdi .cara[data-st="caries"]  { fill: var(--c-danger); }
+.fdi .cara[data-st="empaste"] { fill: var(--c-primary); }
+.fdi-x { fill: none; stroke: none; }
+/* Diente marcado completo */
+.fdi-tooth[data-whole="corona"] .cara  { fill: var(--c-warning); }
+.fdi-tooth[data-whole="caries"] .cara  { fill: var(--c-danger); }
+.fdi-tooth[data-whole="empaste"] .cara { fill: var(--c-primary); }
+.fdi-tooth[data-whole="ausente"] { opacity: .3; }
+.fdi-tooth[data-whole="ausente"] .fdi-x { stroke: var(--c-danger); stroke-width: 2.5; }
+.fdi-all { position: absolute; top: -6px; right: -4px; width: 16px; height: 16px; border-radius: 50%; border: 1px solid var(--c-border);
+    background: var(--c-surface); color: var(--c-muted); font-size: .5rem; cursor: pointer; padding: 0; line-height: 1; opacity: 0; transition: var(--t-fast); }
+.fdi:hover .fdi-all { opacity: 1; }
+.fdi-all:hover { background: var(--c-primary); color: #fff; border-color: var(--c-primary); }
+
+/* ---------- Vista 1 · Esquema ---------- */
+.odo-arch { display: flex; justify-content: center; align-items: flex-end; gap: 3px; overflow-x: auto; padding-bottom: .3rem; }
+.odo-arch.lower { margin-top: .5rem; }
+.odo-mid { flex: 0 0 auto; width: 10px; }
+.tooth { flex: 0 0 auto; width: 34px; text-align: center; border: 1px solid var(--c-border-strong); background: var(--c-surface-2);
+    border-radius: 7px; padding: .3rem 0 .18rem; cursor: pointer; font: inherit; transition: var(--t-fast); }
+:root[data-theme="dark"] .tooth .ti { color: #b7c6d6; }
+.tooth:disabled { cursor: default; }
+.tooth .ti { font-size: 1rem; display: block; color: var(--c-muted); line-height: 1; }
+.tooth .tn { font-size: .58rem; color: var(--c-muted); }
+.tooth:not(:disabled):hover { border-color: var(--c-primary); transform: translateY(-2px); }
+.tooth[data-st="caries"]  { background: var(--c-danger-bg);  border-color: var(--c-danger); }
+.tooth[data-st="caries"] .ti  { color: var(--c-danger); }
+.tooth[data-st="empaste"] { background: var(--c-primary-050); border-color: var(--c-primary); }
+.tooth[data-st="empaste"] .ti { color: var(--c-primary); }
+.tooth[data-st="corona"]  { background: var(--c-warning-bg); border-color: var(--c-warning); }
+.tooth[data-st="corona"] .ti  { color: var(--c-warning); }
+.tooth[data-st="ausente"] { opacity: .4; }
+
+/* ---------- Vista 2 · Realista (SVG anatómico) ---------- */
+.odo-real { overflow-x: auto; padding: .4rem 0; }
+.odo-realarch { display: flex; justify-content: center; align-items: flex-end; gap: 2px; min-width: 620px; }
+.odo-realarch.lower { align-items: flex-start; margin-top: .4rem; }
+.rt { flex: 0 0 auto; width: 36px; border: 0; background: none; padding: 0; cursor: pointer; font: inherit; text-align: center; transition: var(--t-fast); }
+.rt:disabled { cursor: default; }
+.rt:not(:disabled):hover svg { filter: drop-shadow(0 3px 6px rgba(8,145,178,.45)); transform: translateY(-3px); }
+.rt svg { width: 100%; height: auto; display: block; transition: var(--t-fast); }
+.odo-realarch.lower .rt svg { transform: scaleY(-1); }
+.odo-realarch.lower .rt:not(:disabled):hover svg { transform: scaleY(-1) translateY(-3px); }
+.rt .tn { font-size: .56rem; color: var(--c-muted); display: block; }
+/* Relleno por estado */
+.rt .crown { fill: #f6f9fc; stroke: #b9c8d6; stroke-width: 1.2; }
+.rt .root  { fill: #eef3f8; stroke: #c3d0dc; stroke-width: 1.1; }
+:root[data-theme="dark"] .rt .crown { fill: #d8e3ec; stroke: #8fa3b5; }
+:root[data-theme="dark"] .rt .root  { fill: #b9c8d6; stroke: #7f93a6; }
+.rt[data-st="caries"]  .crown { fill: #fecaca; stroke: var(--c-danger); }
+.rt[data-st="caries"]  .spot  { fill: #b91c1c; }
+.rt[data-st="empaste"] .crown { fill: #bae6fd; stroke: var(--c-primary); }
+.rt[data-st="empaste"] .spot  { fill: #0e7490; }
+.rt[data-st="corona"]  .crown { fill: #fde68a; stroke: var(--c-warning); }
+.rt[data-st="corona"]  .root  { fill: #fef3c7; }
+.rt[data-st="ausente"] { opacity: .28; }
+.rt .spot { fill: none; }
+
+/* ---------- Vista 3 · 3D genérico ---------- */
+.odo3d-stage { position: relative; height: 300px; perspective: 900px; overflow: hidden; border-radius: var(--r-md);
+    background: radial-gradient(circle at 50% 32%, var(--c-surface-2), var(--c-surface)); cursor: grab; touch-action: none; }
+.odo3d-stage:active { cursor: grabbing; }
+.odo3d-world { position: absolute; inset: 0; transform-style: preserve-3d; transition: transform .06s linear; }
+.odo3d-arch { position: absolute; left: 50%; top: 50%; transform-style: preserve-3d; }
+.t3 { position: absolute; width: 26px; height: 34px; margin: -17px -13px; border-radius: 8px 8px 5px 5px;
+    background: linear-gradient(180deg, #ffffff 0%, #eef4f9 55%, #d7e2ec 100%);
+    box-shadow: inset 0 -4px 6px rgba(120,140,160,.35), 0 2px 6px rgba(0,0,0,.25);
+    border: 1px solid #c6d4e0; transform-style: preserve-3d; cursor: pointer; }
+.t3::after { content: ""; position: absolute; left: 50%; top: 92%; width: 10px; height: 16px; transform: translateX(-50%);
+    background: linear-gradient(180deg, #e6eef5, #c9d7e3); border-radius: 0 0 6px 6px; }
+.t3[data-st="caries"]  { background: linear-gradient(180deg,#fee2e2,#f87171); border-color: #b91c1c; }
+.t3[data-st="empaste"] { background: linear-gradient(180deg,#e0f2fe,#38bdf8); border-color: #0e7490; }
+.t3[data-st="corona"]  { background: linear-gradient(180deg,#fef9c3,#facc15); border-color: #b45309; }
+.t3[data-st="ausente"] { opacity: .12; }
+.t3:hover { box-shadow: inset 0 -4px 6px rgba(120,140,160,.35), 0 0 0 2px var(--c-accent), 0 4px 10px rgba(0,0,0,.3); }
+.odo3d-hint { position: absolute; left: 50%; bottom: 8px; transform: translateX(-50%); font-size: .74rem; color: var(--c-muted);
+    background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--r-full); padding: .2rem .7rem; white-space: nowrap; }
+.odo3d-tools { display: flex; gap: .4rem; justify-content: center; margin-top: .6rem; flex-wrap: wrap; }
+
+/* ---------- Vista 4 · Scan 3D ---------- */
+.odo-scan { text-align: center; }
+.scan-drop { border: 2px dashed var(--c-border-strong); border-radius: var(--r-md); background: var(--c-surface-2);
+    padding: 2rem 1rem; cursor: pointer; transition: var(--t-base); color: var(--c-muted); display: block; }
+.scan-drop:hover, .scan-drop.drag { border-color: var(--c-primary); background: var(--c-primary-050); color: var(--c-primary-700); }
+.scan-drop i { font-size: 2rem; color: var(--c-primary); display: block; margin-bottom: .5rem; }
+.scan-drop b { color: var(--c-text); }
+.scan-file { display: flex; align-items: center; gap: .8rem; text-align: left; background: var(--c-surface-2);
+    border: 1px solid var(--c-border); border-radius: var(--r-md); padding: .8rem 1rem; margin-top: .8rem; }
+.scan-file .fi { width: 42px; height: 42px; border-radius: var(--r-sm); display: grid; place-items: center;
+    background: linear-gradient(135deg, var(--c-primary), var(--c-accent)); color: #fff; font-size: 1.1rem; flex-shrink: 0; }
+.scan-file b { display: block; font-size: .9rem; }
+.scan-file span { font-size: .78rem; color: var(--c-muted); }
+
+/* ---------- Leyenda ---------- */
+.odo-legend { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; margin-top: .8rem; font-size: .78rem; color: var(--c-muted); }
+.odo-legend .dot { width: 11px; height: 11px; border-radius: 3px; display: inline-block; margin-right: .35rem; vertical-align: middle; border: 1px solid var(--c-border-strong); }
+.odo-hint { margin-left: auto; font-size: .76rem; }

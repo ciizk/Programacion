@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio · Paciente · Clínica Dental Raquel Virgüez</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/tokens.css">
+    <link rel="stylesheet" href="assets/css/design-system.css">
+    <link rel="stylesheet" href="assets/css/ux.css">
+    <link rel="stylesheet" href="assets/css/panel.css">
+    <link rel="stylesheet" href="assets/css/odontograma.css">
+    <link rel="stylesheet" href="assets/css/assistant.css">
+    <link rel="stylesheet" href="assets/css/clinic.css">
+</head>
+<body>
+<div class="panel-backdrop" id="backdrop"></div>
+<div class="panel-body">
+
+    <aside class="sidebar" id="sidebar">
+        <a class="brand" href="index.html"><i class="fa-solid fa-tooth"></i> Clínica Dental</a>
+        <span class="role-chip"><i class="fa-solid fa-user"></i> Paciente</span>
+        <div class="role-switch">
+            <span class="lbl">Cambiar rol (demo)</span>
+            <a href="paciente.html" class="active">Paciente</a> · <a href="doctor.html">Doctor</a> · <a href="secretaria.html">Secretaría</a> · <a href="raquel.html">Dirección</a>
+        </div>
+        <nav>
+            <span class="nav-group">Mis citas</span>
+            <a href="#inicio" data-title="Inicio" data-icon="fa-gauge" data-short="Inicio"
+               data-desc="Tus próximas citas y accesos rápidos. Aquí puedes cancelar o reprogramar dentro de plazo."><i class="fa-solid fa-gauge"></i> Inicio</a>
+            <a href="pedir-cita.html" data-short="Pedir"><i class="fa-solid fa-calendar-plus"></i> Pedir cita</a>
+            <span class="nav-group">Mi salud</span>
+            <a href="#timeline" data-title="Mi línea de tiempo" data-icon="fa-timeline" data-short="Historia"
+               data-desc="Todo tu recorrido en la clínica: visitas, tratamientos, fotos y documentos."><i class="fa-solid fa-timeline"></i> Mi historia</a>
+            <a href="#ficha-sec" data-title="Mi ficha médica" data-icon="fa-notes-medical" data-short="Ficha"
+               data-desc="Tus datos médicos y tu odontograma. Puedes editarlos con cuidado."><i class="fa-solid fa-notes-medical"></i> Mi ficha</a>
+            <a href="#archivos" data-title="Mis archivos" data-icon="fa-images" data-short="Fotos"
+               data-desc="Sube y consulta tus fotos de progreso, radiografías e informes."><i class="fa-solid fa-images"></i> Mis archivos</a>
+        </nav>
+        <div class="sidebar-foot">
+            <a href="index.html"><i class="fa-solid fa-arrow-right-from-bracket"></i> Cerrar sesión</a>
+        </div>
+    </aside>
+
+    <div class="panel-main">
+        <header class="topbar">
+            <div class="flex items-center" style="gap:.7rem">
+                <button class="hamburger" id="hamburger" aria-label="Menú"><i class="fa-solid fa-bars"></i></button>
+                <h1>Inicio</h1>
+            </div>
+            <div class="user">
+                <div class="av">LT</div>
+                <div>Lucía Torres Marí</div>
+            </div>
+        </header>
+        <main class="panel-content">
+
+            <nav class="breadcrumbs" aria-label="Migas de pan">
+                <a href="index.html">Inicio</a><span class="sep">/</span>
+                <span class="current">Panel del paciente</span>
+            </nav>
+
+            <div data-view="inicio"><div class="stats-row">
+                <div class="stat-tile"><div class="k"><i class="fa-solid fa-calendar-check"></i> Próximas citas</div><div class="v" id="st-prox">0</div></div>
+                <div class="stat-tile"><div class="k"><i class="fa-solid fa-clock-rotate-left"></i> Visitas en historial</div><div class="v" id="st-hist">0</div></div>
+                <a class="stat-tile link" href="pedir-cita.html" style="display:flex;flex-direction:column;justify-content:center;text-decoration:none">
+                    <span class="btn btn-primary btn-block"><i class="fa-solid fa-calendar-plus"></i> Solicitar cita</span>
+                </a>
+            </div>
+
+            <section class="panel-section">
+                <h2><i class="fa-solid fa-calendar-check"></i> Próximas citas</h2>
+                <div class="info-box open" style="margin-bottom:.8rem">
+                    <i class="fa-solid fa-circle-info"></i> <span id="reglas-aviso"></span>
+                </div>
+                <div id="prox-wrap"></div>
+            </section>
+
+            </div><!-- /vista inicio -->
+
+            <section class="panel-section" data-view="timeline" id="timeline">
+                <h2><i class="fa-solid fa-timeline"></i> Mi línea de tiempo</h2>
+                <p class="text-muted" style="margin-top:-.4rem">Todo tu recorrido en la clínica, de lo más reciente a lo más antiguo.</p>
+                <div id="tl-wrap"></div>
+            </section>
+
+            <section class="panel-section" data-view="timeline">
+                <h2><i class="fa-solid fa-notes-medical"></i> Detalle de visitas</h2>
+                <div id="hist-wrap"></div>
+            </section>
+
+            <section class="panel-section" data-view="ficha-sec" id="ficha-sec">
+                <h2><i class="fa-solid fa-heart-pulse"></i> Mi ficha médica</h2>
+                <div class="card ficha-view" id="ficha-card">
+                    <div class="ficha-static" id="ficha-static">
+                        <div class="flex justify-between items-center" style="margin-bottom:.9rem">
+                            <b>Datos médicos</b>
+                            <button class="btn btn-ghost btn-sm" id="btn-edit"><i class="fa-solid fa-pen"></i> Editar</button>
+                        </div>
+                        <div class="grid" id="ficha-grid" style="grid-template-columns:repeat(auto-fit,minmax(180px,1fr))"></div>
+                    </div>
+                    <div data-edit id="ficha-form">
+                        <div class="grid" id="ficha-inputs" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr))"></div>
+                        <div class="flex justify-between" style="margin-top:1rem">
+                            <button class="btn btn-ghost btn-sm" id="btn-cancel">Cancelar</button>
+                            <button class="btn btn-primary btn-sm" id="btn-save"><i class="fa-solid fa-check"></i> Guardar cambios</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="panel-section" data-view="ficha-sec" id="odontograma">
+                <h2><i class="fa-solid fa-teeth"></i> Mi odontograma</h2>
+                <p class="text-muted" style="margin-top:-.4rem">Estado de tus dientes registrado por tu doctor/a (solo lectura).</p>
+                <div id="odo-view"></div>
+            </section>
+
+            <section class="panel-section" data-view="archivos" id="archivos">
+                <h2><i class="fa-solid fa-images"></i> Mis archivos y progreso</h2>
+                <p class="text-muted" style="margin-top:-.4rem">Sube fotos de tu evolución (antes/después), radiografías o informes. Solo tú y tu doctor/a las veis.</p>
+                <label class="uploader" id="drop">
+                    <i class="fa-solid fa-cloud-arrow-up"></i>
+                    <div><b>Arrastra tus archivos aquí</b> o haz clic para elegir</div>
+                    <div style="font-size:.8rem">Imágenes o PDF · en la demo se guardan solo en tu navegador</div>
+                    <input type="file" id="file-input" accept="image/*,application/pdf" multiple hidden>
+                </label>
+                <div class="gallery" id="gallery"></div>
+            </section>
+
+        </main>
+    </div>
+</div>
+
+<!-- Aviso antes de editar la ficha médica -->
+<div class="modal-back" id="warn-modal">
+    <div class="modal">
+        <h3><i class="fa-solid fa-triangle-exclamation" style="color:var(--c-warning)"></i> Vas a editar tu ficha médica</h3>
+        <p class="text-muted" style="margin-top:-.2rem">Esta información es <b>clínica y sensible</b>. Un dato incorrecto (alergias, medicación, tipo de sangre…) puede afectar a tu tratamiento. Asegúrate de saber lo que haces.</p>
+        <div class="flex justify-between" style="margin-top:.6rem">
+            <button class="btn btn-ghost" id="warn-cancel">Cancelar</button>
+            <button class="btn btn-primary" id="warn-ok"><i class="fa-solid fa-pen"></i> Entiendo, editar</button>
+        </div>
+    </div>
+</div>
+
+<script src="assets/js/demo-data.js"></script>
+<script src="assets/js/ui.js"></script>
+<script src="assets/js/ux.js"></script>
+<script src="assets/js/odontograma.js"></script>
+<script src="assets/js/wa.js"></script>
+<script src="assets/js/assistant.js"></script>
+<script src="assets/js/clinic.js"></script>
+<script>
+(function () {
+    var P = window.DEMO.patient;
+    // Campana: al pulsar te lleva a la sección; el check la marca como leída
+    UX.bell(P.upcoming.map(function (c) {
+        return { icon: 'fa-calendar-check', title: 'Cita ' + fmtFecha(c.fecha) + ' · ' + c.ini, sub: c.trat + ' · ' + c.doctor, href: '#prox-wrap' };
+    }).concat([
+        { icon: 'fa-teeth', title: 'Tu odontograma está actualizado', sub: 'Revisa los hallazgos de tu última visita', href: '#odontograma' },
+        { icon: 'fa-images', title: 'Sube tus fotos de progreso', sub: 'Compara tu evolución antes/después', href: '#archivos' }
+    ]));
+
+    // Sesión: permite autorrellenar la reserva y limita lo que ve el asistente
+    UX.setSession({ role: 'paciente', nombre: 'Lucía', apellido: 'Torres Marí', tel: '+58 424 000 0000', email: 'lucia.torres@example.com' });
+
+    // Perfil (clic en el nombre, arriba a la derecha)
+    UX.profile({
+        name: 'Lucía Torres Marí', role: 'Paciente',
+        email: 'lucia.torres@example.com', phone: '+58 424 000 0000',
+        extra: [{ k: 'Nº de historia', v: 'PAC-00128' }, { k: 'Seguro', v: P.profile.seguro }, { k: 'Grupo sanguíneo', v: P.profile.grupo }]
+    });
+    document.getElementById('st-prox').textContent = P.upcoming.length;
+    document.getElementById('st-hist').textContent = P.history.length;
+
+    // ---------- Próximas citas con reglas de cancelación / reprogramación ----------
+    document.getElementById('reglas-aviso').innerHTML = Clinic.rules.aviso();
+    var futuras = P.upcoming.map(function (c) { return Object.assign({}, c); });
+    var pw = document.getElementById('prox-wrap');
+    function renderProximas() {
+        document.getElementById('st-prox').textContent = futuras.length;
+        if (!futuras.length) {
+            pw.innerHTML = '<div class="empty"><i class="fa-regular fa-calendar" style="font-size:1.6rem"></i>' +
+                '<p style="margin:.6rem 0 .2rem"><b>No tienes citas próximas</b></p>' +
+                '<p class="mini">Cuando reserves, aparecerán aquí con sus opciones de cambio.</p>' +
+                '<a class="btn btn-primary btn-sm" style="margin-top:.8rem" href="pedir-cita.html"><i class="fa-solid fa-calendar-plus"></i> Pedir cita</a></div>';
+            return;
+        }
+        pw.innerHTML = '<div class="table-wrap"><table class="appts cards-sm"><thead><tr><th>Fecha y hora</th><th>Doctor/a</th><th>Tratamiento</th><th>Estado</th><th>Acciones</th></tr></thead><tbody>' +
+            futuras.map(function (c, i) {
+                var h = Clinic.rules.horasHasta(c);
+                var puedeC = Clinic.rules.puedeCancelar(c), puedeR = Clinic.rules.puedeReprogramar(c);
+                var aviso = (!puedeC || !puedeR)
+                    ? '<div class="text-muted" style="font-size:.74rem;margin-top:.3rem"><i class="fa-solid fa-triangle-exclamation" style="color:var(--c-warning)"></i> ' +
+                      'Faltan ' + Math.max(0, h).toFixed(0) + ' h' + (!puedeC ? ' · fuera de plazo' : ' · solo puedes cancelar') + '</div>' : '';
+                return '<tr><td class="when" data-l="Cuándo"><b>' + fmtFecha(c.fecha) + '</b><span>' + c.ini + ' – ' + c.fin + '</span>' + aviso + '</td>' +
+                    '<td data-l="Doctor/a">' + c.doctor + '<br><span class="text-muted" style="font-size:.82rem">' + c.spec + '</span></td>' +
+                    '<td data-l="Tratamiento">' + c.trat + '</td><td data-l="Estado">' + badge(c.estado) + '</td>' +
+                    '<td data-l="Acciones"><div class="flex wrap" style="gap:.4rem">' +
+                      '<button class="btn btn-ghost btn-sm" data-cita="' + i + '" data-acc="reprogramar"' + (puedeR ? '' : ' disabled title="Fuera de plazo"') + '><i class="fa-solid fa-rotate"></i> Reprogramar</button>' +
+                      '<button class="btn btn-ghost btn-sm" data-cita="' + i + '" data-acc="cancelar" style="color:var(--c-danger)"' + (puedeC ? '' : ' disabled title="Fuera de plazo"') + '>Cancelar</button>' +
+                    '</div></td></tr>';
+            }).join('') + '</tbody></table></div>';
+
+        pw.querySelectorAll('[data-cita]').forEach(function (b) {
+            b.onclick = function () {
+                var c = futuras[+b.dataset.cita], acc = b.dataset.acc;
+                var permitido = acc === 'cancelar' ? Clinic.rules.puedeCancelar(c) : Clinic.rules.puedeReprogramar(c);
+                if (!permitido) {
+                    Toast.show('Fuera de plazo para ' + acc + ' online.', 'err');
+                    return;
+                }
+                if (acc === 'cancelar') {
+                    if (!window.confirm('¿Seguro que quieres cancelar tu cita del ' + fmtFecha(c.fecha) + ' a las ' + c.ini + '?')) return;
+                    var idx = futuras.indexOf(c);
+                    futuras.splice(idx, 1); renderProximas(); pintaTimeline();
+                    Toast.show('Cita cancelada. El hueco se ofrecerá a la lista de espera.', 'ok',
+                        { label: 'Deshacer', fn: function () { futuras.splice(idx, 0, c); renderProximas(); pintaTimeline(); } });
+                } else {
+                    location.href = 'pedir-cita.html';
+                }
+            };
+        });
+    }
+    renderProximas();
+
+    // Historial
+    document.getElementById('hist-wrap').innerHTML = '<div class="table-wrap"><table class="appts"><thead><tr><th>Fecha</th><th>Doctor/a</th><th>Tratamiento</th><th>Estado</th><th>Notas del doctor</th></tr></thead><tbody>' +
+        P.history.map(function (c) {
+            return '<tr><td class="when"><b>' + fmtFecha(c.fecha) + '</b><span>' + c.ini + '</span></td>' +
+                '<td>' + c.doctor + '</td><td>' + c.trat + '</td><td>' + badge(c.estado) + '</td>' +
+                '<td class="text-muted" style="max-width:280px">' + c.notas + '</td></tr>';
+        }).join('') + '</tbody></table></div>';
+
+    // ---------- Ficha médica (editable) ----------
+    var CAMPOS = [['grupo', 'Grupo sanguíneo'], ['alergias', 'Alergias'], ['cronicas', 'Enfermedades crónicas'], ['medicacion', 'Medicación actual'], ['emergencia', 'Contacto de emergencia'], ['seguro', 'Seguro']];
+    var card = document.getElementById('ficha-card');
+    var TIPS = { grupo: 'Tu grupo sanguíneo: clave ante una urgencia.', alergias: 'Fármacos o materiales que debemos evitar (p. ej. penicilina, látex).', medicacion: 'Lo que tomas ahora; puede interactuar con la anestesia.' };
+    function renderFichaStatic() {
+        document.getElementById('ficha-grid').innerHTML = CAMPOS.map(function (c) {
+            var tip = TIPS[c[0]] ? ' <span class="tip" tabindex="0" data-tip="' + TIPS[c[0]] + '">?</span>' : '';
+            return '<div><div class="text-muted" style="font-size:.8rem;font-weight:600">' + c[1] + tip + '</div><div>' + (P.profile[c[0]] || '—') + '</div></div>';
+        }).join('');
+    }
+    Odontograma({ el: document.getElementById('odo-view'), state: P.odonto || {}, editable: false });
+
+    // Línea de tiempo: citas, tratamientos y archivos en un solo relato
+    function pintaTimeline() {
+        Clinic.timeline(document.getElementById('tl-wrap'), {
+            futuras: futuras, historial: P.history, archivos: P.files,
+            documentos: [{ fecha: '2026-07-20', titulo: 'Informe clínico', folio: 'IN-2026-01180' }]
+        });
+    }
+    pintaTimeline();
+
+    Assistant.init({ role: 'paciente', name: 'Lucía' });
+    function fieldFor(key, label) {
+        if (key === 'grupo') {
+            var cur = P.profile[key] || '';
+            var opts = window.DEMO.bloodTypes.slice();
+            if (cur && opts.indexOf(cur) < 0) opts.unshift(cur);
+            return '<div class="field"><label for="f-grupo">' + label + '</label><select id="f-grupo" class="input">' +
+                opts.map(function (o) { return '<option' + (o === cur ? ' selected' : '') + '>' + o + '</option>'; }).join('') + '</select></div>';
+        }
+        return '<div class="field"><label for="f-' + key + '">' + label + '</label><input id="f-' + key + '" class="input" value="' + (P.profile[key] || '').replace(/"/g, '&quot;') + '"></div>';
+    }
+    function renderFichaForm() {
+        document.getElementById('ficha-inputs').innerHTML = CAMPOS.map(function (c) { return fieldFor(c[0], c[1]); }).join('');
+    }
+    function entrarEdicion() { renderFichaForm(); card.classList.remove('ficha-view'); card.classList.add('ficha-edit'); }
+    // Aviso obligatorio antes de editar
+    document.getElementById('btn-edit').onclick = function () { Modal.open('warn-modal'); };
+    document.getElementById('warn-cancel').onclick = function () { Modal.close('warn-modal'); };
+    document.getElementById('warn-ok').onclick = function () { Modal.close('warn-modal'); entrarEdicion(); };
+    document.getElementById('btn-cancel').onclick = function () {
+        var dirty = CAMPOS.some(function (c) { var f = document.getElementById('f-' + c[0]); return f && f.value.trim() !== (P.profile[c[0]] || ''); });
+        if (dirty && !window.confirm('Tienes cambios sin guardar. ¿Descartarlos?')) return;
+        card.classList.add('ficha-view'); card.classList.remove('ficha-edit');
+    };
+    document.getElementById('btn-save').onclick = function () {
+        CAMPOS.forEach(function (c) { P.profile[c[0]] = document.getElementById('f-' + c[0]).value.trim(); });
+        renderFichaStatic(); card.classList.add('ficha-view'); card.classList.remove('ficha-edit');
+        Toast.show('Ficha médica actualizada.', 'ok');
+    };
+    renderFichaStatic();
+
+    // ---------- Archivos / progreso ----------
+    var files = P.files.slice();
+    var gallery = document.getElementById('gallery');
+    function shot(f) {
+        var thumb;
+        if (f.url) thumb = '<div class="thumb" style="background-image:url(' + f.url + ')"></div>';
+        else if (f.kind === 'pdf') thumb = '<div class="thumb" style="background:linear-gradient(135deg,#64748b,#94a3b8)"><i class="fa-solid fa-file-pdf"></i></div>';
+        else thumb = '<div class="thumb" style="background:linear-gradient(135deg,' + (f.tint || '#0891b2') + ',#06b6d4)"><i class="fa-solid fa-image"></i></div>';
+        return '<div class="shot">' + thumb + '<div class="cap"><b>' + f.name + '</b><span>' + fmtFecha(f.date) + '</span></div></div>';
+    }
+    function renderGallery() { gallery.innerHTML = files.map(shot).join(''); }
+    renderGallery();
+
+    function addFiles(list) {
+        var hoy = window.DEMO.today, n = 0;
+        Array.prototype.forEach.call(list, function (file) {
+            n++;
+            if (file.type.indexOf('image') === 0) {
+                var reader = new FileReader();
+                reader.onload = function (e) { files.push({ name: file.name, date: hoy, kind: 'img', url: e.target.result }); renderGallery(); };
+                reader.readAsDataURL(file);
+            } else {
+                files.push({ name: file.name, date: hoy, kind: 'pdf' }); renderGallery();
+            }
+        });
+        if (n) Toast.show(n + (n === 1 ? ' archivo subido.' : ' archivos subidos.'), 'ok');
+    }
+    var input = document.getElementById('file-input'), drop = document.getElementById('drop');
+    input.addEventListener('change', function () { addFiles(input.files); input.value = ''; });
+    ['dragenter', 'dragover'].forEach(function (ev) { drop.addEventListener(ev, function (e) { e.preventDefault(); drop.classList.add('drag'); }); });
+    ['dragleave', 'drop'].forEach(function (ev) { drop.addEventListener(ev, function (e) { e.preventDefault(); drop.classList.remove('drag'); }); });
+    drop.addEventListener('drop', function (e) { if (e.dataTransfer && e.dataTransfer.files.length) addFiles(e.dataTransfer.files); });
+})();
+</script>
+</body>
+</html>

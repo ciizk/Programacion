@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página no encontrada · Clínica Dental Raquel Virgüez</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/tokens.css">
+    <link rel="stylesheet" href="assets/css/design-system.css">
+    <link rel="stylesheet" href="assets/css/ux.css">
+    <link rel="stylesheet" href="assets/css/clinic.css">
+    <link rel="stylesheet" href="assets/css/landing.css">
+</head>
+<body>
+
+<header class="site-header">
+    <div class="container">
+        <a class="brand" href="index.html"><i class="fa-solid fa-tooth"></i> Clínica Dental Raquel Virgüez</a>
+        <div class="nav-actions">
+            <a class="btn btn-primary" href="pedir-cita.html"><i class="fa-solid fa-calendar-check"></i> Pedir cita</a>
+        </div>
+    </div>
+</header>
+
+<main>
+    <div class="err-screen">
+        <div class="err-tooth"><i class="fa-solid fa-tooth"></i></div>
+        <div class="err-code">404</div>
+        <h1 style="font-size:1.5rem;margin-top:.5rem">Esta página se nos ha caído</h1>
+        <p class="text-muted">La dirección que buscas no existe o ha cambiado de sitio.
+           Pero tranquilo: tu sonrisa sigue en buenas manos. 🦷</p>
+        <div style="display:flex;gap:.6rem;justify-content:center;flex-wrap:wrap;margin-top:1.4rem">
+            <a class="btn btn-primary" href="index.html"><i class="fa-solid fa-house"></i> Ir al inicio</a>
+            <a class="btn btn-ghost" href="pedir-cita.html"><i class="fa-solid fa-calendar-check"></i> Pedir cita</a>
+            <button class="btn btn-ghost" onclick="history.back()"><i class="fa-solid fa-arrow-left"></i> Volver atrás</button>
+        </div>
+        <p class="text-muted" style="font-size:.85rem;margin-top:2rem">
+            ¿Necesitas ayuda? Llámanos al <b id="tel">+58 255 621 0000</b> o pregunta al asistente 🤖
+        </p>
+    </div>
+</main>
+
+<footer class="site-footer">
+    <div class="container">
+        <div>
+            <div class="brand"><i class="fa-solid fa-tooth"></i> Clínica Dental Raquel Virgüez</div>
+            <p class="muted" style="margin-top:.5rem">C.C. Plaza Real, Acarigua, Venezuela</p>
+        </div>
+    </div>
+</footer>
+
+<script src="assets/js/demo-data.js"></script>
+<script src="assets/js/ui.js"></script>
+<script src="assets/js/ux.js"></script>
+<script src="assets/js/wa.js"></script>
+<script src="assets/js/assistant.js"></script>
+<script>
+    document.getElementById('tel').textContent = DEMO.clinic.phone;
+    Assistant.init({ role: 'publico' });
+</script>
+</body>
+</html>

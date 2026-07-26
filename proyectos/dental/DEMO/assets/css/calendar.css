@@ -1,0 +1,63 @@
+/* =====================================================================
+   Clínica Dental · Calendario semanal (agenda visual por franjas)
+   Requiere tokens.css + design-system.css
+   ===================================================================== */
+.cal { background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--r-md); box-shadow: var(--sh-sm); overflow: hidden; }
+.cal-nav { display: flex; align-items: center; justify-content: space-between; gap: .6rem; padding: .8rem 1rem; border-bottom: 1px solid var(--c-border); flex-wrap: wrap; }
+.cal-title { font-weight: var(--fw-bold); text-transform: capitalize; }
+.cal-btns { display: flex; gap: .4rem; align-items: center; }
+
+/* Modo Semana / Día + filtro por doctor */
+.cal-modes { display: inline-flex; background: var(--c-surface-2); border: 1px solid var(--c-border); border-radius: var(--r-full); padding: .2rem; }
+.cal-modes button { border: 0; background: none; font: inherit; font-size: .8rem; font-weight: var(--fw-semibold); color: var(--c-muted);
+    padding: .35rem .8rem; border-radius: var(--r-full); cursor: pointer; transition: var(--t-fast); display: inline-flex; align-items: center; gap: .35rem; }
+.cal-modes button.on { background: var(--c-surface); color: var(--c-primary-700); box-shadow: var(--sh-sm); }
+.cal-doc { max-width: 190px; font-size: .84rem; padding: .35rem .6rem; }
+.cal-dhead.doc { display: flex; align-items: center; justify-content: center; gap: .4rem; text-transform: none;
+    font-size: .8rem; font-weight: var(--fw-semibold); color: var(--c-text); padding: .5rem .3rem; }
+.cal-doc-av { width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; font-size: .62rem;
+    background: linear-gradient(135deg, var(--c-primary), var(--c-accent)); color: #fff; font-weight: var(--fw-bold); flex-shrink: 0; }
+.cal-hint { margin-left: auto; font-size: .76rem; }
+/* Doctor: agenda propia, sin selector de otros profesionales */
+.cal-solo { display: inline-flex; align-items: center; gap: .4rem; font-size: .82rem; font-weight: var(--fw-semibold);
+    color: var(--c-primary-700); background: var(--c-primary-050); border: 1px solid var(--c-primary-100);
+    padding: .3rem .8rem; border-radius: var(--r-full); }
+
+.cal-scroll { overflow-x: auto; }
+.cal-head, .cal-body { display: grid; grid-template-columns: 52px repeat(6, minmax(96px, 1fr)); min-width: 640px; }
+.cal-head { border-bottom: 1px solid var(--c-border); background: var(--c-surface-2); }
+.cal-dhead { text-align: center; padding: .45rem .2rem; border-left: 1px solid var(--c-border); font-size: .74rem; color: var(--c-muted); text-transform: uppercase; letter-spacing: .03em; }
+.cal-dhead b { display: block; font-size: 1.15rem; color: var(--c-text); font-weight: var(--fw-bold); }
+.cal-dhead.today { background: var(--c-primary-050); }
+.cal-dhead.today b { color: var(--c-primary-700); }
+
+.cal-gutter { padding-top: 0; }
+.cal-hour { height: 44px; font-size: .66rem; color: var(--c-muted); text-align: right; padding-right: .4rem; box-sizing: border-box; }
+.cal-day { position: relative; border-left: 1px solid var(--c-border);
+    background-image: repeating-linear-gradient(to bottom, transparent 0, transparent 43px, var(--c-border) 43px, var(--c-border) 44px); }
+.cal-day.today { background-color: var(--c-primary-050); }
+
+.cal-ev { position: absolute; left: 3px; right: 3px; border-radius: 6px; padding: .2rem .4rem; font-size: .7rem;
+    overflow: hidden; color: #fff; box-shadow: var(--sh-sm); border-left: 3px solid rgba(255,255,255,.5); cursor: pointer; transition: filter var(--t-fast), transform var(--t-fast); }
+.cal-ev:hover, .cal-ev:focus-visible { filter: brightness(1.08); transform: scale(1.02); outline: none; z-index: 3; }
+
+/* Popover de detalle de cita */
+.cal-pop { position: fixed; z-index: var(--z-modal); width: 240px; background: var(--c-surface); color: var(--c-text);
+    border: 1px solid var(--c-border); border-radius: var(--r-md); box-shadow: var(--sh-xl); padding: .9rem 1rem; animation: toast-in .15s var(--ease); }
+.cal-pop h5 { margin: 0 0 .1rem; font-size: .95rem; display: flex; align-items: center; gap: .4rem; }
+.cal-pop .cp-time { color: var(--c-muted); font-size: .82rem; margin-bottom: .5rem; }
+.cal-pop .cp-row { font-size: .85rem; margin: .2rem 0; }
+.cal-pop .cp-close { position: absolute; top: .5rem; right: .6rem; border: 0; background: none; color: var(--c-muted); cursor: pointer; font-size: .9rem; }
+.cal-ev b { display: block; font-weight: var(--fw-bold); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cal-ev span { display: block; opacity: .92; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cal-ev.programada { background: var(--c-info); }
+.cal-ev.confirmada { background: var(--c-primary); }
+.cal-ev.completada { background: var(--c-success); }
+.cal-ev.cancelada  { background: var(--c-danger); }
+.cal-ev.no_asistio { background: var(--c-warning); }
+
+.cal-legend { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: .7rem; font-size: .78rem; color: var(--c-muted); }
+.cal-legend .dot { width: 10px; height: 10px; border-radius: 3px; display: inline-block; margin-right: .35rem; vertical-align: middle; }
+.cal-legend .programada { background: var(--c-info); }
+.cal-legend .confirmada { background: var(--c-primary); }
+.cal-legend .completada { background: var(--c-success); }

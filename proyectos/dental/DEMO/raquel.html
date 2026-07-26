@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dirección · Raquel · Clínica Dental Raquel Virgüez</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/tokens.css">
+    <link rel="stylesheet" href="assets/css/design-system.css">
+    <link rel="stylesheet" href="assets/css/ux.css">
+    <link rel="stylesheet" href="assets/css/panel.css">
+    <link rel="stylesheet" href="assets/css/finance.css">
+    <link rel="stylesheet" href="assets/css/calendar.css">
+    <link rel="stylesheet" href="assets/css/reports.css">
+    <link rel="stylesheet" href="assets/css/assistant.css">
+    <link rel="stylesheet" href="assets/css/clinic.css">
+</head>
+<body>
+<div class="panel-backdrop" id="backdrop"></div>
+<div class="panel-body">
+
+    <aside class="sidebar" id="sidebar">
+        <a class="brand" href="index.html"><i class="fa-solid fa-tooth"></i> Clínica Dental</a>
+        <span class="role-chip"><i class="fa-solid fa-crown"></i> Propietaria</span>
+        <div class="role-switch">
+            <span class="lbl">Cambiar rol (demo)</span>
+            <a href="paciente.html">Paciente</a> · <a href="doctor.html">Doctor</a> · <a href="secretaria.html">Secretaría</a> · <a href="raquel.html" class="active">Dirección</a>
+        </div>
+        <nav>
+            <span class="nav-group">Dirección</span>
+            <a href="#resumen" data-title="Resumen" data-icon="fa-gauge-high" data-short="Resumen"
+               data-desc="La foto del día: ingresos, citas pendientes y estado general de la clínica."><i class="fa-solid fa-gauge-high"></i> Resumen</a>
+            <a href="#finanzas" data-title="Finanzas" data-icon="fa-sack-dollar" data-short="Finanzas"
+               data-desc="Ingresos por mes y día, comparativa con el mes anterior, métodos de pago y exportación."><i class="fa-solid fa-sack-dollar"></i> Finanzas</a>
+            <span class="nav-group">Mi consulta</span>
+            <a href="#agenda" data-title="Mi agenda" data-icon="fa-calendar-day" data-short="Agenda"
+               data-desc="Tus citas. Al completarlas registras el cobro y suma automáticamente a caja."><i class="fa-solid fa-calendar-day"></i> Mi agenda</a>
+            <a href="#calendario" data-title="Calendario semanal" data-icon="fa-calendar-week" data-short="Semana"
+               data-desc="Tu semana de trabajo con el detalle de cada cita."><i class="fa-solid fa-calendar-week"></i> Calendario</a>
+            <a href="#ajustes" data-title="Ajustes de la clínica" data-icon="fa-gear" data-short="Ajustes"
+               data-desc="Horarios de atención, duración de las citas, días laborables y festivos. Afecta a toda la agenda."><i class="fa-solid fa-gear"></i> Ajustes</a>
+            <a href="#equipo" data-title="Equipo" data-icon="fa-user-doctor" data-short="Equipo"
+               data-desc="Los profesionales de la clínica y sus especialidades."><i class="fa-solid fa-user-doctor"></i> Equipo</a>
+        </nav>
+        <div class="sidebar-foot">
+            <a href="index.html"><i class="fa-solid fa-arrow-right-from-bracket"></i> Cerrar sesión</a>
+        </div>
+    </aside>
+
+    <div class="panel-main">
+        <header class="topbar">
+            <div class="flex items-center" style="gap:.7rem">
+                <button class="hamburger" id="hamburger" aria-label="Menú"><i class="fa-solid fa-bars"></i></button>
+                <h1>Panel de dirección</h1>
+            </div>
+            <div class="user">
+                <div class="av">RV</div>
+                <div>Dra. Raquel Virgüez</div>
+            </div>
+        </header>
+        <main class="panel-content">
+
+            <nav class="breadcrumbs" aria-label="Migas de pan">
+                <a href="index.html">Inicio</a><span class="sep">/</span>
+                <span class="current">Dirección</span>
+            </nav>
+
+            <!-- RESUMEN / KPIs -->
+            <section class="panel-section" data-view="resumen" id="resumen">
+                <div class="stats-row">
+                    <div class="stat-tile kpi"><div class="k"><i class="fa-solid fa-calendar-day"></i> Ingresos hoy</div><div class="v" id="k-hoy">$0</div><div class="sub" id="k-hoy-n">0 cobros</div></div>
+                    <div class="stat-tile kpi"><div class="k"><i class="fa-solid fa-calendar-week"></i> Este mes</div><div class="v" id="k-mes">$0</div><div class="sub" id="k-mes-n">julio 2026</div></div>
+                    <div class="stat-tile kpi"><div class="k"><i class="fa-solid fa-sack-dollar"></i> Total acumulado</div><div class="v" id="k-total">$0</div><div class="sub" id="k-total-n">0 movimientos</div></div>
+                    <div class="stat-tile"><div class="k"><i class="fa-solid fa-hourglass-half"></i> Citas pendientes</div><div class="v" id="k-pend">0</div><div class="sub">en tu agenda</div></div>
+                </div>
+            </section>
+
+            <!-- MI AGENDA -->
+            <section class="panel-section" data-view="agenda" id="agenda">
+                <h2><i class="fa-solid fa-calendar-day"></i> Mi agenda</h2>
+                <p class="text-muted" style="margin-top:-.4rem">Al <b>completar</b> una cita registras el <b>cobro</b> (coste obligatorio) y suma automáticamente a finanzas.</p>
+                <div id="agenda-wrap"></div>
+            </section>
+
+            <!-- CALENDARIO -->
+            <section class="panel-section" data-view="calendario" id="calendario">
+                <h2><i class="fa-solid fa-calendar-week"></i> Calendario semanal</h2>
+                <div id="cal-raquel"></div>
+            </section>
+
+            <!-- FINANZAS -->
+            <section class="panel-section" data-view="finanzas" id="finanzas">
+                <div class="flex items-center justify-between wrap" style="margin-bottom:.9rem">
+                    <h2 style="margin:0"><i class="fa-solid fa-sack-dollar"></i> Finanzas</h2>
+                    <div class="flex items-center wrap" style="gap:.6rem">
+                        <div class="seg" id="fin-seg">
+                            <button class="on" data-fin="mensual"><i class="fa-solid fa-chart-column"></i> Mensual</button>
+                            <button data-fin="diaria"><i class="fa-solid fa-calendar-day"></i> Diaria</button>
+                        </div>
+                        <button class="btn btn-ghost btn-sm" id="fin-csv"><i class="fa-solid fa-file-csv"></i> CSV</button>
+                        <button class="btn btn-ghost btn-sm" id="fin-print"><i class="fa-solid fa-print"></i> Imprimir</button>
+                    </div>
+                </div>
+
+                <!-- Vista mensual -->
+                <div class="fin-view on" id="view-mensual">
+                    <!-- Comparativa mes actual vs mes anterior -->
+                    <div class="card cmp-card" id="cmp-card">
+                        <h3 style="margin-top:0"><i class="fa-solid fa-scale-balanced" style="color:var(--c-primary)"></i> Comparativa de meses</h3>
+                        <div class="cmp-grid" id="cmp-grid"></div>
+                        <div class="cmp-bars" id="cmp-bars"></div>
+                        <p class="text-muted" id="cmp-note" style="font-size:.84rem;margin:.8rem 0 0"></p>
+                    </div>
+
+                    <div class="card" style="margin-top:1rem">
+                        <h3 style="margin-top:0"><i class="fa-solid fa-chart-column" style="color:var(--c-primary)"></i> Ingresos por mes</h3>
+                        <div class="barchart" id="barchart"></div>
+                    </div>
+                    <div class="card" style="margin-top:1rem">
+                        <h3 style="margin-top:0">Método de pago</h3>
+                        <div class="msplit" id="msplit"><div class="m-card" style="width:50%"></div><div class="m-cash" style="width:50%"></div></div>
+                        <div class="mlegend" id="mlegend"></div>
+                    </div>
+                </div>
+
+                <!-- Vista diaria -->
+                <div class="fin-view" id="view-diaria">
+                    <div class="card">
+                        <div class="flex items-center justify-between wrap" style="margin-bottom:.8rem">
+                            <div class="field" style="margin:0;min-width:200px">
+                                <label for="fin-day">Día</label>
+                                <select id="fin-day" class="input"></select>
+                            </div>
+                            <div style="text-align:right">
+                                <div class="text-muted" style="font-size:.8rem;font-weight:600">Total del día</div>
+                                <div class="v" id="day-total" style="font-size:1.6rem;font-weight:800;color:var(--c-primary-700)">$0</div>
+                            </div>
+                        </div>
+                        <div id="day-wrap"></div>
+                    </div>
+                </div>
+
+                <!-- Movimientos -->
+                <h3 style="margin:1.4rem 0 .6rem"><i class="fa-solid fa-receipt" style="color:var(--c-primary)"></i> Últimos movimientos</h3>
+                <div id="mov-wrap"></div>
+            </section>
+
+            <!-- EQUIPO -->
+            <section class="panel-section" data-view="ajustes" id="ajustes">
+                <h2><i class="fa-solid fa-gear"></i> Ajustes de la clínica</h2>
+                <p class="text-muted" style="margin-top:-.4rem">Lo que configures aquí define los huecos que se ofrecen en toda la agenda.</p>
+                <div class="card" style="max-width:720px" id="ajustes-card"></div>
+            </section>
+
+            <section class="panel-section" data-view="equipo" id="equipo">
+                <h2><i class="fa-solid fa-user-doctor"></i> Equipo</h2>
+                <div class="people-grid" id="team-wrap"></div>
+            </section>
+
+        </main>
+    </div>
+</div>
+
+<!-- Modal completar + cobrar -->
+<div class="modal-back" id="modal">
+    <div class="modal">
+        <h3><i class="fa-solid fa-cash-register" style="color:var(--c-primary)"></i> Completar y cobrar</h3>
+        <p class="text-muted" id="modalPaciente" style="margin-top:-.4rem"></p>
+        <div class="field">
+            <label for="notas">Notas clínicas <span style="color:var(--c-danger)">*</span></label>
+            <textarea id="notas" class="input" placeholder="Diagnóstico, procedimiento, indicaciones…"></textarea>
+        </div>
+        <div class="grid" style="grid-template-columns:1fr 1fr">
+            <div class="field">
+                <label for="coste">Coste ($) <span style="color:var(--c-danger)">*</span></label>
+                <input type="number" id="coste" class="input" min="0" step="0.01" placeholder="Ej.: 50.00">
+            </div>
+            <div class="field">
+                <label>Método de pago <span style="color:var(--c-danger)">*</span></label>
+                <div class="pay-choice" id="pay-choice">
+                    <button type="button" class="pay-opt on" data-metodo="tarjeta"><i class="fa-solid fa-credit-card"></i> Tarjeta</button>
+                    <button type="button" class="pay-opt" data-metodo="efectivo"><i class="fa-solid fa-money-bill-wave"></i> Efectivo</button>
+                </div>
+            </div>
+        </div>
+        <div class="flex justify-between" style="margin-top:.5rem">
+            <button class="btn btn-ghost" id="btnCancel">Cancelar</button>
+            <button class="btn btn-primary" id="btnGuardar"><i class="fa-solid fa-check"></i> Cobrar y completar</button>
+        </div>
+    </div>
+</div>
+
+<script src="assets/js/demo-data.js"></script>
+<script src="assets/js/ui.js"></script>
+<script src="assets/js/ux.js"></script>
+<script src="assets/js/calendar.js"></script>
+<script src="assets/js/reports.js"></script>
+<script src="assets/js/wa.js"></script>
+<script src="assets/js/assistant.js"></script>
+<script src="assets/js/clinic.js"></script>
+<script>
+(function () {
+    var HOY = DEMO.today, MES_ACT = HOY.slice(0, 7);
+    UX.bell(DEMO.raquel.pending.map(function (c) {
+        return { icon: 'fa-calendar-day', title: 'Cita ' + fmtFecha(c.fecha) + ' · ' + c.ini, sub: c.paciente + ' · ' + c.trat, href: '#agenda' };
+    }).concat([{ icon: 'fa-sack-dollar', title: 'Cierre de caja del día', sub: 'Revisa ingresos y método de pago', href: '#finanzas' }]));
+
+    UX.setSession({ role: 'raquel', nombre: 'Raquel', apellido: 'Virgüez', tel: '+58 255 621 0000', email: 'raquel@clinicaraquelvirguez.com' });
+
+    UX.profile({
+        name: 'Dra. Raquel Virgüez', role: 'Propietaria · Doctora · Admin',
+        email: 'raquel@clinicaraquelvirguez.com', phone: '+58 255 621 0000',
+        extra: [{ k: 'Nº colegiado', v: 'COEV-3001' }, { k: 'Rol', v: 'Dirección y odontología' }, { k: 'Centro', v: DEMO.clinic.name }]
+    });
+    window.ClinicCalendar({ el: document.getElementById('cal-raquel'), events: DEMO.raquel.pending.map(function (c) { return { fecha: c.fecha, ini: c.ini, fin: c.fin, title: c.paciente, sub: c.trat, doctor: 'Dra. Raquel Virgüez', estado: c.estado }; }), skeleton: true });
+    var pending = DEMO.raquel.pending.map(function (c) { return Object.assign({}, c); });
+    var fin = DEMO.finances.map(function (c) { return Object.assign({}, c); });
+    var completarId = null, metodoSel = 'tarjeta';
+
+    /* ---------- Agenda ---------- */
+    function renderAgenda() {
+        var w = document.getElementById('agenda-wrap');
+        if (!pending.length) { w.innerHTML = '<div class="empty"><i class="fa-regular fa-calendar-check"></i> No tienes citas pendientes.</div>'; }
+        else {
+            w.innerHTML = '<div class="table-wrap"><table class="appts"><thead><tr><th>Fecha y hora</th><th>Paciente</th><th>Tratamiento</th><th>Estado</th><th>Acciones</th></tr></thead><tbody>' +
+                pending.map(function (c) {
+                    var conf = c.estado === 'programada' ? '<button class="btn btn-ghost btn-sm" data-act="confirmar" data-id="' + c.id + '"><i class="fa-solid fa-check"></i> Confirmar</button>' : '';
+                    return '<tr><td class="when"><b>' + fmtFecha(c.fecha) + '</b><span>' + c.ini + ' – ' + c.fin + '</span></td>' +
+                        '<td>' + c.paciente + '<br><span class="text-muted" style="font-size:.82rem">' + c.tel + '</span></td>' +
+                        '<td>' + c.trat + '</td><td>' + badge(c.estado) + '</td>' +
+                        '<td><div class="flex wrap" style="gap:.4rem">' + conf +
+                        '<button class="btn btn-primary btn-sm" data-act="completar" data-id="' + c.id + '"><i class="fa-solid fa-cash-register"></i> Completar</button>' +
+                        '<button class="btn btn-ghost btn-sm" data-act="docs" data-id="' + c.id + '" title="Receta o informe"><i class="fa-solid fa-file-prescription"></i></button>' +
+                        '<button class="btn btn-ghost btn-sm" data-act="wa" data-id="' + c.id + '" title="Recordatorio por WhatsApp" style="color:#25d366"><i class="fa-brands fa-whatsapp"></i></button></div></td></tr>';
+                }).join('') + '</tbody></table></div>';
+        }
+        w.querySelectorAll('[data-act]').forEach(function (b) {
+            b.onclick = function () {
+                var id = +b.dataset.id, idx = pending.map(function (c) { return c.id; }).indexOf(id);
+                if (idx < 0) return;
+                if (b.dataset.act === 'confirmar') { pending[idx].estado = 'confirmada'; Toast.show('Cita confirmada.', 'ok'); renderAgenda(); }
+                else if (b.dataset.act === 'docs') { abrirDocs(pending[idx]); }
+                else if (b.dataset.act === 'wa') { var w = pending[idx]; WA.recordatorio(Object.assign({ fechaTxt: fmtFecha(w.fecha), doctor: 'Dra. Raquel Virgüez' }, w)); }
+                else { completarId = id; openModal(pending[idx]); }
+            };
+        });
+        document.getElementById('k-pend').textContent = pending.length;
+    }
+
+    /* ---------- Documentos clínicos ---------- */
+    function abrirDocs(cita) {
+        var p = DEMO.patientsList.filter(function (x) { return x.nombre === cita.paciente; })[0] ||
+                { nombre: cita.paciente, ficha: { alergias: 'No conocidas' }, odonto: {} };
+        Reports.open({
+            paciente: p.nombre, ficha: p.ficha, odonto: p.odonto,
+            doctor: 'Dra. Raquel Virgüez', colegiado: 'COEV-3001',
+            tratamiento: cita.trat, fechaCita: fmtFecha(cita.fecha), horaCita: cita.ini
+        });
+    }
+
+    /* ---------- Modal cobrar ---------- */
+    function openModal(c) {
+        var precio = precioDe(c.trat);
+        document.getElementById('modalPaciente').textContent = 'Paciente: ' + c.paciente + ' · ' + c.trat;
+        document.getElementById('notas').value = '';
+        document.getElementById('coste').value = precio || '';
+        setMetodo('tarjeta');
+        Modal.open('modal');
+    }
+    function precioDe(tratNombre) {
+        var t = DEMO.treatments.filter(function (x) { return tratNombre.indexOf(x.name) === 0 || x.name.indexOf(tratNombre) === 0; })[0];
+        return t ? t.precio : '';
+    }
+    function setMetodo(m) {
+        metodoSel = m;
+        document.querySelectorAll('#pay-choice .pay-opt').forEach(function (o) { o.classList.toggle('on', o.dataset.metodo === m); });
+    }
+    document.querySelectorAll('#pay-choice .pay-opt').forEach(function (o) { o.onclick = function () { setMetodo(o.dataset.metodo); }; });
+    document.getElementById('btnCancel').onclick = function () { Modal.close('modal'); };
+    document.getElementById('btnGuardar').onclick = function () {
+        var notas = document.getElementById('notas').value.trim();
+        var importe = parseFloat(document.getElementById('coste').value);
+        if (!notas) { Toast.show('Las notas clínicas son obligatorias.', 'err'); return; }
+        if (!(importe > 0)) { Toast.show('El coste es obligatorio para cobrar la cita.', 'err'); return; }
+        var idx = pending.map(function (c) { return c.id; }).indexOf(completarId);
+        if (idx < 0) return;
+        var c = pending.splice(idx, 1)[0];
+        fin.push({ fecha: HOY, paciente: c.paciente, trat: c.trat, metodo: metodoSel, importe: importe });
+        Modal.close('modal');
+        renderAgenda(); renderFinanzas();
+        Toast.show('Cobro registrado: ' + fmtMoney(importe) + ' (' + metodoSel + ').', 'ok',
+            { label: 'Generar receta', fn: function () { abrirDocs(c); } });
+        setTimeout(function () {
+            Clinic.proponerSeguimiento(c, function (nueva) { pending.push(nueva); renderAgenda(); });
+        }, 900);
+    };
+
+    /* ---------- Finanzas ---------- */
+    function sum(arr) { return arr.reduce(function (a, c) { return a + c.importe; }, 0); }
+    function renderKPIs() {
+        var hoy = fin.filter(function (c) { return c.fecha === HOY; });
+        var mes = fin.filter(function (c) { return c.fecha.slice(0, 7) === MES_ACT; });
+        document.getElementById('k-hoy').textContent = fmtMoney(sum(hoy));
+        document.getElementById('k-hoy-n').textContent = hoy.length + (hoy.length === 1 ? ' cobro' : ' cobros');
+        document.getElementById('k-mes').textContent = fmtMoney(sum(mes));
+        document.getElementById('k-total').textContent = fmtMoney(sum(fin));
+        document.getElementById('k-total-n').textContent = fin.length + ' movimientos';
+    }
+    function renderChart() {
+        var byMonth = {};
+        fin.forEach(function (c) { var k = c.fecha.slice(0, 7); byMonth[k] = (byMonth[k] || 0) + c.importe; });
+        var keys = Object.keys(byMonth).sort();
+        var max = Math.max.apply(null, keys.map(function (k) { return byMonth[k]; }));
+        document.getElementById('barchart').innerHTML = keys.map(function (k) {
+            var h = Math.max(6, Math.round(byMonth[k] / max * 160));
+            var mesIdx = +k.slice(5, 7) - 1;
+            var cur = k === MES_ACT ? ' cur' : '';
+            return '<div class="barcol' + cur + '"><div class="barval">' + fmtMoney(byMonth[k]) + '</div>' +
+                '<div class="bartrack"><div class="bar" style="height:' + h + 'px"></div></div>' +
+                '<div class="barlbl">' + mesCorto(mesIdx) + '</div></div>';
+        }).join('');
+    }
+    function renderSplit() {
+        var card = sum(fin.filter(function (c) { return c.metodo === 'tarjeta'; }));
+        var cash = sum(fin.filter(function (c) { return c.metodo === 'efectivo'; }));
+        var tot = card + cash || 1;
+        var pc = Math.round(card / tot * 100), pe = 100 - pc;
+        document.getElementById('msplit').innerHTML = '<div class="m-card" style="width:' + pc + '%"></div><div class="m-cash" style="width:' + pe + '%"></div>';
+        document.getElementById('mlegend').innerHTML =
+            '<span><span class="dot card"></span> Tarjeta · <b>' + fmtMoney(card) + '</b> (' + pc + '%)</span>' +
+            '<span><span class="dot cash"></span> Efectivo · <b>' + fmtMoney(cash) + '</b> (' + pe + '%)</span>';
+    }
+    function payBadge(m) { return '<span class="pay pay-' + m + '"><i class="fa-solid ' + (m === 'tarjeta' ? 'fa-credit-card' : 'fa-money-bill-wave') + '"></i> ' + m + '</span>'; }
+    function renderMovs() {
+        var rows = fin.slice().sort(function (a, b) { return a.fecha < b.fecha ? 1 : -1; }).slice(0, 12);
+        document.getElementById('mov-wrap').innerHTML = '<div class="table-wrap"><table class="appts"><thead><tr><th>Fecha</th><th>Paciente</th><th>Tratamiento</th><th>Método</th><th style="text-align:right">Importe</th></tr></thead><tbody>' +
+            rows.map(function (c) {
+                return '<tr><td><b>' + fmtFecha(c.fecha) + '</b></td><td>' + c.paciente + '</td><td>' + c.trat + '</td><td>' + payBadge(c.metodo) + '</td><td class="amount" style="text-align:right">' + fmtMoney(c.importe) + '</td></tr>';
+            }).join('') + '</tbody></table></div>';
+    }
+    function renderDaySelect() {
+        var days = fin.map(function (c) { return c.fecha; }).filter(function (v, i, a) { return a.indexOf(v) === i; }).sort().reverse();
+        var sel = document.getElementById('fin-day');
+        var prev = sel.value;
+        sel.innerHTML = days.map(function (d) { return '<option value="' + d + '"' + (d === HOY ? ' selected' : '') + '>' + fmtFecha(d) + '</option>'; }).join('');
+        if (prev && days.indexOf(prev) >= 0) sel.value = prev;
+        renderDaily();
+    }
+    function renderDaily() {
+        var day = document.getElementById('fin-day').value;
+        var rows = fin.filter(function (c) { return c.fecha === day; });
+        document.getElementById('day-total').textContent = fmtMoney(sum(rows));
+        document.getElementById('day-wrap').innerHTML = rows.length
+            ? '<div class="table-wrap"><table class="appts"><thead><tr><th>Paciente</th><th>Tratamiento</th><th>Método</th><th style="text-align:right">Importe</th></tr></thead><tbody>' +
+                rows.map(function (c) { return '<tr><td>' + c.paciente + '</td><td>' + c.trat + '</td><td>' + payBadge(c.metodo) + '</td><td class="amount" style="text-align:right">' + fmtMoney(c.importe) + '</td></tr>'; }).join('') + '</tbody></table></div>'
+            : '<div class="empty">Sin movimientos ese día.</div>';
+    }
+    function renderComparativa() {
+        var c = Assistant.comparativa();
+        var up = c.diff >= 0, MES = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+        function nom(k) { return MES[+k.slice(5, 7) - 1]; }
+        document.getElementById('cmp-grid').innerHTML =
+            '<div class="cmp-item"><div class="k">' + nom(c.act) + ' (actual)</div><div class="v">' + fmtMoney(c.actTotal) + '</div>' +
+            '<div class="s">día ' + c.diaMes + ' de ' + c.diasTot + '</div></div>' +
+            '<div class="cmp-item"><div class="k">' + nom(c.ant) + ' (anterior)</div><div class="v">' + fmtMoney(c.antTotal) + '</div>' +
+            '<div class="s">mes completo</div></div>' +
+            '<div class="cmp-item"><div class="k">Variación</div><div class="v">' + (up ? '+' : '') + fmtMoney(c.diff) + '</div>' +
+            '<span class="cmp-delta ' + (up ? 'up' : 'down') + '"><i class="fa-solid fa-arrow-' + (up ? 'up' : 'down') + '"></i> ' + Math.abs(c.pct).toFixed(1) + '%</span></div>' +
+            '<div class="cmp-item"><div class="k">Proyección cierre</div><div class="v">' + fmtMoney(c.proyeccion) + '</div>' +
+            '<div class="s">al ritmo actual</div></div>';
+
+        var max = Math.max(c.actTotal, c.antTotal, c.proyeccion) || 1;
+        document.getElementById('cmp-bars').innerHTML =
+            '<div class="cmp-row"><span class="lbl">' + nom(c.act) + '</span><div class="cmp-track"><div class="cmp-fill now" style="width:' + (c.actTotal / max * 100) + '%"></div></div><span class="val">' + fmtMoney(c.actTotal) + '</span></div>' +
+            '<div class="cmp-row"><span class="lbl">' + nom(c.ant) + '</span><div class="cmp-track"><div class="cmp-fill prev" style="width:' + (c.antTotal / max * 100) + '%"></div></div><span class="val">' + fmtMoney(c.antTotal) + '</span></div>' +
+            '<div class="cmp-row"><span class="lbl">Proyección</span><div class="cmp-track"><div class="cmp-fill now" style="width:' + (c.proyeccion / max * 100) + '%;opacity:.55"></div></div><span class="val">' + fmtMoney(c.proyeccion) + '</span></div>';
+
+        document.getElementById('cmp-note').innerHTML = up
+            ? '<i class="fa-solid fa-arrow-trend-up" style="color:var(--c-success)"></i> Vas <b>' + c.pct.toFixed(1) + '% por encima</b> de ' + nom(c.ant) + '. Manteniendo el ritmo cerrarás en torno a <b>' + fmtMoney(c.proyeccion) + '</b>.'
+            : '<i class="fa-solid fa-arrow-trend-down" style="color:var(--c-danger)"></i> Vas <b>' + Math.abs(c.pct).toFixed(1) + '% por debajo</b> de ' + nom(c.ant) + '. Activa recordatorios y ofrece los huecos libres para recuperar.';
+    }
+    function renderFinanzas() { renderKPIs(); renderChart(); renderSplit(); renderMovs(); renderDaySelect(); renderComparativa(); }
+
+    document.getElementById('fin-day').addEventListener('change', renderDaily);
+    document.querySelectorAll('#fin-seg button').forEach(function (b) {
+        b.onclick = function () {
+            document.querySelectorAll('#fin-seg button').forEach(function (x) { x.classList.remove('on'); });
+            b.classList.add('on');
+            document.getElementById('view-mensual').classList.toggle('on', b.dataset.fin === 'mensual');
+            document.getElementById('view-diaria').classList.toggle('on', b.dataset.fin === 'diaria');
+        };
+    });
+
+    /* ---------- Equipo ---------- */
+    document.getElementById('team-wrap').innerHTML = DEMO.doctors.map(function (d) {
+        var ini = d.name.replace('Dra. ', '').replace('Dr. ', '').split(' ').map(function (w) { return w[0]; }).slice(0, 2).join('').toUpperCase();
+        return '<div class="person"><div class="pav">' + ini + '</div><div class="pinfo"><b>' + d.name + '</b><span>' + d.specialty + ' · Nº ' + d.colegiado + '</span></div></div>';
+    }).join('');
+
+    /* El menú lo gobierna la navegación por vistas (UX.goView), no el scroll:
+       así nunca marca una sección en la que no estás. */
+
+    document.getElementById('fin-csv').onclick = function () {
+        var rows = [['Fecha', 'Paciente', 'Tratamiento', 'Metodo', 'Importe']].concat(
+            fin.slice().sort(function (a, b) { return a.fecha < b.fecha ? 1 : -1; }).map(function (c) { return [c.fecha, c.paciente, c.trat, c.metodo, c.importe]; }));
+        UX.downloadCSV('finanzas-clinica.csv', rows); Toast.show('CSV de finanzas exportado.', 'ok');
+    };
+    document.getElementById('fin-print').onclick = function () { UX.print('Finanzas · Clínica Dental Raquel Virgüez'); };
+
+    /* ---------- Ajustes de la clínica ---------- */
+    function renderAjustes() {
+        var st = DEMO.settings, DOW = ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'];
+        document.getElementById('ajustes-card').innerHTML =
+            '<h3 style="margin-top:0"><i class="fa-solid fa-clock" style="color:var(--c-primary)"></i> Horario de atención</h3>' +
+            '<div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(150px,1fr))">' +
+              '<div class="field"><label for="aj-m1">Mañana desde</label><input type="number" id="aj-m1" class="input" min="6" max="14" value="' + st.maniana.desde + '"></div>' +
+              '<div class="field"><label for="aj-m2">Mañana hasta</label><input type="number" id="aj-m2" class="input" min="7" max="15" value="' + st.maniana.hasta + '"></div>' +
+              '<div class="field"><label for="aj-t1">Tarde desde</label><input type="number" id="aj-t1" class="input" min="13" max="20" value="' + st.tarde.desde + '"></div>' +
+              '<div class="field"><label for="aj-t2">Tarde hasta</label><input type="number" id="aj-t2" class="input" min="14" max="22" value="' + st.tarde.hasta + '"></div>' +
+            '</div>' +
+            '<div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(180px,1fr))">' +
+              '<div class="field"><label for="aj-fr">Duración del hueco (min)</label><select id="aj-fr" class="input">' +
+                [15,20,30,45,60].map(function(m){ return '<option' + (st.franjaMin===m?' selected':'') + '>' + m + '</option>'; }).join('') + '</select></div>' +
+              '<div class="field"><label for="aj-av">Recordatorio automático (h antes)</label><select id="aj-av" class="input">' +
+                [12,24,48].map(function(h){ return '<option' + (st.avisoHoras===h?' selected':'') + '>' + h + '</option>'; }).join('') + '</select></div>' +
+            '</div>' +
+            '<div class="field"><label>Días laborables</label><div class="pac-filtros" id="aj-dias">' +
+              [1,2,3,4,5,6].map(function(d){ return '<button type="button" class="chip' + (st.dias.indexOf(d)>=0?' on':'') + '" data-d="' + d + '">' + DOW[d] + '</button>'; }).join('') +
+            '</div></div>' +
+            '<div class="field"><label>Días festivos (cerrado)</label><div id="aj-fest" class="pac-filtros">' +
+              (st.festivos.length ? st.festivos.map(function(f,i){ return '<span class="chip on">' + fmtFecha(f) + ' <b data-fest="' + i + '" style="cursor:pointer">×</b></span>'; }).join('') : '<span class="text-muted" style="font-size:.85rem">Sin festivos definidos</span>') +
+            '</div><div class="flex" style="gap:.5rem;margin-top:.5rem"><input type="date" id="aj-newfest" class="input" style="max-width:190px">' +
+            '<button class="btn btn-ghost btn-sm" id="aj-addfest"><i class="fa-solid fa-plus"></i> Añadir</button></div></div>' +
+            '<div class="alert alert-info" style="font-size:.85rem"><i class="fa-solid fa-circle-info"></i> Estos ajustes definen los huecos que se ofrecen al reservar y el rango que muestra el calendario.</div>' +
+            '<button class="btn btn-primary" id="aj-save"><i class="fa-solid fa-check"></i> Guardar ajustes</button>';
+
+        document.querySelectorAll('#aj-dias .chip').forEach(function(b){
+            b.onclick = function(){ b.classList.toggle('on'); };
+        });
+        document.querySelectorAll('#aj-fest [data-fest]').forEach(function(b){
+            b.onclick = function(){ DEMO.settings.festivos.splice(+b.dataset.fest,1); renderAjustes(); };
+        });
+        document.getElementById('aj-addfest').onclick = function(){
+            var v = document.getElementById('aj-newfest').value;
+            if (!v) return Toast.show('Elige una fecha.', 'err');
+            if (DEMO.settings.festivos.indexOf(v) < 0) DEMO.settings.festivos.push(v);
+            DEMO.settings.festivos.sort(); renderAjustes(); Toast.show('Festivo añadido.', 'ok');
+        };
+        document.getElementById('aj-save').onclick = function(){
+            var btn = this;
+            UX.conFeedback(btn, function(){
+                var st2 = DEMO.settings;
+                st2.maniana = { desde:+document.getElementById('aj-m1').value, hasta:+document.getElementById('aj-m2').value };
+                st2.tarde   = { desde:+document.getElementById('aj-t1').value, hasta:+document.getElementById('aj-t2').value };
+                st2.franjaMin = +document.getElementById('aj-fr').value;
+                st2.avisoHoras = +document.getElementById('aj-av').value;
+                st2.dias = [].map.call(document.querySelectorAll('#aj-dias .chip.on'), function(b){ return +b.dataset.d; });
+                Clinic.registrarCambio('Ajustes de la clínica', ['Horarios y franjas actualizados']);
+                Toast.show('Ajustes guardados. La agenda ya usa los nuevos horarios.', 'ok');
+            }, 'Guardando…', 'Guardado');
+        };
+    }
+    renderAjustes();
+
+    Assistant.init({ role: 'raquel', name: 'Raquel' });
+
+    renderAgenda();
+    document.getElementById('barchart').innerHTML = '<div class="skeleton sk-block" style="height:180px"></div>';
+    setTimeout(renderFinanzas, 320);
+})();
+</script>
+</body>
+</html>

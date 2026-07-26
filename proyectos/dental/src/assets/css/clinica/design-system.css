@@ -1,0 +1,147 @@
+/* =====================================================================
+   Clínica Dental · Design System (compartido: web informativa + paneles)
+   Look clínico/tech: blancos, grises suaves, acentos azul/cyan. Mobile-first.
+   ===================================================================== */
+
+:root {
+    /* Colores base */
+    --c-bg:          #f5f8fb;
+    --c-surface:     #ffffff;
+    --c-surface-2:   #f0f6fb;
+    --c-border:      #e2e8f0;
+    --c-text:        #0f2438;
+    --c-muted:       #5b7186;
+
+    /* Marca (azul/cyan clínico) */
+    --c-primary:     #0891b2;
+    --c-primary-600: #0e7490;
+    --c-primary-700: #155e75;
+    --c-accent:      #06b6d4;
+    --c-primary-050: #ecfeff;
+    --c-primary-100: #cff4fb;
+
+    /* Estado */
+    --c-success:     #15803d;
+    --c-success-bg:  #dcfce7;
+    --c-warning:     #b45309;
+    --c-warning-bg:  #fef3c7;
+    --c-danger:      #b91c1c;
+    --c-danger-bg:   #fee2e2;
+    --c-info:        #0369a1;
+    --c-info-bg:     #e0f2fe;
+
+    /* Tipografía */
+    --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+    /* Radios / sombras / espaciado */
+    --r-sm: 8px;
+    --r-md: 12px;
+    --r-lg: 18px;
+    --r-full: 999px;
+    --sh-sm: 0 1px 2px rgba(15,36,56,.06), 0 1px 3px rgba(15,36,56,.08);
+    --sh-md: 0 4px 12px rgba(15,36,56,.08);
+    --sh-lg: 0 12px 32px rgba(15,36,56,.12);
+    --maxw: 1180px;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+    margin: 0;
+    font-family: var(--font);
+    color: var(--c-text);
+    background: var(--c-bg);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 { line-height: 1.2; margin: 0 0 .5em; color: var(--c-text); font-weight: 700; }
+h1 { font-size: clamp(2rem, 4vw, 3rem); letter-spacing: -.02em; }
+h2 { font-size: clamp(1.5rem, 3vw, 2.1rem); letter-spacing: -.01em; }
+h3 { font-size: 1.2rem; }
+p  { margin: 0 0 1rem; }
+a  { color: var(--c-primary-600); text-decoration: none; }
+a:hover { color: var(--c-primary-700); }
+img { max-width: 100%; display: block; }
+
+.container { width: 100%; max-width: var(--maxw); margin: 0 auto; padding: 0 clamp(1rem, 4vw, 2rem); }
+
+/* ------- Botones ------- */
+.btn {
+    display: inline-flex; align-items: center; gap: .5rem;
+    font: inherit; font-weight: 600; cursor: pointer;
+    padding: .7rem 1.3rem; border-radius: var(--r-full);
+    border: 1px solid transparent; transition: .18s ease;
+    text-decoration: none; white-space: nowrap;
+}
+.btn:disabled { opacity: .55; cursor: not-allowed; }
+.btn-primary { background: var(--c-primary); color: #fff; box-shadow: var(--sh-sm); }
+.btn-primary:hover { background: var(--c-primary-600); color: #fff; transform: translateY(-1px); }
+.btn-ghost { background: transparent; color: var(--c-primary-700); border-color: var(--c-border); }
+.btn-ghost:hover { background: var(--c-primary-050); color: var(--c-primary-700); }
+.btn-light { background: #fff; color: var(--c-primary-700); box-shadow: var(--sh-sm); }
+.btn-light:hover { background: var(--c-primary-050); }
+.btn-danger { background: var(--c-danger); color: #fff; }
+.btn-block { width: 100%; justify-content: center; }
+.btn-sm { padding: .4rem .8rem; font-size: .85rem; }
+
+/* ------- Tarjetas ------- */
+.card {
+    background: var(--c-surface); border: 1px solid var(--c-border);
+    border-radius: var(--r-lg); box-shadow: var(--sh-sm); padding: 1.4rem;
+}
+.card-hover { transition: .2s ease; }
+.card-hover:hover { box-shadow: var(--sh-md); transform: translateY(-3px); border-color: var(--c-primary-100); }
+
+/* ------- Badges de estado ------- */
+.badge {
+    display: inline-flex; align-items: center; gap: .35rem;
+    font-size: .74rem; font-weight: 700; letter-spacing: .02em;
+    padding: .25rem .65rem; border-radius: var(--r-full); text-transform: uppercase;
+}
+.badge-programada { background: var(--c-info-bg);    color: var(--c-info); }
+.badge-confirmada { background: var(--c-primary-100); color: var(--c-primary-700); }
+.badge-completada { background: var(--c-success-bg); color: var(--c-success); }
+.badge-cancelada  { background: var(--c-danger-bg);  color: var(--c-danger); }
+.badge-no_asistio { background: var(--c-warning-bg); color: var(--c-warning); }
+
+/* ------- Formularios ------- */
+.field { margin-bottom: 1rem; }
+.field label { display: block; font-weight: 600; font-size: .9rem; margin-bottom: .35rem; color: var(--c-text); }
+.input, select.input, textarea.input {
+    width: 100%; font: inherit; color: var(--c-text);
+    padding: .65rem .8rem; border: 1px solid var(--c-border);
+    border-radius: var(--r-sm); background: #fff; transition: .15s ease;
+}
+.input:focus { outline: none; border-color: var(--c-primary); box-shadow: 0 0 0 3px var(--c-primary-050); }
+textarea.input { min-height: 120px; resize: vertical; }
+
+/* ------- Alertas ------- */
+.alert { padding: .8rem 1rem; border-radius: var(--r-sm); font-size: .92rem; margin-bottom: 1rem; border: 1px solid transparent; }
+.alert-error { background: var(--c-danger-bg);  color: var(--c-danger);  border-color: #fecaca; }
+.alert-ok    { background: var(--c-success-bg); color: var(--c-success); border-color: #bbf7d0; }
+.alert-info  { background: var(--c-info-bg);    color: var(--c-info);    border-color: #bae6fd; }
+
+/* ------- Coming soon ------- */
+.coming-soon {
+    border: 1px dashed var(--c-primary); border-radius: var(--r-md);
+    background: var(--c-primary-050); color: var(--c-primary-700);
+    padding: 1.2rem; text-align: center; font-weight: 600;
+}
+.coming-soon .cs-badge {
+    display: inline-block; font-size: .7rem; letter-spacing: .05em;
+    background: var(--c-primary); color: #fff; padding: .2rem .6rem;
+    border-radius: var(--r-full); margin-bottom: .5rem;
+}
+
+/* ------- Utilidades ------- */
+.text-muted { color: var(--c-muted); }
+.text-center { text-align: center; }
+.grid { display: grid; gap: 1.2rem; }
+.flex { display: flex; gap: 1rem; }
+.items-center { align-items: center; }
+.justify-between { justify-content: space-between; }
+.mt-0 { margin-top: 0; } .mb-0 { margin-bottom: 0; }
+.table-wrap { overflow-x: auto; }
